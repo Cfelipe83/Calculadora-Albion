@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Albion Hub - Mapas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans p-4 md:p-8">
+  <div class="max-w-7xl mx-auto space-y-6">
+    <header class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold"><i class="fa-solid fa-crown"></i></div>
+        <div>
+          <a href="index.html" class="text-xl font-black text-emerald-400">ALBION HUB</a>
+          <p class="text-[11px] text-slate-400">Servidor Exclusivo: <span class="text-emerald-300 font-semibold">América (West)</span></p>
+        </div>
+      </div>
+      <nav class="flex flex-wrap gap-1 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
+        <a href="index.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Refinación</a>
+        <a href="islas.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Islas</a>
+        <a href="crafteo.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Crafteo</a>
+        <a href="mercado.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Mercado</a>
+        <a href="jugadores.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Jugadores</a>
+        <a href="mapas.html" class="px-3 py-2 bg-emerald-600 text-slate-950 rounded-lg">Mapas</a>
+      </nav>
+    </header>
+
+    <section class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-6">
+      <h2 class="text-xl font-bold text-emerald-400 flex items-center gap-2"><i class="fa-solid fa-map-location-dot"></i> Buscador de Mapas y Zonas</h2>
+      <input type="text" id="mapSearchInput" placeholder="Buscar mapa (Ej: Lymhurst, Brecilien, Roast Oasis, Caminos...)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 font-semibold focus:border-emerald-500 focus:outline-none">
+      <div id="mapResults" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+    </section>
+  </div>
+
+  <script src="items.js"></script>
+  <script>
+    function renderMaps(maps) {
+      const container = document.getElementById('mapResults');
+      container.innerHTML = '';
+      if(!maps.length) { container.innerHTML = '<p class="text-slate-500 text-sm">No se encontraron mapas.</p>'; return; }
+      maps.forEach(m => {
+        let pvpColor = 'text-blue-400';
+        if(m.pvp.includes('Amarilla')) pvpColor = 'text-amber-400';
+        if(m.pvp.includes('Roja')) pvpColor = 'text-rose-400';
+        if(m.pvp.includes('Negra')) pvpColor = 'text-slate-950 bg-rose-500 px-1 rounded';
+
+        const card = document.createElement('div');
+        card.className = 'bg-slate-950 border border-slate-800 p-5 rounded-2xl flex flex-col gap-2';
+        card.innerHTML = `
+          <h3 class="text-base font-black text-slate-100 flex items-center gap-2"><i class="fa-solid fa-map text-emerald-500"></i> ${m.name}</h3>
+          <p class="text-xs text-slate-400 font-bold">${m.type} | Nivel: <span class="text-emerald-300">${m.tier}</span></p>
+          <div class="mt-2 text-xs space-y-1">
+            <p><span class="text-slate-500 uppercase font-bold">Reglas PvP:</span> <span class="font-bold ${pvpColor}">${m.pvp}</span></p>
+            <p><span class="text-slate-500 uppercase font-bold">Recursos:</span> <span class="text-slate-300 font-semibold">${m.res}</span></p>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById('mapSearchInput').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      renderMaps(!q ? MAPS_DB : MAPS_DB.filter(m => m.name.toLowerCase().includes(q) || m.type.toLowerCase().includes(q)));
+    });
+
+    renderMaps(MAPS_DB);
+  </script>
+</body>
+</html>
