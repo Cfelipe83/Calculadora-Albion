@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Albion Online - Refinación e Islas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;600;700;900&display=swap');
+    .title-font { font-family: 'Cinzel', serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-3 md:p-8 font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
+  <div class="max-w-5xl mx-auto space-y-6">
+    
+    <!-- Encabezado Principal -->
+    <header class="flex flex-col md:flex-row justify-between items-center bg-slate-900/90 p-5 rounded-2xl border border-slate-800 backdrop-blur-md shadow-xl gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl shadow-inner">
+          <i class="fa-solid fa-coins"></i>
+        </div>
+        <div>
+          <h1 class="text-2xl font-black text-amber-400 tracking-wide title-font">Calculadora Albion Online</h1>
+          <p class="text-xs text-slate-400">Precios en tiempo real vía <span class="text-amber-300 font-semibold">Albion Online Data Project</span></p>
+        </div>
+      </div>
+      
+      <div class="flex flex-wrap items-center gap-3 w-full md:w-auto justify-end">
+        <div class="flex items-center gap-2 bg-slate-950 border border-slate-800 rounded-xl px-3 py-1.5 shadow-inner">
+          <i class="fa-solid fa-globe text-slate-400 text-xs"></i>
+          <select id="serverSelect" class="bg-transparent text-sm text-amber-300 font-semibold focus:outline-none cursor-pointer">
+            <option value="europe" class="bg-slate-900 text-slate-100" selected>Servidor Europa (EU)</option>
+            <option value="west" class="bg-slate-900 text-slate-100">Servidor América (West)</option>
+            <option value="east" class="bg-slate-900 text-slate-100">Servidor Asia (East)</option>
+          </select>
+        </div>
+        <button id="fetchBtn" class="flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-4 py-2 rounded-xl text-sm transition-all active:scale-95 shadow-lg shadow-amber-500/20">
+          <i id="syncIcon" class="fa-solid fa-arrows-rotate"></i>
+          <span>Actualizar Precios</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Barra de Selección de Modo -->
+    <div class="flex gap-2 p-1.5 bg-slate-900/60 rounded-xl border border-slate-800 max-w-fit">
+      <button id="tabRefining" class="flex items-center gap-2 px-5 py-2.5 bg-amber-500 text-slate-950 font-bold rounded-lg transition-all text-sm shadow-md">
+        <i class="fa-solid fa-fire-burner"></i>
+        <span>Refinación de Materiales</span>
+      </button>
+      <button id="tabIsland" class="flex items-center gap-2 px-5 py-2.5 bg-transparent hover:bg-slate-800 text-slate-400 hover:text-slate-200 font-bold rounded-lg transition-all text-sm">
+        <i class="fa-solid fa-wheat-awn"></i>
+        <span>Isla y Cultivos</span>
+      </button>
+    </div>
+
+    <!-- SECCIÓN 1: REFINACIÓN -->
+    <main id="refiningSection" class="grid lg:grid-cols-3 gap-6">
+      <section class="lg:col-span-2 bg-slate-900/80 p-6 rounded-2xl border border-slate-800 space-y-5 shadow-lg">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h2 class="text-base font-bold text-slate-200 flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-amber-400"></i> Parámetros de Refinación
+          </h2>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700" id="cityBonusLabel">Ciudad Óptima: Lymhurst</span>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1.5">Recurso a Refinar</label>
+            <select id="matType" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-200 focus:border-amber-500 focus:outline-none">
+              <option value="CLOTH" selected>Tela (Fibra)</option>
+              <option value="LEATHER">Cuero (Piel)</option>
+              <option value="METALBAR">Lingotes (Mineral)</option>
+              <option value="PLANKS">Tablas (Madera)</option>
+              <option value="STONEBLOCK">Bloques (Piedra)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1.5">Nivel del Producto (Tier)</label>
+            <select id="matTier" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-200 focus:border-amber-500 focus:outline-none">
+              <option value="T4">Tier 4 (Adepto)</option>
+              <option value="T5" selected>Tier 5 (Experto)</option>
+              <option value="T6">Tier 6 (Maestro)</option>
+              <option value="T7">Tier 7 (Gran Maestro)</option>
+              <option value="T8">Tier 8 (Anciano)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Inputs con Iconos Oficiales -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-4 bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
+            <img id="rawIcon" src="https://render.albiononline.com/v1/item/T5_FIBER.png?size=64" class="w-14 h-14 rounded-lg bg-slate-900 border border-slate-700/50 p-1 flex-shrink-0" alt="Material Bruto">
+            <div class="flex-1">
+              <div class="flex justify-between items-center">
+                <span id="rawName" class="text-xs text-slate-400 font-semibold">Material Bruto Base</span>
+                <span id="rawRatioHint" class="text-[11px] text-amber-400/80">3 requeridos / unidad</span>
+              </div>
+              <input type="number" id="rawPrice" placeholder="0" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1.5 text-sm mt-1 text-slate-100 font-bold focus:border-amber-500 focus:outline-none">
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
+            <img id="prevIcon" src="https://render.albiononline.com/v1/item/T4_CLOTH.png?size=64" class="w-14 h-14 rounded-lg bg-slate-900 border border-slate-700/50 p-1 flex-shrink-0" alt="Tier Inferior">
+            <div class="flex-1">
+              <div class="flex justify-between items-center">
+                <span id="prevName" class="text-xs text-slate-400 font-semibold">Refinado Tier Inferior</span>
+                <span class="text-[11px] text-slate-500">1 requerido / unidad</span>
+              </div>
+              <input type="number" id="prevPrice" placeholder="0" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1.5 text-sm mt-1 text-slate-100 font-bold focus:border-amber-500 focus:outline-none">
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
+            <img id="outIcon" src="https://render.albiononline.com/v1/item/T5_CLOTH.png?size=64" class="w-14 h-14 rounded-lg bg-slate-900 border border-slate-700/50 p-1 flex-shrink-0" alt="Resultado Final">
+            <div class="flex-1">
+              <span id="outName" class="text-xs text-slate-400 font-semibold block">Precio Venta Refinado en Mercado</span>
+              <input type="number" id="outPrice" placeholder="0" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1.5 text-sm mt-1 text-slate-100 font-bold focus:border-amber-500 focus:outline-none">
+            </div>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 pt-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1.5">Cantidad de Material Bruto</label>
+            <input type="number" id="rawQty" value="1000" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-200 font-bold focus:border-amber-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1.5">Tasa de Retorno (RRR %)</label>
+            <select id="rrrSelect" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-200 font-bold focus:border-amber-500 focus:outline-none">
+              <option value="15.2">15.2% (Isla / Ciudad Sin Bono)</option>
+              <option value="36.7" selected>36.7% (Bono Ciudad)</option>
+              <option value="43.5">43.5% (Ciudad Sin Foco + Bono Actividad)</option>
+              <option value="53.9">53.9% (Bono Ciudad + FOCO)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel Resultados Refinación -->
+      <section class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-6 shadow-lg">
+        <div>
+          <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-chart-line text-emerald-400"></i> Balance Financiero
+          </h2>
+          <div class="mt-4 space-y-3.5">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Unidades Creadas:</span>
+              <span id="resUnits" class="font-bold text-slate-100 text-base">0</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Costo Total Compra:</span>
+              <span id="resCost" class="font-bold text-rose-400 text-sm">0</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Ingreso Neto (tras 4% fee):</span>
+              <span id="resRevenue" class="font-bold text-slate-100 text-sm">0</span>
+            </div>
+            <div class="border-t border-slate-800 pt-2 flex justify-between items-center text-xs text-slate-500">
+              <span>Tasa Impuesto Venta:</span>
+              <span>4.0% (Premium)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 text-center shadow-inner space-y-1">
+          <span class="text-[11px] text-slate-400 uppercase font-black tracking-widest">Ganancia Neta Estimada</span>
+          <p id="resProfit" class="text-3xl font-black text-emerald-400 tracking-tight">0 Plata</p>
+          <span id="resRoi" class="text-xs font-bold text-emerald-500 block">ROI: 0%</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- SECCIÓN 2: ISLA Y CULTIVOS -->
+    <main id="islandSection" class="hidden grid lg:grid-cols-3 gap-6">
+      <section class="lg:col-span-2 bg-slate-900/80 p-6 rounded-2xl border border-slate-800 space-y-5 shadow-lg">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h2 class="text-base font-bold text-slate-200 flex items-center gap-2">
+            <i class="fa-solid fa-seedling text-amber-400"></i> Configuración de Cultivo
+          </h2>
+          <span class="text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700">9 Casillas por Parcela</span>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1.5">Cultivo</label>
+            <select id="cropSelect" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-200 focus:border-amber-500 focus:outline-none">
+              <option value="T3_CARROT" selected>Zanahorias (Tier 3)</option>
+              <option value="T4_BEAN">Frijoles (Tier 4)</option>
+              <option value="T5_CABBAGE">Repollos (Tier 5)</option>
+              <option value="T6_POTATO">Patatas (Tier 6)</option>
+              <option value="T7_CORN">Maíz (Tier 7)</option>
+              <option value="T8_PUMPKIN">Calabazas (Tier 8)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1.5">Cantidad de Parcelas Agrícolas</label>
+            <select id="plotsCount" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-200 font-bold focus:border-amber-500 focus:outline-none">
+              <option value="1">1 Parcela (9 Casillas)</option>
+              <option value="2">2 Parcelas (18 Casillas)</option>
+              <option value="3">3 Parcelas (27 Casillas)</option>
+              <option value="4">4 Parcelas (36 Casillas)</option>
+              <option value="5" selected>5 Parcelas (45 Casillas)</option>
+              <option value="6">6 Parcelas (54 Casillas)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center gap-4 bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
+            <img id="seedIcon" src="https://render.albiononline.com/v1/item/T3_FARM_CARROT_SEED.png?size=64" class="w-14 h-14 rounded-lg bg-slate-900 border border-slate-700/50 p-1 flex-shrink-0" alt="Semilla">
+            <div class="flex-1">
+              <span id="seedName" class="text-xs text-slate-400 font-semibold block">Precio Compra Semilla</span>
+              <input type="number" id="seedPrice" placeholder="0" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1.5 text-sm mt-1 text-slate-100 font-bold focus:border-amber-500 focus:outline-none">
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
+            <img id="cropIcon" src="https://render.albiononline.com/v1/item/T3_CARROT.png?size=64" class="w-14 h-14 rounded-lg bg-slate-900 border border-slate-700/50 p-1 flex-shrink-0" alt="Cosecha">
+            <div class="flex-1">
+              <span id="cropName" class="text-xs text-slate-400 font-semibold block">Precio Venta Cosecha en Mercado</span>
+              <input type="number" id="cropPrice" placeholder="0" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1.5 text-sm mt-1 text-slate-100 font-bold focus:border-amber-500 focus:outline-none">
+            </div>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 pt-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1.5">Riego de Cultivos</label>
+            <select id="waterSelect" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-200 font-bold focus:border-amber-500 focus:outline-none">
+              <option value="no">Sin Riego (Retorno Semilla ~0 - 80%)</option>
+              <option value="yes" selected>Regado con Foco (Retorno > 100%)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1.5">Rendimiento Promedio por Casilla</label>
+            <input type="number" id="yieldPerPlot" value="9" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-200 font-bold focus:border-amber-500 focus:outline-none">
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel Resultados Isla -->
+      <section class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-6 shadow-lg">
+        <div>
+          <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-basket-shopping text-emerald-400"></i> Rendimiento de Cosecha
+          </h2>
+          <div class="mt-4 space-y-3.5">
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Total Cultivos Cosechados:</span>
+              <span id="islandTotalCrops" class="font-bold text-slate-100 text-base">0</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Semillas Recuperadas:</span>
+              <span id="islandSeedsRecovered" class="font-bold text-slate-100 text-sm">0</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Costo Semillas Nuevas:</span>
+              <span id="islandSeedCost" class="font-bold text-rose-400 text-sm">0</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-slate-400">Ingreso Cosecha + Semillas:</span>
+              <span id="islandRevenue" class="font-bold text-slate-100 text-sm">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 text-center shadow-inner space-y-1">
+          <span class="text-[11px] text-slate-400 uppercase font-black tracking-widest">Ganancia Neta Diaria</span>
+          <p id="islandProfit" class="text-3xl font-black text-emerald-400 tracking-tight">0 Plata</p>
+          <span id="islandRoi" class="text-xs font-bold text-emerald-500 block">ROI: 0%</span>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  <script>
+    const RAW_MAP = { CLOTH: 'FIBER', LEATHER: 'HIDE', METALBAR: 'ORE', PLANKS: 'WOOD', STONEBLOCK: 'ROCK' };
+    const RAW_PER_TIER = { T4: 2, T5: 3, T6: 4, T7: 5, T8: 5 };
+    const CITY_BONUSES = {
+      CLOTH: 'Lymhurst (+36.7% Bono)',
+      LEATHER: 'Martlock (+36.7% Bono)',
+      METALBAR: 'Thetford (+36.7% Bono)',
+      PLANKS: 'Fort Sterling (+36.7% Bono)',
+      STONEBLOCK: 'Bridgewatch (+36.7% Bono)'
+    };
+
+    const CROP_DATA = {
+      T3_CARROT: { seed: 'T3_FARM_CARROT_SEED', item: 'T3_CARROT', returnNoWater: 0.0, returnWater: 2.0 },
+      T4_BEAN: { seed: 'T4_FARM_BEAN_SEED', item: 'T4_BEAN', returnNoWater: 0.6, returnWater: 1.2 },
+      T5_CABBAGE: { seed: 'T5_FARM_CABBAGE_SEED', item: 'T5_CABBAGE', returnNoWater: 0.73, returnWater: 1.13 },
+      T6_POTATO: { seed: 'T6_FARM_POTATO_SEED', item: 'T6_POTATO', returnNoWater: 0.8, returnWater: 1.06 },
+      T7_CORN: { seed: 'T7_FARM_CORN_SEED', item: 'T7_CORN', returnNoWater: 0.86, returnWater: 1.02 },
+      T8_PUMPKIN: { seed: 'T8_FARM_PUMPKIN_SEED', item: 'T8_PUMPKIN', returnNoWater: 0.91, returnWater: 0.99 }
+    };
+
+    let activeTab = 'refining';
+
+    document.getElementById('tabRefining').addEventListener('click', () => {
+      activeTab = 'refining';
+      document.getElementById('tabRefining').className = 'flex items-center gap-2 px-5 py-2.5 bg-amber-500 text-slate-950 font-bold rounded-lg transition-all text-sm shadow-md';
+      document.getElementById('tabIsland').className = 'flex items-center gap-2 px-5 py-2.5 bg-transparent hover:bg-slate-800 text-slate-400 hover:text-slate-200 font-bold rounded-lg transition-all text-sm';
+      document.getElementById('refiningSection').classList.remove('hidden');
+      document.getElementById('islandSection').classList.add('hidden');
+    });
+
+    document.getElementById('tabIsland').addEventListener('click', () => {
+      activeTab = 'island';
+      document.getElementById('tabIsland').className = 'flex items-center gap-2 px-5 py-2.5 bg-amber-500 text-slate-950 font-bold rounded-lg transition-all text-sm shadow-md';
+      document.getElementById('tabRefining').className = 'flex items-center gap-2 px-5 py-2.5 bg-transparent hover:bg-slate-800 text-slate-400 hover:text-slate-200 font-bold rounded-lg transition-all text-sm';
+      document.getElementById('islandSection').classList.remove('hidden');
+      document.getElementById('refiningSection').classList.add('hidden');
+      updateIslandIcons();
+      fetchIslandPrices();
+    });
+
+    function getRefiningItemId(tier, type, isRaw = false) {
+      if (isRaw) return `${tier}_${RAW_MAP[type]}`;
+      if (tier === 'T3') return `T3_${type}`;
+      return `${tier}_${type}`;
+    }
+
+    function updateRefiningIcons() {
+      const type = document.getElementById('matType').value;
+      const tier = document.getElementById('matTier').value;
+      const prevTier = 'T' + (parseInt(tier[1]) - 1);
+
+      const rawId = getRefiningItemId(tier, type, true);
+      const prevId = getRefiningItemId(prevTier, type);
+      const outId = getRefiningItemId(tier, type);
+
+      document.getElementById('rawIcon').src = `https://render.albiononline.com/v1/item/${rawId}.png?size=64`;
+      document.getElementById('prevIcon').src = `https://render.albiononline.com/v1/item/${prevId}.png?size=64`;
+      document.getElementById('outIcon').src = `https://render.albiononline.com/v1/item/${outId}.png?size=64`;
+      document.getElementById('cityBonusLabel').textContent = `Ciudad Óptima: ${CITY_BONUSES[type]}`;
+      document.getElementById('rawRatioHint').textContent = `${RAW_PER_TIER[tier]} requeridos / unidad`;
+    }
+
+    function updateIslandIcons() {
+      const cropKey = document.getElementById('cropSelect').value;
+      const data = CROP_DATA[cropKey];
+      document.getElementById('seedIcon').src = `https://render.albiononline.com/v1/item/${data.seed}.png?size=64`;
+      document.getElementById('cropIcon').src = `https://render.albiononline.com/v1/item/${data.item}.png?size=64`;
+    }
+
+    async function fetchRefiningPrices() {
+      const syncIcon = document.getElementById('syncIcon');
+      syncIcon.classList.add('fa-spin');
+
+      const server = document.getElementById('serverSelect').value;
+      const type = document.getElementById('matType').value;
+      const tier = document.getElementById('matTier').value;
+      const prevTier = 'T' + (parseInt(tier[1]) - 1);
+
+      const rawId = getRefiningItemId(tier, type, true);
+      const prevId = getRefiningItemId(prevTier, type);
+      const outId = getRefiningItemId(tier, type);
+
+      const url = `https://${server}.albion-online-data.com/api/v2/stats/prices/${rawId},${prevId},${outId}.json`;
+      
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        const getPrice = (id) => {
+          const items = data.filter(d => d.item_id === id && d.sell_price_min > 0);
+          return items.length ? Math.min(...items.map(d => d.sell_price_min)) : 0;
+        };
+
+        const rawP = getPrice(rawId);
+        const prevP = getPrice(prevId);
+        const outP = getPrice(outId);
+
+        if (rawP) document.getElementById('rawPrice').value = rawP;
+        if (prevP) document.getElementById('prevPrice').value = prevP;
+        if (outP) document.getElementById('outPrice').value = outP;
+        calculateRefining();
+      } catch (err) {
+        console.error("Error al consultar API de Albion:", err);
+      } finally {
+        syncIcon.classList.remove('fa-spin');
+      }
+    }
+
+    async function fetchIslandPrices() {
+      const syncIcon = document.getElementById('syncIcon');
+      syncIcon.classList.add('fa-spin');
+
+      const server = document.getElementById('serverSelect').value;
+      const cropKey = document.getElementById('cropSelect').value;
+      const { seed, item } = CROP_DATA[cropKey];
+
+      const url = `https://${server}.albion-online-data.com/api/v2/stats/prices/${seed},${item}.json`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const getPrice = (id) => {
+          const items = data.filter(d => d.item_id === id && d.sell_price_min > 0);
+          return items.length ? Math.min(...items.map(d => d.sell_price_min)) : 0;
+        };
+
+        const seedP = getPrice(seed);
+        const cropP = getPrice(item);
+
+        if (seedP) document.getElementById('seedPrice').value = seedP;
+        if (cropP) document.getElementById('cropPrice').value = cropP;
+        calculateIsland();
+      } catch (err) {
+        console.error("Error al consultar precios de isla:", err);
+      } finally {
+        syncIcon.classList.remove('fa-spin');
+      }
+    }
+
+    function calculateRefining() {
+      const qty = parseFloat(document.getElementById('rawQty').value) || 0;
+      const rawP = parseFloat(document.getElementById('rawPrice').value) || 0;
+      const prevP = parseFloat(document.getElementById('prevPrice').value) || 0;
+      const outP = parseFloat(document.getElementById('outPrice').value) || 0;
+      const rrr = (parseFloat(document.getElementById('rrrSelect').value) || 0) / 100;
+      const tier = document.getElementById('matTier').value;
+
+      const rawRatio = RAW_PER_TIER[tier] || 2;
+      const effectiveMultiplier = 1 / (1 - rrr);
+      const refinedUnits = Math.floor((qty / rawRatio) * effectiveMultiplier);
+
+      const totalRawCost = qty * rawP;
+      const totalPrevCost = refinedUnits * prevP;
+      const totalCost = totalRawCost + totalPrevCost;
+
+      const grossRevenue = refinedUnits * outP * 0.96;
+      const netProfit = Math.round(grossRevenue - totalCost);
+      const roi = totalCost > 0 ? ((netProfit / totalCost) * 100).toFixed(1) : 0;
+
+      document.getElementById('resUnits').textContent = refinedUnits.toLocaleString();
+      document.getElementById('resCost').textContent = Math.round(totalCost).toLocaleString() + ' Plata';
+      document.getElementById('resRevenue').textContent = Math.round(grossRevenue).toLocaleString() + ' Plata';
+      
+      const profitEl = document.getElementById('resProfit');
+      profitEl.textContent = (netProfit >= 0 ? '+' : '') + netProfit.toLocaleString() + ' Plata';
+      profitEl.className = netProfit >= 0 ? 'text-3xl font-black text-emerald-400 tracking-tight' : 'text-3xl font-black text-rose-400 tracking-tight';
+      
+      document.getElementById('resRoi').textContent = `ROI: ${roi}%`;
+      document.getElementById('resRoi').className = roi >= 0 ? 'text-xs font-bold text-emerald-500 block' : 'text-xs font-bold text-rose-500 block';
+    }
+
+    function calculateIsland() {
+      const plots = parseInt(document.getElementById('plotsCount').value) || 1;
+      const totalSlots = plots * 9;
+      const seedP = parseFloat(document.getElementById('seedPrice').value) || 0;
+      const cropP = parseFloat(document.getElementById('cropPrice').value) || 0;
+      const yieldAvg = parseFloat(document.getElementById('yieldPerPlot').value) || 9;
+      const isWatered = document.getElementById('waterSelect').value === 'yes';
+
+      const cropKey = document.getElementById('cropSelect').value;
+      const returnRate = isWatered ? CROP_DATA[cropKey].returnWater : CROP_DATA[cropKey].returnNoWater;
+
+      const totalCrops = Math.round(totalSlots * yieldAvg);
+      const seedsReturned = Math.round(totalSlots * returnRate);
+      
+      const seedsToBuy = Math.max(0, totalSlots - seedsReturned);
+      const totalSeedCost = seedsToBuy * seedP;
+
+      const cropRevenue = totalCrops * cropP * 0.96;
+      const excessSeeds = Math.max(0, seedsReturned - totalSlots);
+      const extraSeedRevenue = excessSeeds * seedP * 0.96;
+
+      const totalRevenue = cropRevenue + extraSeedRevenue;
+      const netProfit = Math.round(totalRevenue - totalSeedCost);
+      const roi = totalSeedCost > 0 ? ((netProfit / totalSeedCost) * 100).toFixed(1) : 100;
+
+      document.getElementById('islandTotalCrops').textContent = totalCrops.toLocaleString();
+      document.getElementById('islandSeedsRecovered').textContent = `${seedsReturned} de ${totalSlots}`;
+      document.getElementById('islandSeedCost').textContent = Math.round(totalSeedCost).toLocaleString() + ' Plata';
+      document.getElementById('islandRevenue').textContent = Math.round(totalRevenue).toLocaleString() + ' Plata';
+
+      const profitEl = document.getElementById('islandProfit');
+      profitEl.textContent = (netProfit >= 0 ? '+' : '') + netProfit.toLocaleString() + ' Plata';
+      profitEl.className = netProfit >= 0 ? 'text-3xl font-black text-emerald-400 tracking-tight' : 'text-3xl font-black text-rose-400 tracking-tight';
+
+      document.getElementById('islandRoi').textContent = `ROI: ${roi}%`;
+      document.getElementById('islandRoi').className = roi >= 0 ? 'text-xs font-bold text-emerald-500 block' : 'text-xs font-bold text-rose-500 block';
+    }
+
+    ['rawQty', 'rawPrice', 'prevPrice', 'outPrice', 'rrrSelect'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calculateRefining);
+    });
+
+    ['matType', 'matTier'].forEach(id => {
+      document.getElementById(id).addEventListener('change', () => {
+        updateRefiningIcons();
+        fetchRefiningPrices();
+      });
+    });
+
+    ['plotsCount', 'seedPrice', 'cropPrice', 'waterSelect', 'yieldPerPlot'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calculateIsland);
+    });
+
+    document.getElementById('cropSelect').addEventListener('change', () => {
+      updateIslandIcons();
+      fetchIslandPrices();
+    });
+
+    document.getElementById('fetchBtn').addEventListener('click', () => {
+      if (activeTab === 'refining') fetchRefiningPrices();
+      else fetchIslandPrices();
+    });
+
+    document.getElementById('serverSelect').addEventListener('change', () => {
+      if (activeTab === 'refining') fetchRefiningPrices();
+      else fetchIslandPrices();
+    });
+
+    updateRefiningIcons();
+    fetchRefiningPrices();
+  </script>
+</body>
+</html>
