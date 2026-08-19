@@ -19,7 +19,6 @@
 
   <div class="max-w-[1400px] mx-auto p-3 sm:p-6 space-y-5 w-full">
     
-    <!-- Navbar Header -->
     <header class="bg-[#111827] border border-slate-800/80 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xl">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-black">
@@ -54,16 +53,13 @@
       </div>
     </header>
 
-    <!-- Top Selection Panel (Buscar item a fabricar, Tier, Encantamiento, Runs) -->
     <section class="bg-[#111827] border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
-        
-        <!-- Autocomplete Search Item -->
         <div class="md:col-span-5 relative">
           <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Ítem a Fabricar</label>
           <div class="relative">
             <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-500"></i>
-            <input type="text" id="itemSearchInput" placeholder="Ej: Pastel de Cerdo, Espada Ancha, Poción..." autocomplete="off" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-sm text-emerald-300 font-bold focus:border-emerald-500 focus:outline-none transition">
+            <input type="text" id="itemSearchInput" placeholder="Busca armadura, arma, montura, comida..." autocomplete="off" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-sm text-emerald-300 font-bold focus:border-emerald-500 focus:outline-none transition">
           </div>
           <div id="autocompleteList" class="absolute z-50 w-full bg-[#1e293b] border border-slate-700 rounded-xl mt-1 max-h-56 overflow-y-auto hidden shadow-2xl"></div>
         </div>
@@ -71,12 +67,11 @@
         <div class="md:col-span-2">
           <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Nivel (Tier)</label>
           <select id="tierSelect" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-200 font-bold focus:border-emerald-500 focus:outline-none">
-            <option value="3">Tier 3</option>
             <option value="4">Tier 4</option>
             <option value="5">Tier 5</option>
             <option value="6">Tier 6</option>
-            <option value="7" selected>Tier 7</option>
-            <option value="8">Tier 8</option>
+            <option value="7">Tier 7</option>
+            <option value="8" selected>Tier 8</option>
           </select>
         </div>
 
@@ -92,26 +87,25 @@
         </div>
 
         <div class="md:col-span-3">
-          <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Tiradas / Cantidad (Runs)</label>
+          <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Tiradas (Runs)</label>
           <input type="number" id="runsInput" value="10" min="1" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl px-3 py-2 text-sm font-bold text-emerald-400 focus:border-emerald-500 focus:outline-none">
         </div>
       </div>
 
-      <!-- Quick Preset Chips / Parameters -->
       <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2 pt-2 border-t border-slate-800 text-xs">
         <div>
           <label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Tasa RRR</label>
           <select id="rrrSelect" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg p-1.5 font-bold text-emerald-400">
+            <option value="0.0">0.0% (Monturas/Crianza)</option>
             <option value="0.152">15.2% (Isla/Sin Bono)</option>
             <option value="0.180">18.0% (Brecilien)</option>
             <option value="0.248" selected>24.8% (Ciudad Bono)</option>
             <option value="0.479">47.9% (Ciudad + Foco)</option>
-            <option value="0.539">53.9% (Refinación + Foco)</option>
           </select>
         </div>
 
         <div>
-          <label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Estado Premium</label>
+          <label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Premium</label>
           <select id="premiumSelect" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg p-1.5 font-bold text-slate-200">
             <option value="0.04" selected>Activo (4% Tax)</option>
             <option value="0.08">Inactivo (8% Tax)</option>
@@ -119,15 +113,15 @@
         </div>
 
         <div>
-          <label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Tasa Setup Mercado</label>
+          <label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Setup Mercado</label>
           <select id="setupTaxSelect" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg p-1.5 font-bold text-slate-200">
-            <option value="0.025" selected>2.5% (Orden de Venta)</option>
+            <option value="0.025" selected>2.5% (Orden)</option>
             <option value="0.0">0.0% (Venta Directa)</option>
           </select>
         </div>
 
         <div>
-          <label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Impuesto Taller (x100 Nutri)</label>
+          <label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Impuesto Taller</label>
           <input type="number" id="stationFeeInput" value="500" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg p-1.5 font-bold text-slate-200 focus:outline-none">
         </div>
 
@@ -135,26 +129,22 @@
           <div class="flex items-center gap-2">
             <i class="fa-solid fa-city text-emerald-400"></i>
             <div>
-              <span class="text-[10px] text-slate-500 font-bold uppercase block">Bono de Ciudad Recomendado</span>
-              <span id="bestCraftCityLabel" class="text-xs font-black text-amber-300">Caerleon / Brecilien</span>
+              <span class="text-[10px] text-slate-500 font-bold uppercase block">Bono Recomendado</span>
+              <span id="bestCraftCityLabel" class="text-xs font-black text-amber-300">Selecciona un Ítem</span>
             </div>
           </div>
-          <span id="autoRrrBadge" class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 font-bold">Auto-RRR</span>
         </div>
       </div>
     </section>
 
-    <!-- Main Workspace (Grid 3 Columns) -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-      
-      <!-- Inputs & Material Breakdown (Left - 7 cols) -->
       <section class="lg:col-span-7 bg-[#111827] border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
           <div class="flex items-center gap-3">
-            <img id="headerOutputImg" src="https://render.albiononline.com/v1/item/T7_MEAL_PIE.png?size=64" onerror="this.src='https://render.albiononline.com/v1/item/TREASURE_KNOWLEDGE.png?size=64'" class="w-12 h-12 bg-[#0b0f19] border border-slate-700 rounded-xl p-1 shadow-inner" alt="Output">
+            <img id="headerOutputImg" src="https://render.albiononline.com/v1/item/T4_BAG.png?size=64" onerror="this.src='https://render.albiononline.com/v1/item/TREASURE_KNOWLEDGE.png?size=64'" class="w-12 h-12 bg-[#0b0f19] border border-slate-700 rounded-xl p-1 shadow-inner">
             <div>
-              <h2 id="headerOutputName" class="text-base font-black text-slate-100">Pastel de Cerdo (Tier 7)</h2>
-              <p id="headerOutputCode" class="text-[11px] font-mono text-slate-500">T7_MEAL_PIE</p>
+              <h2 id="headerOutputName" class="text-base font-black text-slate-100">Bolsa</h2>
+              <p id="headerOutputCode" class="text-[11px] font-mono text-slate-500">T4_BAG</p>
             </div>
           </div>
           <div class="text-right">
@@ -163,45 +153,16 @@
           </div>
         </div>
 
-        <!-- Dynamic Inputs Table (AFM Style) -->
         <div>
           <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
             <span>Materiales de Entrada (Inputs)</span>
             <span class="text-[11px] text-slate-500 lowercase font-normal">Costo calculado tras RRR efectivo</span>
           </h3>
-          <div class="space-y-2.5" id="inputsContainer">
-            <!-- Inyectado por JS -->
-          </div>
-        </div>
-
-        <!-- Diarios de Trabajador (Journals) -->
-        <div class="pt-2 border-t border-slate-800">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-              <i class="fa-solid fa-book-bookmark text-blue-400"></i> Diarios de Crafteo (Opcional)
-            </span>
-            <label class="flex items-center gap-2 text-xs text-slate-300 font-semibold cursor-pointer">
-              <input type="checkbox" id="useJournalsCheckbox" class="rounded bg-slate-900 border-slate-700 text-emerald-500 focus:ring-0">
-              <span>Incluir Diarios</span>
-            </label>
-          </div>
-          <div id="journalsPanel" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-3 bg-[#0b0f19] p-3 rounded-xl border border-slate-800">
-            <div>
-              <label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Precio Diario Vacío (Compra)</label>
-              <input type="number" id="journalEmptyPrice" value="1200" class="w-full bg-[#111827] border border-slate-700 rounded-lg p-1.5 text-xs font-bold text-slate-200">
-            </div>
-            <div>
-              <label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Precio Diario Lleno (Venta)</label>
-              <input type="number" id="journalFullPrice" value="4800" class="w-full bg-[#111827] border border-slate-700 rounded-lg p-1.5 text-xs font-bold text-emerald-400">
-            </div>
-          </div>
+          <div class="space-y-2.5" id="inputsContainer"></div>
         </div>
       </section>
 
-      <!-- Outputs, Selling Market & Profit Summary (Right - 5 cols) -->
       <section class="lg:col-span-5 space-y-4">
-        
-        <!-- Output Market & Selling City Selector -->
         <div class="bg-[#111827] border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
           <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
             <span>Mercado de Venta (Output)</span>
@@ -222,245 +183,47 @@
                 <option value="Thetford">Thetford</option>
               </select>
             </div>
-
             <div>
               <label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Precio Unitario de Venta</label>
-              <input type="number" id="outputUnitPriceInput" value="3900" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl p-2 text-xs font-bold text-emerald-400 focus:outline-none">
+              <input type="number" id="outputUnitPriceInput" value="0" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl p-2 text-xs font-bold text-emerald-400 focus:outline-none">
             </div>
           </div>
 
-          <!-- Mini Precios por Ciudad en Tiempo Real -->
           <div class="pt-2 border-t border-slate-800">
             <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1.5">Precios Mínimos en Otras Ciudades (Click para aplicar):</span>
-            <div class="grid grid-cols-3 gap-1.5 text-center text-[11px]" id="marketCityPricesGrid">
-              <!-- Inyectado por JS -->
-            </div>
+            <div class="grid grid-cols-3 gap-1.5 text-center text-[11px]" id="marketCityPricesGrid"></div>
           </div>
         </div>
 
-        <!-- Profit Summary Card (AFM Complete Breakdown) -->
         <div class="bg-[#111827] border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
           <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider border-b border-slate-800 pb-2">
             Desglose Financiero Completo
           </h3>
-
           <div class="space-y-2 text-xs font-semibold">
-            <div class="flex justify-between items-center text-slate-400">
-              <span>Costo Bruto Materiales:</span>
-              <span id="resGrossMatCost" class="text-slate-200 font-bold">0 🥈</span>
-            </div>
-            <div class="flex justify-between items-center text-slate-400">
-              <span>Materiales Recuperados (RRR):</span>
-              <span id="resReturnedMatValue" class="text-emerald-400 font-bold">-0 🥈</span>
-            </div>
-            <div class="flex justify-between items-center text-slate-400">
-              <span>Costo Neto de Materiales:</span>
-              <span id="resNetMatCost" class="text-rose-400 font-bold">0 🥈</span>
-            </div>
-            <div class="flex justify-between items-center text-slate-400">
-              <span>Tasa de Nutrición / Taller:</span>
-              <span id="resStationFeeCost" class="text-rose-400 font-bold">0 🥈</span>
-            </div>
-            <div class="flex justify-between items-center text-slate-400">
-              <span>Impuestos de Venta + Setup:</span>
-              <span id="resTotalTaxesCost" class="text-rose-400 font-bold">0 🥈</span>
-            </div>
-            <div class="flex justify-between items-center text-slate-400" id="resJournalsRow" style="display:none;">
-              <span>Beneficio Neto por Diarios:</span>
-              <span id="resJournalsProfit" class="text-emerald-400 font-bold">+0 🥈</span>
-            </div>
-            <div class="border-t border-slate-800 pt-2 flex justify-between items-center text-slate-300 font-bold">
-              <span>Ingreso Bruto de Venta:</span>
-              <span id="resGrossRevenue" class="text-slate-100 font-black">0 🥈</span>
-            </div>
+            <div class="flex justify-between items-center text-slate-400"><span>Costo Bruto Materiales:</span><span id="resGrossMatCost" class="text-slate-200 font-bold">0 🥈</span></div>
+            <div class="flex justify-between items-center text-slate-400"><span>Materiales Recuperados (RRR):</span><span id="resReturnedMatValue" class="text-emerald-400 font-bold">-0 🥈</span></div>
+            <div class="flex justify-between items-center text-slate-400"><span>Costo Neto de Materiales:</span><span id="resNetMatCost" class="text-rose-400 font-bold">0 🥈</span></div>
+            <div class="flex justify-between items-center text-slate-400"><span>Tasa de Nutrición / Taller:</span><span id="resStationFeeCost" class="text-rose-400 font-bold">0 🥈</span></div>
+            <div class="flex justify-between items-center text-slate-400"><span>Impuestos de Venta + Setup:</span><span id="resTotalTaxesCost" class="text-rose-400 font-bold">0 🥈</span></div>
+            <div class="border-t border-slate-800 pt-2 flex justify-between items-center text-slate-300 font-bold"><span>Ingreso Bruto de Venta:</span><span id="resGrossRevenue" class="text-slate-100 font-black">0 🥈</span></div>
           </div>
-
-          <!-- Big Profit Box -->
           <div class="bg-[#0b0f19] border border-slate-800 p-4 rounded-xl text-center space-y-1 shadow-inner">
             <span class="text-[10px] text-slate-500 uppercase font-black tracking-widest block">Beneficio Neto (Net Profit)</span>
             <p id="resNetProfit" class="text-2xl sm:text-3xl font-black text-emerald-400 tracking-tight">0 🥈</p>
             <div class="flex justify-center items-center gap-3 pt-1 text-xs">
-              <span id="resRoiBadge" class="font-bold text-emerald-400">ROI: 0%</span>
-              <span class="text-slate-600">|</span>
-              <span id="resProfitPerRun" class="text-slate-400 font-bold">0 🥈 / run</span>
+              <span id="resRoiBadge" class="font-bold text-emerald-400">ROI: 0%</span><span class="text-slate-600">|</span><span id="resProfitPerRun" class="text-slate-400 font-bold">0 🥈 / run</span>
             </div>
           </div>
         </div>
-
       </section>
     </div>
-
   </div>
-
-  <footer class="mt-8 py-6 border-t border-slate-800 text-center text-xs text-slate-500 bg-[#111827]/50">
-    <p>Albion Free Market Replica - Servidor América (West). Precios en tiempo real vía Albion Data Project.</p>
-  </footer>
 
   <script src="items.js"></script>
   <script>
+    let currentRecipe = null;
     const CITIES = ['Bridgewatch', 'Fort Sterling', 'Lymhurst', 'Martlock', 'Thetford', 'Caerleon', 'Brecilien', 'Black Market'];
 
-    // Base de datos de Recetas Estructuradas estilo Albion Free Market
-    const AFM_RECIPES = {
-      // COMIDAS
-      T7_MEAL_PIE: {
-        name: 'Pastel de Cerdo (Tier 7)',
-        tree: 'Cocina',
-        cityBonus: 'Caerleon / Brecilien',
-        outputId: 'T7_MEAL_PIE',
-        defaultTier: 7,
-        inputs: [
-          { id: 'T7_CORN', name: 'Maíz T7', qtyPerRun: 24, defaultCity: 'Bridgewatch' },
-          { id: 'T3_FLOUR', name: 'Harina T3', qtyPerRun: 12, defaultCity: 'Caerleon' },
-          { id: 'T7_MEAT', name: 'Carne de Cerdo T7', qtyPerRun: 18, defaultCity: 'Thetford' },
-          { id: 'T6_MILK', name: 'Leche de Oveja T6', qtyPerRun: 12, defaultCity: 'Fort Sterling' }
-        ]
-      },
-      T7_MEAL_STEW: {
-        name: 'Estofado de Cerdo (Tier 7)',
-        tree: 'Cocina',
-        cityBonus: 'Caerleon / Brecilien',
-        outputId: 'T7_MEAL_STEW',
-        defaultTier: 7,
-        inputs: [
-          { id: 'T7_MEAT', name: 'Carne de Cerdo T7', qtyPerRun: 18, defaultCity: 'Thetford' },
-          { id: 'T7_CORN', name: 'Maíz T7', qtyPerRun: 12, defaultCity: 'Bridgewatch' },
-          { id: 'T6_PORK', name: 'Pan T6', qtyPerRun: 6, defaultCity: 'Caerleon' }
-        ]
-      },
-      T7_MEAL_OMELETTE: {
-        name: 'Tortilla de Cerdo (Tier 7)',
-        tree: 'Cocina',
-        cityBonus: 'Caerleon / Brecilien',
-        outputId: 'T7_MEAL_OMELETTE',
-        defaultTier: 7,
-        inputs: [
-          { id: 'T7_EGG', name: 'Huevos T7', qtyPerRun: 24, defaultCity: 'Lymhurst' },
-          { id: 'T7_MEAT', name: 'Carne de Cerdo T7', qtyPerRun: 18, defaultCity: 'Thetford' },
-          { id: 'T6_MILK', name: 'Leche T6', qtyPerRun: 12, defaultCity: 'Fort Sterling' }
-        ]
-      },
-
-      // POCIONES
-      T7_POTION_HEAL: {
-        name: 'Poción de Curación Mayor (Tier 7)',
-        tree: 'Alquimia',
-        cityBonus: 'Caerleon / Brecilien',
-        outputId: 'T7_POTION_HEAL',
-        defaultTier: 7,
-        inputs: [
-          { id: 'T7_ELUSIVEFOXGLOVE', name: 'Digitalis Esquiva T7', qtyPerRun: 24, defaultCity: 'Lymhurst' },
-          { id: 'T7_BURDOCK', name: 'Bardana T7', qtyPerRun: 12, defaultCity: 'Martlock' },
-          { id: 'T6_ALCOHOL', name: 'Licor T6', qtyPerRun: 6, defaultCity: 'Caerleon' }
-        ]
-      },
-      T7_POTION_INVIS: {
-        name: 'Poción de Invisibilidad (Tier 7)',
-        tree: 'Alquimia',
-        cityBonus: 'Caerleon / Brecilien',
-        outputId: 'T7_POTION_INVIS',
-        defaultTier: 7,
-        inputs: [
-          { id: 'T7_FIREBLOOM', name: 'Flor de Fuego T7', qtyPerRun: 36, defaultCity: 'Fort Sterling' },
-          { id: 'T7_AGARIC', name: 'Arcano Agaric T7', qtyPerRun: 18, defaultCity: 'Bridgewatch' },
-          { id: 'T6_MILK', name: 'Leche T6', qtyPerRun: 12, defaultCity: 'Thetford' }
-        ]
-      },
-
-      // MONTURAS
-      T7_MOUNT_HORSE: {
-        name: 'Caballo de Montar T7',
-        tree: 'Guarnicionero',
-        cityBonus: 'Sin Bono de Ciudad (15.2%)',
-        outputId: 'T7_MOUNT_HORSE',
-        defaultTier: 7,
-        inputs: [
-          { id: 'T7_FARM_HORSE_GROWN', name: 'Caballo T7 Criado', qtyPerRun: 1, defaultCity: 'Lymhurst' },
-          { id: 'T7_LEATHER', name: 'Cuero T7 Refinado', qtyPerRun: 30, defaultCity: 'Martlock' }
-        ]
-      },
-      T7_MOUNT_OX: {
-        name: 'Buey de Transporte T7',
-        tree: 'Guarnicionero',
-        cityBonus: 'Sin Bono de Ciudad (15.2%)',
-        outputId: 'T7_MOUNT_OX',
-        defaultTier: 7,
-        inputs: [
-          { id: 'T7_FARM_OX_GROWN', name: 'Buey T7 Criado', qtyPerRun: 1, defaultCity: 'Lymhurst' },
-          { id: 'T7_PLANKS', name: 'Tablas T7 Refinadas', qtyPerRun: 40, defaultCity: 'Fort Sterling' }
-        ]
-      },
-
-      // ARMAS / EQUIPO (Martlock, Fort Sterling, Thetford, Lymhurst, Bridgewatch)
-      MAIN_SWORD: {
-        name: 'Espada Ancha',
-        tree: 'Guerrero',
-        cityBonus: 'Lymhurst (+24.8%)',
-        outputId: 'MAIN_SWORD',
-        defaultTier: 7,
-        inputs: [
-          { id: 'PLANKS', name: 'Tablas de Madera', qtyPerRun: 8, defaultCity: 'Fort Sterling' },
-          { id: 'METALBAR', name: 'Lingotes de Metal', qtyPerRun: 16, defaultCity: 'Thetford' }
-        ]
-      },
-      MAIN_AXE: {
-        name: 'Hacha de Batalla',
-        tree: 'Guerrero',
-        cityBonus: 'Martlock (+24.8%)',
-        outputId: 'MAIN_AXE',
-        defaultTier: 7,
-        inputs: [
-          { id: 'PLANKS', name: 'Tablas de Madera', qtyPerRun: 8, defaultCity: 'Fort Sterling' },
-          { id: 'METALBAR', name: 'Lingotes de Metal', qtyPerRun: 16, defaultCity: 'Thetford' }
-        ]
-      },
-      '2H_BOW': {
-        name: 'Arco',
-        tree: 'Cazador',
-        cityBonus: 'Lymhurst (+24.8%)',
-        outputId: '2H_BOW',
-        defaultTier: 7,
-        inputs: [
-          { id: 'PLANKS', name: 'Tablas de Madera', qtyPerRun: 32, defaultCity: 'Fort Sterling' }
-        ]
-      },
-      ARMOR_PLATE_SET1: {
-        name: 'Armadura de Soldado',
-        tree: 'Guerrero',
-        cityBonus: 'Fort Sterling (+24.8%)',
-        outputId: 'ARMOR_PLATE_SET1',
-        defaultTier: 7,
-        inputs: [
-          { id: 'METALBAR', name: 'Lingotes de Metal', qtyPerRun: 16, defaultCity: 'Thetford' }
-        ]
-      },
-      ARMOR_LEATHER_SET1: {
-        name: 'Chaqueta de Mercenario',
-        tree: 'Cazador',
-        cityBonus: 'Thetford (+24.8%)',
-        outputId: 'ARMOR_LEATHER_SET1',
-        defaultTier: 7,
-        inputs: [
-          { id: 'LEATHER', name: 'Cuero Refinado', qtyPerRun: 16, defaultCity: 'Martlock' }
-        ]
-      },
-      ARMOR_CLOTH_SET1: {
-        name: 'Toga de Erudito',
-        tree: 'Mago',
-        cityBonus: 'Bridgewatch (+24.8%)',
-        outputId: 'ARMOR_CLOTH_SET1',
-        defaultTier: 7,
-        inputs: [
-          { id: 'CLOTH', name: 'Tela Refinada', qtyPerRun: 16, defaultCity: 'Lymhurst' }
-        ]
-      }
-    };
-
-    let activeRecipeKey = 'T7_MEAL_PIE';
-    let currentInputPrices = {};
-    let currentMarketCityPrices = {};
-
-    // 1. Autocompletado del buscador
     const searchInput = document.getElementById('itemSearchInput');
     const autocompleteList = document.getElementById('autocompleteList');
 
@@ -469,22 +232,26 @@
       autocompleteList.innerHTML = '';
       if(val.length < 2) { autocompleteList.classList.add('hidden'); return; }
 
-      const keys = Object.keys(AFM_RECIPES);
-      const matches = keys.filter(k => AFM_RECIPES[k].name.toLowerCase().includes(val) || k.toLowerCase().includes(val));
-
+      const matches = ITEMS_DB.filter(i => i.name.toLowerCase().includes(val) || i.id.toLowerCase().includes(val)).slice(0, 15);
       if(matches.length > 0) autocompleteList.classList.remove('hidden');
       else autocompleteList.classList.add('hidden');
 
-      matches.forEach(k => {
-        const item = AFM_RECIPES[k];
+      matches.forEach(item => {
         const div = document.createElement('div');
-        div.className = 'px-4 py-2.5 hover:bg-slate-700 cursor-pointer text-xs sm:text-sm font-bold text-emerald-300 border-b border-slate-700/50 flex justify-between items-center';
-        div.innerHTML = `<span>${item.name}</span><span class="text-[10px] text-slate-400 font-mono">${k}</span>`;
+        div.className = 'px-4 py-2 hover:bg-slate-700 cursor-pointer text-xs sm:text-sm font-bold text-emerald-300 border-b border-slate-700/50 flex justify-between items-center';
+        div.innerHTML = `<span>${item.name}</span><span class="text-[10px] text-slate-400 font-mono">${item.id}</span>`;
         div.onclick = () => {
           searchInput.value = item.name;
-          activeRecipeKey = k;
+          currentRecipe = item;
           autocompleteList.classList.add('hidden');
-          renderRecipeInputs();
+          
+          if(item.type === 'fixed') {
+            document.getElementById('tierSelect').value = item.tier;
+            document.getElementById('tierSelect').disabled = true;
+          } else {
+            document.getElementById('tierSelect').disabled = false;
+          }
+          renderInputs();
           fetchPrices();
         };
         autocompleteList.appendChild(div);
@@ -493,39 +260,44 @@
 
     document.addEventListener('click', (e) => { if(e.target !== searchInput) autocompleteList.classList.add('hidden'); });
 
-    // Renderizar los inputs de materiales en la tabla izquierda
-    function renderRecipeInputs() {
-      const recipe = AFM_RECIPES[activeRecipeKey] || AFM_RECIPES['T7_MEAL_PIE'];
-      const tier = document.getElementById('tierSelect').value;
-      const enchant = document.getElementById('enchantSelect').value;
-      const encSuffix = enchant !== '0' ? `@${enchant}` : '';
+    function buildIds() {
+      if(!currentRecipe) return null;
+      const t = document.getElementById('tierSelect').value;
+      const e = document.getElementById('enchantSelect').value;
+      const suf = e !== '0' ? `@${e}` : '';
 
-      // Actualizar Header
-      let finalOutputId = recipe.outputId.includes('T7_') || recipe.outputId.includes('T6_') 
-        ? recipe.outputId.replace(/T\d_/, `T${tier}_`) + encSuffix
-        : `T${tier}_${recipe.outputId}${encSuffix}`;
+      let outId = currentRecipe.type === 'fixed' ? currentRecipe.id : `T${t}_${currentRecipe.id}`;
+      if(e !== '0' && !outId.includes('MOUNT') && !outId.includes('MEAL') && !outId.includes('POTION')) outId += suf;
 
-      document.getElementById('headerOutputImg').src = `https://render.albiononline.com/v1/item/${finalOutputId}.png?size=64`;
-      document.getElementById('headerOutputName').textContent = `${recipe.name.replace(/Tier \d/, `Tier ${tier}`)}`;
-      document.getElementById('headerOutputCode').textContent = finalOutputId;
-      document.getElementById('bestCraftCityLabel').textContent = recipe.cityBonus;
+      let m1 = currentRecipe.type === 'fixed' ? currentRecipe.m1 : `T${t}_${currentRecipe.m1}${suf}`;
+      let m2 = currentRecipe.m2 ? (currentRecipe.type === 'fixed' ? currentRecipe.m2 : `T${t}_${currentRecipe.m2}${suf}`) : null;
+
+      return { outId, m1, m2 };
+    }
+
+    function renderInputs() {
+      if(!currentRecipe) return;
+      const { outId, m1, m2 } = buildIds();
+      const t = document.getElementById('tierSelect').value;
+
+      document.getElementById('headerOutputImg').src = `https://render.albiononline.com/v1/item/${outId}.png?size=64`;
+      document.getElementById('headerOutputName').textContent = currentRecipe.type === 'fixed' ? currentRecipe.name : `${currentRecipe.name} T${t}`;
+      document.getElementById('headerOutputCode').textContent = outId;
+      document.getElementById('bestCraftCityLabel').textContent = currentRecipe.city;
 
       const container = document.getElementById('inputsContainer');
       container.innerHTML = '';
 
-      recipe.inputs.forEach((inp, idx) => {
-        let inputMatId = inp.id.includes('T7_') || inp.id.includes('T6_') || inp.id.includes('T3_')
-          ? inp.id.replace(/T\d_/, `T${tier}_`)
-          : (inp.id.includes('METALBAR') || inp.id.includes('PLANKS') || inp.id.includes('CLOTH') || inp.id.includes('LEATHER') ? `T${tier}_${inp.id}${encSuffix}` : inp.id);
-
+      [ { id: m1, q: currentRecipe.q1, defC: 'Bridgewatch' }, { id: m2, q: currentRecipe.q2, defC: 'Caerleon' } ].forEach((mat, idx) => {
+        if(!mat.id) return;
         const card = document.createElement('div');
         card.className = 'bg-[#0b0f19] border border-slate-800 p-3 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 hover:border-slate-700 transition';
         card.innerHTML = `
           <div class="flex items-center gap-3 w-full sm:w-auto">
-            <img src="https://render.albiononline.com/v1/item/${inputMatId}.png?size=48" onerror="this.src='https://render.albiononline.com/v1/item/TREASURE_KNOWLEDGE.png?size=48'" class="w-10 h-10 bg-[#111827] border border-slate-800 rounded-lg p-0.5">
+            <img src="https://render.albiononline.com/v1/item/${mat.id}.png?size=48" onerror="this.src='https://render.albiononline.com/v1/item/TREASURE_KNOWLEDGE.png?size=48'" class="w-10 h-10 bg-[#111827] border border-slate-800 rounded-lg p-0.5">
             <div>
-              <span class="font-bold text-slate-200 text-xs block">${inp.name}</span>
-              <span class="text-[10px] text-slate-500 font-mono">${inputMatId} (x${inp.qtyPerRun}/run)</span>
+              <span class="font-bold text-slate-200 text-xs block">${mat.id}</span>
+              <span class="text-[10px] text-slate-500 font-mono">x${mat.q}/run</span>
             </div>
           </div>
 
@@ -533,7 +305,7 @@
             <div>
               <label class="text-[9px] text-slate-500 uppercase font-bold block">Mercado Compra</label>
               <select id="inputCity_${idx}" class="bg-[#111827] border border-slate-700 rounded-lg px-2 py-1 text-xs font-bold text-slate-200">
-                ${CITIES.map(c => `<option value="${c}" ${c === inp.defaultCity ? 'selected' : ''}>${c}</option>`).join('')}
+                ${CITIES.map(c => `<option value="${c}" ${c === mat.defC ? 'selected' : ''}>${c}</option>`).join('')}
               </select>
             </div>
             <div>
@@ -544,7 +316,6 @@
         `;
         container.appendChild(card);
 
-        // Eventos en inputs
         card.querySelector(`#inputPrice_${idx}`).addEventListener('input', calculate);
         card.querySelector(`#inputCity_${idx}`).addEventListener('change', fetchPrices);
       });
@@ -552,147 +323,87 @@
       calculate();
     }
 
-    // Consultar API de Albion Data Project (Servidor West)
     async function fetchPrices() {
+      if(!currentRecipe) return;
       const syncIcon = document.getElementById('syncIcon');
       if(syncIcon) syncIcon.classList.add('fa-spin');
 
-      const recipe = AFM_RECIPES[activeRecipeKey] || AFM_RECIPES['T7_MEAL_PIE'];
-      const tier = document.getElementById('tierSelect').value;
-      const enchant = document.getElementById('enchantSelect').value;
-      const encSuffix = enchant !== '0' ? `@${enchant}` : '';
-
-      let finalOutputId = recipe.outputId.includes('T7_') || recipe.outputId.includes('T6_') 
-        ? recipe.outputId.replace(/T\d_/, `T${tier}_`) + encSuffix
-        : `T${tier}_${recipe.outputId}${encSuffix}`;
-
-      const idsToFetch = [finalOutputId];
-      recipe.inputs.forEach(inp => {
-        let inputMatId = inp.id.includes('T7_') || inp.id.includes('T6_') || inp.id.includes('T3_')
-          ? inp.id.replace(/T\d_/, `T${tier}_`)
-          : (inp.id.includes('METALBAR') || inp.id.includes('PLANKS') || inp.id.includes('CLOTH') || inp.id.includes('LEATHER') ? `T${tier}_${inp.id}${encSuffix}` : inp.id);
-        idsToFetch.push(inputMatId);
-      });
+      const { outId, m1, m2 } = buildIds();
+      const idsToFetch = [outId, m1];
+      if(m2) idsToFetch.push(m2);
 
       try {
         const res = await fetch(`https://west.albion-online-data.com/api/v2/stats/prices/${idsToFetch.join(',')}.json?locations=${CITIES.join(',')}`);
         const data = await res.json();
 
-        // 1. Extraer precios para los inputs individuales según la ciudad elegida en su select
-        recipe.inputs.forEach((inp, idx) => {
-          let inputMatId = inp.id.includes('T7_') || inp.id.includes('T6_') || inp.id.includes('T3_')
-            ? inp.id.replace(/T\d_/, `T${tier}_`)
-            : (inp.id.includes('METALBAR') || inp.id.includes('PLANKS') || inp.id.includes('CLOTH') || inp.id.includes('LEATHER') ? `T${tier}_${inp.id}${encSuffix}` : inp.id);
-
-          const citySel = document.getElementById(`inputCity_${idx}`);
-          const city = citySel ? citySel.value : inp.defaultCity;
-
-          const match = data.filter(d => d.item_id === inputMatId && d.city === city && d.sell_price_min > 0);
-          const price = match.length ? Math.min(...match.map(m => m.sell_price_min)) : 0;
-
-          const priceInput = document.getElementById(`inputPrice_${idx}`);
-          if(priceInput && price > 0) priceInput.value = price;
+        [ { base: m1, idx: 0 }, { base: m2, idx: 1 } ].forEach(mat => {
+          if(!mat.base) return;
+          const citySel = document.getElementById(`inputCity_${mat.idx}`);
+          const city = citySel ? citySel.value : 'Bridgewatch';
+          const match = data.filter(d => d.item_id === mat.base && d.city === city && d.sell_price_min > 0);
+          const p = match.length ? Math.min(...match.map(x=>x.sell_price_min)) : 0;
+          const input = document.getElementById(`inputPrice_${mat.idx}`);
+          if(input && p>0) input.value = p;
         });
 
-        // 2. Extraer precios del ítem de salida en todas las ciudades
         const outputCityGrid = document.getElementById('marketCityPricesGrid');
         outputCityGrid.innerHTML = '';
-        currentMarketCityPrices = {};
-        let highestPrice = 0;
-        let bestCity = 'Caerleon';
+        let highestPrice = 0, bestCity = 'Caerleon';
 
         CITIES.forEach(city => {
-          const match = data.filter(d => d.item_id === finalOutputId && d.city === city && d.sell_price_min > 0);
-          const price = match.length ? Math.min(...match.map(m => m.sell_price_min)) : 0;
-          currentMarketCityPrices[city] = price;
-
-          if(price > highestPrice) {
-            highestPrice = price;
-            bestCity = city;
-          }
+          const m = data.filter(d => d.item_id === outId && d.city === city && d.sell_price_min > 0);
+          const p = m.length ? Math.min(...m.map(x=>x.sell_price_min)) : 0;
+          if(p > highestPrice) { highestPrice = p; bestCity = city; }
 
           const btn = document.createElement('button');
           btn.className = 'bg-[#0b0f19] border border-slate-800 p-1.5 rounded-lg hover:border-emerald-500 transition text-left';
-          btn.onclick = () => {
-            document.getElementById('sellCitySelect').value = city;
-            document.getElementById('outputUnitPriceInput').value = price;
-            calculate();
-          };
-          btn.innerHTML = `
-            <span class="text-slate-500 font-bold block truncate text-[10px]">${city}</span>
-            <span class="font-black ${price > 0 ? 'text-emerald-400' : 'text-slate-600'}">${price > 0 ? price.toLocaleString() : '-'}</span>
-          `;
+          btn.onclick = () => { document.getElementById('sellCitySelect').value = city; document.getElementById('outputUnitPriceInput').value = p; calculate(); };
+          btn.innerHTML = `<span class="text-slate-500 font-bold block truncate text-[10px]">${city}</span><span class="font-black ${p>0?'text-emerald-400':'text-slate-600'}">${p>0?p.toLocaleString():'-'}</span>`;
           outputCityGrid.appendChild(btn);
         });
 
-        // Aplicar la mejor ciudad por defecto si el input está en 0
-        const outPriceInput = document.getElementById('outputUnitPriceInput');
-        if(highestPrice > 0 && parseFloat(outPriceInput.value) <= 0) {
-          outPriceInput.value = highestPrice;
+        const outP = document.getElementById('outputUnitPriceInput');
+        if(highestPrice > 0 && parseFloat(outP.value) <= 0) {
+          outP.value = highestPrice;
           document.getElementById('sellCitySelect').value = bestCity;
           document.getElementById('bestSellCityBadge').textContent = `${bestCity} Market`;
         }
-
         calculate();
-      } catch (err) {
-        console.error("Error al consultar API West:", err);
-      } finally {
-        if(syncIcon) syncIcon.classList.remove('fa-spin');
-      }
+      } catch (err) { console.error(err); } finally { if(syncIcon) syncIcon.classList.remove('fa-spin'); }
     }
 
-    // Cálculo financiero maestro estilo Albion Free Market
     function calculate() {
-      const recipe = AFM_RECIPES[activeRecipeKey] || AFM_RECIPES['T7_MEAL_PIE'];
-      const runs = parseInt(document.getElementById('runsInput').value) || 1;
-      const rrr = parseFloat(document.getElementById('rrrSelect').value) || 0.248;
-      const premiumTax = parseFloat(document.getElementById('premiumSelect').value) || 0.04;
-      const setupTax = parseFloat(document.getElementById('setupTaxSelect').value) || 0.025;
-      const stationFee = parseFloat(document.getElementById('stationFeeInput').value) || 500;
-      const outUnitPrice = parseFloat(document.getElementById('outputUnitPriceInput').value) || 0;
+      if(!currentRecipe) return;
+      const runs = parseInt(document.getElementById('runsInput').value)||1;
+      const rrr = parseFloat(document.getElementById('rrrSelect').value)||0;
+      const premiumTax = parseFloat(document.getElementById('premiumSelect').value)||0.04;
+      const setupTax = parseFloat(document.getElementById('setupTaxSelect').value)||0.025;
+      const stationFee = parseFloat(document.getElementById('stationFeeInput').value)||500;
+      const outUnitPrice = parseFloat(document.getElementById('outputUnitPriceInput').value)||0;
 
-      // 1. Costo de materiales
       let grossMatCost = 0;
-      recipe.inputs.forEach((inp, idx) => {
-        const pInput = document.getElementById(`inputPrice_${idx}`);
-        const unitP = pInput ? parseFloat(pInput.value) || 0 : 0;
-        grossMatCost += (inp.qtyPerRun * runs) * unitP;
+      [ { q: currentRecipe.q1, idx: 0 }, { q: currentRecipe.q2, idx: 1 } ].forEach(m => {
+        if(m.q) {
+          const el = document.getElementById(`inputPrice_${m.idx}`);
+          grossMatCost += (m.q * runs) * (el ? parseFloat(el.value)||0 : 0);
+        }
       });
 
       const returnedMatValue = grossMatCost * rrr;
       const netMatCost = grossMatCost - returnedMatValue;
-
-      // 2. Costo del taller de fabricación (Tasa de nutrición)
       const stationFeeCost = runs * (stationFee * 0.12);
+      
+      const unitsPerRun = currentRecipe.id.includes('MEAL') || currentRecipe.id.includes('POTION') ? 10 : 1;
+      const totalOutputs = runs * unitsPerRun; 
+      document.getElementById('headerTotalOutputs').textContent = `${totalOutputs} Unidades`;
 
-      // 3. Producción y Venta
-      const totalOutputs = runs * 1; // 1 output por run (para comidas da 10 al craftear base, simplificado por tirada)
-      document.getElementById('headerTotalOutputs').textContent = `${runs} Unidades`;
-
-      const grossRevenue = runs * outUnitPrice;
+      const grossRevenue = totalOutputs * outUnitPrice;
       const totalTaxesCost = grossRevenue * (premiumTax + setupTax);
-
-      // 4. Diarios de crafteo (opcional)
-      let journalsProfit = 0;
-      const useJournals = document.getElementById('useJournalsCheckbox').checked;
-      if(useJournals) {
-        const jEmpty = parseFloat(document.getElementById('journalEmptyPrice').value) || 0;
-        const jFull = parseFloat(document.getElementById('journalFullPrice').value) || 0;
-        const journalsFilled = Math.floor(runs / 4); // Aprox 1 diario cada 4-5 runs
-        journalsProfit = journalsFilled * (jFull - jEmpty);
-        document.getElementById('resJournalsRow').style.display = 'flex';
-        document.getElementById('resJournalsProfit').textContent = `+${Math.round(journalsProfit).toLocaleString()} 🥈`;
-      } else {
-        document.getElementById('resJournalsRow').style.display = 'none';
-      }
-
-      // 5. Ganancia Neta Total
-      const netProfit = Math.round(grossRevenue - netMatCost - stationFeeCost - totalTaxesCost + journalsProfit);
+      const netProfit = Math.round(grossRevenue - netMatCost - stationFeeCost - totalTaxesCost);
       const totalInvestment = netMatCost + stationFeeCost;
       const roi = totalInvestment > 0 ? ((netProfit / totalInvestment) * 100).toFixed(1) : 0;
       const profitPerRun = runs > 0 ? Math.round(netProfit / runs) : 0;
 
-      // Actualizar UI
       document.getElementById('resGrossMatCost').textContent = `${Math.round(grossMatCost).toLocaleString()} 🥈`;
       document.getElementById('resReturnedMatValue').textContent = `-${Math.round(returnedMatValue).toLocaleString()} 🥈`;
       document.getElementById('resNetMatCost').textContent = `${Math.round(netMatCost).toLocaleString()} 🥈`;
@@ -707,43 +418,23 @@
       const roiBadge = document.getElementById('resRoiBadge');
       roiBadge.textContent = `ROI: ${roi}%`;
       roiBadge.className = roi >= 0 ? 'font-bold text-emerald-400' : 'font-bold text-rose-400';
-
       document.getElementById('resProfitPerRun').textContent = `${profitPerRun.toLocaleString()} 🥈 / run`;
-      document.getElementById('bestSellCity').textContent = `${document.getElementById('sellCitySelect').value} (${outUnitPrice.toLocaleString()} 🥈)`;
     }
 
-    // Eventos Globales
-    ['runsInput', 'rrrSelect', 'premiumSelect', 'setupTaxSelect', 'stationFeeInput', 'outputUnitPriceInput', 'journalEmptyPrice', 'journalFullPrice'].forEach(id => {
-      const el = document.getElementById(id);
-      if(el) el.addEventListener('input', calculate);
+    ['runsInput', 'rrrSelect', 'premiumSelect', 'setupTaxSelect', 'stationFeeInput', 'outputUnitPriceInput'].forEach(id => {
+      document.getElementById(id)?.addEventListener('input', calculate);
     });
 
     ['tierSelect', 'enchantSelect'].forEach(id => {
-      document.getElementById(id).addEventListener('change', () => {
-        renderRecipeInputs();
-        fetchPrices();
-      });
-    });
-
-    document.getElementById('useJournalsCheckbox').addEventListener('change', (e) => {
-      document.getElementById('journalsPanel').classList.toggle('hidden', !e.target.checked);
-      calculate();
+      document.getElementById(id)?.addEventListener('change', () => { renderInputs(); fetchPrices(); });
     });
 
     document.getElementById('sellCitySelect').addEventListener('change', (e) => {
-      const city = e.target.value;
-      document.getElementById('bestSellCityBadge').textContent = `${city} Market`;
-      if(currentMarketCityPrices[city]) {
-        document.getElementById('outputUnitPriceInput').value = currentMarketCityPrices[city];
-      }
+      document.getElementById('bestSellCityBadge').textContent = `${e.target.value} Market`;
       calculate();
     });
 
     document.getElementById('fetchBtn').addEventListener('click', fetchPrices);
-
-    // Inicializar
-    renderRecipeInputs();
-    fetchPrices();
   </script>
 </body>
 </html>
