@@ -1,4 +1,3 @@
-
 const ITEMS_DB = [
   { id: "MAIN_SWORD", es: "Espada Ancha" }, { id: "2H_CLAYMORE", es: "Claymore" }, { id: "MAIN_SCIMITAR", es: "Espadas Dobles" }, { id: "2H_CLEAVER_HELL", es: "Sangradora" }, { id: "2H_DUALSWORD", es: "Espadas Dobles" },
   { id: "MAIN_AXE", es: "Hacha de Batalla" }, { id: "2H_HALBERD", es: "Alabarda" }, { id: "2H_AXE", es: "Gran Hacha" }, { id: "2H_SCYTHE_HELL", es: "Guadaña Infernal" }, { id: "2H_DUALAXE_KEEPER", es: "Patas de Oso" },
@@ -26,5 +25,31 @@ const ITEMS_DB = [
   { id: "BAG", es: "Bolsa" }, { id: "CAPE", es: "Capa Normal" }, { id: "CAPEITEM_FW_MARTLOCK", es: "Capa de Martlock" }, { id: "CAPEITEM_FW_THETFORD", es: "Capa de Thetford" }, { id: "CAPEITEM_FW_FORTSTERLING", es: "Capa de Fort Sterling" }, { id: "CAPEITEM_FW_LYMHURST", es: "Capa de Lymhurst" }, { id: "CAPEITEM_FW_BRIDGEWATCH", es: "Capa de Bridgewatch" },
   { id: "CLOTH", es: "Tela" }, { id: "LEATHER", es: "Cuero" }, { id: "METALBAR", es: "Lingote de Metal" }, { id: "PLANKS", es: "Tablas de Madera" }, { id: "STONEBLOCK", es: "Bloque de Piedra" },
   { id: "MEAT", es: "Carne Cruda" }, { id: "MEAL_STEW", es: "Estofado de Ternera" }, { id: "MEAL_OMELETTE", es: "Tortilla de Cerdo" }, { id: "POTION_HEAL", es: "Poción de Curación" }, { id: "POTION_COOLDOWN", es: "Poción de Veneno" },
-  { id: "MOUNT_HORSE", es: "Caballo de Montar" }, { id: "MOUNT_OX", es: "Buey de Transporte" }, { id: "MOUNT_DIREWOLF", es: "Lobo Huargo" }
+  { id: "MOUNT_HORSE", es: "Caballo de Montar" }, { id: "MOUNT_OX", es: "Buey de Transporte" }, { id: "MOUNT_DIREWOLF", es: "Lobo Huargo" },
+  { id: "CARROT", es: "Zanahoria" }, { id: "FARM_CARROT_SEED", es: "Semilla de Zanahoria" },
+  { id: "BEAN", es: "Frijoles" }, { id: "FARM_BEAN_SEED", es: "Semilla de Frijoles" },
+  { id: "CABBAGE", es: "Repollo" }, { id: "FARM_CABBAGE_SEED", es: "Semilla de Repollo" },
+  { id: "POTATO", es: "Patata" }, { id: "FARM_POTATO_SEED", es: "Semilla de Patata" },
+  { id: "CORN", es: "Maíz" }, { id: "FARM_CORN_SEED", es: "Semilla de Maíz" },
+  { id: "PUMPKIN", es: "Calabaza" }, { id: "FARM_PUMPKIN_SEED", es: "Semilla de Calabaza" },
+  { id: "AGARIC", es: "Arcano Agaric (Hierba)" }, { id: "COMFREY", es: "Consuelda (Hierba)" },
+  { id: "BURDOCK", es: "Bardana (Hierba)" }, { id: "DRAGONTEASEL", es: "Cardencha (Hierba)" },
+  { id: "ELUSIVEFOXGLOVE", es: "Digitalis (Hierba)" }, { id: "FIREBLOOM", es: "Flor de Fuego (Hierba)" },
+  { id: "MILK", es: "Leche" }, { id: "EGG", es: "Huevo" },
+  { id: "FARM_HORSE_GROWN", es: "Caballo Criado" }, { id: "FARM_OX_GROWN", es: "Buey Criado" }, { id: "FARM_DIREWOLF_GROWN", es: "Lobo Huargo Criado" }
+];
+
+const MAPS_DB = [
+  { name: "Lymhurst", type: "Ciudad Real", tier: "T3+", pvp: "Segura (Azul)", res: "Madera, Piedra, Piel" },
+  { name: "Fort Sterling", type: "Ciudad Real", tier: "T3+", pvp: "Segura (Azul)", res: "Mineral, Piedra, Fibra" },
+  { name: "Thetford", type: "Ciudad Real", tier: "T3+", pvp: "Segura (Azul)", res: "Madera, Mineral, Fibra" },
+  { name: "Martlock", type: "Ciudad Real", tier: "T3+", pvp: "Segura (Azul)", res: "Madera, Piedra, Mineral" },
+  { name: "Bridgewatch", type: "Ciudad Real", tier: "T3+", pvp: "Segura (Azul)", res: "Piel, Piedra, Fibra" },
+  { name: "Caerleon", type: "Ciudad (Centro)", tier: "T3+", pvp: "Segura (Azul)", res: "Rodeada de Zonas Rojas" },
+  { name: "Brecilien", type: "Ciudad Mística", tier: "T3+", pvp: "Segura (Azul)", res: "Acceso a Nieblas y Caminos" },
+  { name: "Eldon Hill", type: "Continente Real", tier: "T5", pvp: "Facción (Amarilla)", res: "Madera (T5), Piedra (T5), Piel (T5)" },
+  { name: "Roast Oasis", type: "Continente Real", tier: "T6", pvp: "PVP Total (Roja)", res: "Madera (T6), Piedra (T6), Piel (T6)" },
+  { name: "Arthur's Rest", type: "Zona Negra (Santuario)", tier: "T7", pvp: "Segura", res: "Ninguno" },
+  { name: "Sunfang Approach", type: "Zona Negra", tier: "T8", pvp: "PVP Total (Negra)", res: "Piel (T8), Mineral (T8), Fibra (T8)" },
+  { name: "Caminos Avalonianos", type: "Caminos Avalonianos", tier: "T4-T8", pvp: "PVP Total (Negra)", res: "Todos los recursos aleatorios" }
 ];
