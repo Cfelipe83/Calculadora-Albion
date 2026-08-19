@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Albion Hub - Buscador y Comparador de Precios en Tiempo Real</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;600;700;900&display=swap');
+    .title-font { font-family: 'Cinzel', serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-amber-500 selection:text-slate-950 flex flex-col justify-between">
+  
+  <div class="max-w-7xl mx-auto p-4 md:p-8 space-y-6 w-full">
+    <!-- Navbar común -->
+    <header class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:px-6 backdrop-blur-md shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl shadow-inner">
+          <i class="fa-solid fa-scale-balanced"></i>
+        </div>
+        <div>
+          <a href="index.html" class="text-xl font-black text-amber-400 tracking-wide title-font hover:opacity-90 transition">ALBION TOOLS HUB</a>
+          <p class="text-[11px] text-slate-400">Buscador y Comparador <span class="text-amber-300 font-semibold">Multi-Ciudad en Vivo</span></p>
+        </div>
+      </div>
+
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
+        <a href="index.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2">
+          <i class="fa-solid fa-fire-burner"></i><span>Refinación</span>
+        </a>
+        <a href="islas.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2">
+          <i class="fa-solid fa-wheat-awn"></i><span>Islas & Granjas</span>
+        </a>
+        <a href="crafteo.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2">
+          <i class="fa-solid fa-hammer"></i><span>Crafteo & Ciudades</span>
+        </a>
+        <a href="mercado.html" class="px-3.5 py-2 rounded-lg bg-amber-500 text-slate-950 flex items-center gap-2 shadow-md">
+          <i class="fa-solid fa-scale-balanced"></i><span>Buscador & Arbitraje</span>
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1.5 bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-amber-300 font-bold">
+          <i class="fa-solid fa-globe text-slate-400"></i>
+          <select id="serverSelect" class="bg-transparent focus:outline-none cursor-pointer">
+            <option value="europe" selected class="bg-slate-900 text-slate-100">Europa (EU)</option>
+            <option value="west" class="bg-slate-900 text-slate-100">América (West)</option>
+            <option value="east" class="bg-slate-900 text-slate-100">Asia (East)</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <!-- Barra de Búsqueda -->
+    <section class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl space-y-4 shadow-xl">
+      <div class="flex flex-col md:flex-row gap-3">
+        <div class="relative flex-1">
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-500"></i>
+          <input type="text" id="searchInput" placeholder="Ej: T4_BAG, T6_MAIN_SWORD, T5_CLOTH, T8_MEAT o selecciona abajo..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-11 pr-4 py-3 text-sm text-slate-100 font-semibold focus:border-amber-500 focus:outline-none">
+        </div>
+        <button id="searchBtn" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-6 py-3 rounded-xl text-sm transition active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20">
+          <i id="searchSpinner" class="fa-solid fa-arrows-rotate"></i>
+          <span>Consultar Precios</span>
+        </button>
+      </div>
+
+      <!-- Accesos Rápidos de Búsqueda -->
+      <div class="flex flex-wrap items-center gap-2 pt-1 text-xs">
+        <span class="text-slate-500 font-semibold">Populares:</span>
+        <button onclick="quickSearch('T4_BAG')" class="px-2.5 py-1 bg-slate-950 hover:bg-slate-800 text-slate-300 rounded-lg border border-slate-800 transition">Bolsa T4</button>
+        <button onclick="quickSearch('T5_FARM_HORSE_GROWN')" class="px-2.5 py-1 bg-slate-950 hover:bg-slate-800 text-slate-300 rounded-lg border border-slate-800 transition">Caballo T5</button>
+        <button onclick="quickSearch('T6_MAIN_AXE')" class="px-2.5 py-1 bg-slate-950 hover:bg-slate-800 text-slate-300 rounded-lg border border-slate-800 transition">Hacha de Batalla T6</button>
+        <button onclick="quickSearch('T7_CLOTH')" class="px-2.5 py-1 bg-slate-950 hover:bg-slate-800 text-slate-300 rounded-lg border border-slate-800 transition">Tela T7</button>
+        <button onclick="quickSearch('T8_MEAT')" class="px-2.5 py-1 bg-slate-950 hover:bg-slate-800 text-slate-300 rounded-lg border border-slate-800 transition">Carne T8</button>
+      </div>
+    </section>
+
+    <!-- Resumen Comparativo de Compra y Venta -->
+    <div id="arbitrageBanner" class="hidden grid sm:grid-cols-3 gap-4">
+      <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+          <i class="fa-solid fa-cart-arrow-down"></i>
+        </div>
+        <div>
+          <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Dónde Comprar Más Barato</span>
+          <p id="cheapestCity" class="text-base font-black text-emerald-400">-</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl">
+          <i class="fa-solid fa-sack-dollar"></i>
+        </div>
+        <div>
+          <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Dónde Vender Más Caro</span>
+          <p id="mostExpensiveCity" class="text-base font-black text-amber-300">-</p>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl">
+          <i class="fa-solid fa-route"></i>
+        </div>
+        <div>
+          <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Margen Bruto de Arbitraje</span>
+          <p id="arbitrageSpread" class="text-base font-black text-blue-400">-</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla Comparativa de Ciudades -->
+    <main class="bg-slate-900/80 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
+      <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img id="searchPreviewImg" src="https://render.albiononline.com/v1/item/T4_BAG.png?size=64" class="w-12 h-12 bg-slate-950 border border-slate-800 rounded-lg p-1" alt="Ítem">
+          <div>
+            <h2 id="searchItemTitle" class="text-base font-bold text-slate-100">T4_BAG</h2>
+            <p class="text-xs text-slate-400">Precios ordenados en tiempo real por ciudad y mercado</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm text-slate-300">
+          <thead class="bg-slate-950 text-xs uppercase text-slate-400 border-b border-slate-800">
+            <tr>
+              <th class="px-6 py-4 font-bold">Ciudad / Mercado</th>
+              <th class="px-6 py-4 font-bold text-emerald-400">Precio Venta Mínimo (Comprar aquí)</th>
+              <th class="px-6 py-4 font-bold text-amber-400">Orden de Compra Máx. (Venta instantánea)</th>
+              <th class="px-6 py-4 font-bold text-slate-400">Última Actualización</th>
+              <th class="px-6 py-4 font-bold text-center">Estado</th>
+            </tr>
+          </thead>
+          <tbody id="pricesTableBody" class="divide-y divide-slate-800/60 font-medium">
+            <tr>
+              <td colspan="5" class="px-6 py-8 text-center text-slate-500">Haz una búsqueda para cargar precios en vivo...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <footer class="mt-12 py-6 border-t border-slate-800 text-center text-xs text-slate-500">
+    <p>Albion Online es una marca registrada de Sandbox Interactive GmbH. Datos provistos por Albion Online Data Project.</p>
+  </footer>
+
+  <script>
+    const CITIES = ['Bridgewatch', 'Fort Sterling', 'Lymhurst', 'Martlock', 'Thetford', 'Caerleon', 'Brecilien', 'Black Market'];
+
+    function quickSearch(id) {
+      document.getElementById('searchInput').value = id;
+      doSearch();
+    }
+
+    async function doSearch() {
+      const query = document.getElementById('searchInput').value.trim();
+      if (!query) return;
+
+      const server = document.getElementById('serverSelect').value;
+      const spinner = document.getElementById('searchSpinner');
+      spinner.classList.add('fa-spin');
+
+      document.getElementById('searchPreviewImg').src = `https://render.albiononline.com/v1/item/${query}.png?size=64`;
+      document.getElementById('searchItemTitle').textContent = query;
+
+      try {
+        const res = await fetch(`https://${server}.albion-online-data.com/api/v2/stats/prices/${query}.json?locations=${CITIES.join(',')}`);
+        const data = await res.json();
+
+        const tbody = document.getElementById('pricesTableBody');
+        tbody.innerHTML = '';
+
+        let validSellOrders = [];
+        let validBuyOrders = [];
+
+        CITIES.forEach(city => {
+          const entries = data.filter(d => d.city === city);
+          const sellMin = entries.length ? Math.min(...entries.map(e => e.sell_price_min).filter(p => p > 0)) : Infinity;
+          const buyMax = entries.length ? Math.max(...entries.map(e => e.buy_price_max).filter(p => p > 0)) : 0;
+          const lastUpdate = entries.length && entries[0].sell_price_min_date ? new Date(entries[0].sell_price_min_date).toLocaleTimeString() : 'N/A';
+
+          const validSell = sellMin !== Infinity ? sellMin : 0;
+          if (validSell > 0) validSellOrders.push({ city, price: validSell });
+          if (buyMax > 0) validBuyOrders.push({ city, price: buyMax });
+
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-slate-900/60 transition';
+          row.innerHTML = `
+            <td class="px-6 py-4 font-bold text-slate-200 flex items-center gap-2">
+              <i class="fa-solid fa-location-dot text-slate-500"></i> ${city}
+            </td>
+            <td class="px-6 py-4 font-black ${validSell > 0 ? 'text-emerald-400' : 'text-slate-600'}">
+              ${validSell > 0 ? validSell.toLocaleString() + ' Plata' : 'Sin Ofertas'}
+            </td>
+            <td class="px-6 py-4 font-black ${buyMax > 0 ? 'text-amber-300' : 'text-slate-600'}">
+              ${buyMax > 0 ? buyMax.toLocaleString() + ' Plata' : 'Sin Órdenes'}
+            </td>
+            <td class="px-6 py-4 text-xs text-slate-400">${lastUpdate}</td>
+            <td class="px-6 py-4 text-center">
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-bold ${validSell > 0 ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' : 'bg-slate-800 text-slate-500'}">
+                ${validSell > 0 ? 'Disponible' : 'Agotado'}
+              </span>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+
+        // Arbitraje & Comparador
+        if (validSellOrders.length > 0) {
+          validSellOrders.sort((a, b) => a.price - b.price);
+          const cheapest = validSellOrders[0];
+          const expensive = validSellOrders[validSellOrders.length - 1];
+          const spread = expensive.price - cheapest.price;
+          const spreadPct = ((spread / cheapest.price) * 100).toFixed(1);
+
+          document.getElementById('cheapestCity').textContent = `${cheapest.city} (${cheapest.price.toLocaleString()} Plata)`;
+          document.getElementById('mostExpensiveCity').textContent = `${expensive.city} (${expensive.price.toLocaleString()} Plata)`;
+          document.getElementById('arbitrageSpread').textContent = `+${spread.toLocaleString()} Plata (+${spreadPct}%)`;
+          document.getElementById('arbitrageBanner').classList.remove('hidden');
+        }
+
+      } catch (err) {
+        console.error(err);
+      } finally {
+        spinner.classList.remove('fa-spin');
+      }
+    }
+
+    document.getElementById('searchBtn').addEventListener('click', doSearch);
+    document.getElementById('searchInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
+    document.getElementById('serverSelect').addEventListener('change', doSearch);
+
+    // Búsqueda inicial
+    quickSearch('T4_BAG');
+  </script>
+</body>
+</html>

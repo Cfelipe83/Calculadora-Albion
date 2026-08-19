@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Albion Hub - Crafteo y Bonificaciones de Ciudad</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;600;700;900&display=swap');
+    .title-font { font-family: 'Cinzel', serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-amber-500 selection:text-slate-950 flex flex-col justify-between">
+  
+  <div class="max-w-7xl mx-auto p-4 md:p-8 space-y-6 w-full">
+    <!-- Navbar común -->
+    <header class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:px-6 backdrop-blur-md shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl shadow-inner">
+          <i class="fa-solid fa-hammer"></i>
+        </div>
+        <div>
+          <a href="index.html" class="text-xl font-black text-amber-400 tracking-wide title-font hover:opacity-90 transition">ALBION TOOLS HUB</a>
+          <p class="text-[11px] text-slate-400">Optimizador de Crafteo y <span class="text-amber-300 font-semibold">Mejor Ciudad de Venta</span></p>
+        </div>
+      </div>
+
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
+        <a href="index.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2">
+          <i class="fa-solid fa-fire-burner"></i><span>Refinación</span>
+        </a>
+        <a href="islas.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2">
+          <i class="fa-solid fa-wheat-awn"></i><span>Islas & Granjas</span>
+        </a>
+        <a href="crafteo.html" class="px-3.5 py-2 rounded-lg bg-amber-500 text-slate-950 flex items-center gap-2 shadow-md">
+          <i class="fa-solid fa-hammer"></i><span>Crafteo & Ciudades</span>
+        </a>
+        <a href="mercado.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2">
+          <i class="fa-solid fa-scale-balanced"></i><span>Buscador & Arbitraje</span>
+        </a>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1.5 bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-amber-300 font-bold">
+          <i class="fa-solid fa-globe text-slate-400"></i>
+          <select id="serverSelect" class="bg-transparent focus:outline-none cursor-pointer">
+            <option value="europe" selected class="bg-slate-900 text-slate-100">Europa (EU)</option>
+            <option value="west" class="bg-slate-900 text-slate-100">América (West)</option>
+            <option value="east" class="bg-slate-900 text-slate-100">Asia (East)</option>
+          </select>
+        </div>
+        <button id="fetchBtn" class="flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-3.5 py-2 rounded-xl text-xs transition active:scale-95 shadow-md shadow-amber-500/20">
+          <i id="syncIcon" class="fa-solid fa-arrows-rotate"></i>
+          <span class="hidden sm:inline">Precios API</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Recomendación de Ciudad Crafteo -->
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl">
+          <i class="fa-solid fa-city"></i>
+        </div>
+        <div>
+          <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Ciudad Ideal para Fabricar</span>
+          <p id="bestCraftCity" class="text-base font-bold text-amber-300">Fort Sterling (+24.8% Retorno)</p>
+        </div>
+      </div>
+      <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+          <i class="fa-solid fa-sack-dollar"></i>
+        </div>
+        <div>
+          <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Mejor Ciudad de Venta (Mayor Precio)</span>
+          <p id="bestSellCity" class="text-base font-bold text-emerald-400">Analizando mercado en vivo...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Crafting Tool -->
+    <main class="grid lg:grid-cols-3 gap-6">
+      <section class="lg:col-span-2 bg-slate-900/80 p-6 rounded-2xl border border-slate-800 space-y-5 shadow-lg">
+        <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center gap-2">
+          <i class="fa-solid fa-wrench text-amber-400"></i> Parámetros del Ítem a Fabricar
+        </h2>
+
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Categoría de Equipo</label>
+            <select id="craftCat" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200 focus:border-amber-500 focus:outline-none">
+              <option value="SWORD" selected>Espadas (Bono: Caerleon)</option>
+              <option value="BOW">Arcos (Bono: Fort Sterling)</option>
+              <option value="FIRE_STAFF">Bastones de Fuego (Bono: Lymhurst)</option>
+              <option value="PLATE_ARMOR">Armaduras de Placa (Bono: Thetford)</option>
+              <option value="LEATHER_ARMOR">Armaduras de Cuero (Bono: Martlock)</option>
+              <option value="CLOTH_ARMOR">Togas de Tela (Bono: Bridgewatch)</option>
+              <option value="BAG">Bolsas (Bono: Todas las Ciudades)</option>
+              <option value="CAPE">Capas (Bono: Brecilien/Caerleon)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Nivel (Tier)</label>
+            <select id="craftTier" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200 focus:border-amber-500 focus:outline-none">
+              <option value="T4">Tier 4 (Adepto)</option>
+              <option value="T5">Tier 5 (Experto)</option>
+              <option value="T6" selected>Tier 6 (Maestro)</option>
+              <option value="T7">Tier 7 (Gran Maestro)</option>
+              <option value="T8">Tier 8 (Anciano)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Encantamiento</label>
+            <select id="craftEnchant" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200 focus:border-amber-500 focus:outline-none">
+              <option value="0" selected>.0 (Normal)</option>
+              <option value="1">.1 (Poco Común)</option>
+              <option value="2">.2 (Raro)</option>
+              <option value="3">.3 (Excepcional)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Materiales Requeridos -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-4 bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+            <img id="mat1Img" src="" class="w-14 h-14 bg-slate-900 border border-slate-800 rounded-lg p-1" alt="Mat 1">
+            <div class="flex-1">
+              <div class="flex justify-between items-center text-xs">
+                <span class="font-bold text-slate-300" id="mat1Name">Material Primario (x16)</span>
+                <span class="text-slate-500">Costo Unitario</span>
+              </div>
+              <input type="number" id="mat1Price" placeholder="Precio Compra" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1.5 text-sm font-bold text-amber-400 mt-1 focus:border-amber-500 focus:outline-none">
+            </div>
+          </div>
+
+          <div id="mat2Container" class="flex items-center gap-4 bg-slate-950/80 p-3 rounded-xl border border-slate-800">
+            <img id="mat2Img" src="" class="w-14 h-14 bg-slate-900 border border-slate-800 rounded-lg p-1" alt="Mat 2">
+            <div class="flex-1">
+              <div class="flex justify-between items-center text-xs">
+                <span class="font-bold text-slate-300" id="mat2Name">Material Secundario (x8)</span>
+                <span class="text-slate-500">Costo Unitario</span>
+              </div>
+              <input type="number" id="mat2Price" placeholder="Precio Compra" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1.5 text-sm font-bold text-amber-400 mt-1 focus:border-amber-500 focus:outline-none">
+            </div>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-4 pt-2">
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Cantidad a Craftear</label>
+            <input type="number" id="craftQty" value="10" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-slate-100 focus:border-amber-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Tasa de Retorno (RRR Crafteo)</label>
+            <select id="craftRrr" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-slate-100 focus:border-amber-500 focus:outline-none">
+              <option value="15.2">15.2% (Sin bono de ciudad)</option>
+              <option value="24.8" selected>24.8% (Ciudad Especializada)</option>
+              <option value="47.9">47.9% (Ciudad + FOCO)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Precio Venta Seleccionado</label>
+            <input type="number" id="manualSellPrice" placeholder="Auto o Manual" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-emerald-400 focus:border-amber-500 focus:outline-none">
+          </div>
+        </div>
+
+        <!-- Comparativa de Ciudades de Venta en Vivo -->
+        <div class="border-t border-slate-800 pt-4">
+          <h3 class="text-xs uppercase tracking-wider font-bold text-slate-400 mb-3">Precios de Venta en Todas las Ciudades Reales</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 text-center text-xs" id="cityPriceGrid">
+            <!-- Renderizado por JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Panel Resultados Crafteo -->
+      <section class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-6 shadow-lg">
+        <div>
+          <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-chart-line text-emerald-400"></i> Desglose de Ganancia
+          </h2>
+          <div class="mt-4 space-y-3 text-sm">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-400">Total Ítems Creados:</span>
+              <span id="resCraftUnits" class="font-bold text-slate-100 text-base">0</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-400">Costo Materiales Neto:</span>
+              <span id="resNetMatCost" class="font-bold text-rose-400">0 Plata</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-400">Ingreso por Ventas (post 4%):</span>
+              <span id="resCraftRevenue" class="font-bold text-slate-100">0 Plata</span>
+            </div>
+            <div class="border-t border-slate-800 pt-2 flex justify-between items-center text-xs text-slate-500">
+              <span>Arbitraje Recomendado:</span>
+              <span id="resArbitrageHint" class="text-amber-300 font-bold">Transportar a Caerleon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 text-center shadow-inner space-y-1">
+          <span class="text-[11px] text-slate-400 uppercase font-black tracking-widest">Beneficio Neto Crafteo</span>
+          <p id="resCraftProfit" class="text-3xl font-black text-emerald-400 tracking-tight">0 Plata</p>
+          <span id="resCraftRoi" class="text-xs font-bold text-emerald-500 block">ROI: 0%</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="mt-12 py-6 border-t border-slate-800 text-center text-xs text-slate-500">
+    <p>Albion Online es una marca registrada de Sandbox Interactive GmbH. Datos provistos por Albion Online Data Project.</p>
+  </footer>
+
+  <script>
+    const CRAFT_CONFIG = {
+      SWORD: { name: 'Espada Ancha', idPattern: 'MAIN_SWORD', mat1: 'METALBAR', q1: 16, mat2: 'LEATHER', q2: 8, bestCity: 'Caerleon / Bridgewatch' },
+      BOW: { name: 'Arco de Guerra', idPattern: '2H_WARBOW', mat1: 'PLANKS', q1: 32, mat2: null, q2: 0, bestCity: 'Fort Sterling (+24.8% Retorno)' },
+      FIRE_STAFF: { name: 'Gran Bastón de Fuego', idPattern: '2H_FIRESTAFF', mat1: 'PLANKS', q1: 20, mat2: 'METALBAR', q2: 12, bestCity: 'Lymhurst (+24.8% Retorno)' },
+      PLATE_ARMOR: { name: 'Armadura de Caballero', idPattern: 'ARMOR_PLATE_SET3', mat1: 'METALBAR', q1: 16, mat2: null, q2: 0, bestCity: 'Thetford (+24.8% Retorno)' },
+      LEATHER_ARMOR: { name: 'Chaqueta de Asesino', idPattern: 'ARMOR_LEATHER_SET3', mat1: 'LEATHER', q1: 16, mat2: null, q2: 0, bestCity: 'Martlock (+24.8% Retorno)' },
+      CLOTH_ARMOR: { name: 'Toga de Erudito', idPattern: 'ARMOR_CLOTH_SET1', mat1: 'CLOTH', q1: 16, mat2: null, q2: 0, bestCity: 'Bridgewatch (+24.8% Retorno)' },
+      BAG: { name: 'Bolsa', idPattern: 'BAG', mat1: 'CLOTH', q1: 8, mat2: 'LEATHER', q2: 8, bestCity: 'Todas las Ciudades (+15.2%)' },
+      CAPE: { name: 'Capa', idPattern: 'CAPE', mat1: 'CLOTH', q1: 4, mat2: 'LEATHER', q2: 4, bestCity: 'Brecilien / Caerleon' }
+    };
+
+    const CITIES = ['Lymhurst', 'Fort Sterling', 'Thetford', 'Martlock', 'Bridgewatch', 'Caerleon'];
+    let currentCityPrices = {};
+
+    function getCraftItemIds() {
+      const cat = document.getElementById('craftCat').value;
+      const tier = document.getElementById('craftTier').value;
+      const enc = document.getElementById('craftEnchant').value;
+      const encSuffix = enc !== '0' ? `@${enc}` : '';
+
+      const cfg = CRAFT_CONFIG[cat];
+      const finalItemId = `${tier}_${cfg.idPattern}${encSuffix}`;
+      const mat1Id = `${tier}_${cfg.mat1}${encSuffix}`;
+      const mat2Id = cfg.mat2 ? `${tier}_${cfg.mat2}${encSuffix}` : null;
+
+      return { finalItemId, mat1Id, mat2Id, cfg };
+    }
+
+    function updateCraftUi() {
+      const { finalItemId, mat1Id, mat2Id, cfg } = getCraftItemIds();
+      document.getElementById('bestCraftCity').textContent = cfg.bestCity;
+
+      document.getElementById('mat1Img').src = `https://render.albiononline.com/v1/item/${mat1Id}.png?size=64`;
+      document.getElementById('mat1Name').textContent = `Material 1: ${cfg.mat1} (x${cfg.q1})`;
+
+      const mat2Box = document.getElementById('mat2Container');
+      if (mat2Id) {
+        mat2Box.style.display = 'flex';
+        document.getElementById('mat2Img').src = `https://render.albiononline.com/v1/item/${mat2Id}.png?size=64`;
+        document.getElementById('mat2Name').textContent = `Material 2: ${cfg.mat2} (x${cfg.q2})`;
+      } else {
+        mat2Box.style.display = 'none';
+      }
+    }
+
+    async function fetchCraftPrices() {
+      const syncIcon = document.getElementById('syncIcon');
+      syncIcon.classList.add('fa-spin');
+      const server = document.getElementById('serverSelect').value;
+      const { finalItemId, mat1Id, mat2Id } = getCraftItemIds();
+
+      const idsToFetch = [finalItemId, mat1Id];
+      if (mat2Id) idsToFetch.push(mat2Id);
+
+      try {
+        const res = await fetch(`https://${server}.albion-online-data.com/api/v2/stats/prices/${idsToFetch.join(',')}.json?locations=${CITIES.join(',')}`);
+        const data = await res.json();
+
+        // Extraer precios de materiales
+        const getMin = (id) => {
+          const valid = data.filter(d => d.item_id === id && d.sell_price_min > 0);
+          return valid.length ? Math.min(...valid.map(v => v.sell_price_min)) : 0;
+        };
+
+        const p1 = getMin(mat1Id);
+        if (p1) document.getElementById('mat1Price').value = p1;
+        if (mat2Id) {
+          const p2 = getMin(mat2Id);
+          if (p2) document.getElementById('mat2Price').value = p2;
+        }
+
+        // Analizar precios del ítem final por ciudad
+        const grid = document.getElementById('cityPriceGrid');
+        grid.innerHTML = '';
+        currentCityPrices = {};
+        let highestPrice = 0;
+        let bestCity = 'N/A';
+
+        CITIES.forEach(city => {
+          const match = data.filter(d => d.item_id === finalItemId && d.city === city && d.sell_price_min > 0);
+          const price = match.length ? Math.min(...match.map(m => m.sell_price_min)) : 0;
+          currentCityPrices[city] = price;
+
+          if (price > highestPrice) {
+            highestPrice = price;
+            bestCity = city;
+          }
+
+          const card = document.createElement('div');
+          card.className = 'bg-slate-950 p-2.5 rounded-xl border border-slate-800 cursor-pointer hover:border-amber-500 transition';
+          card.onclick = () => {
+            document.getElementById('manualSellPrice').value = price;
+            calculateCraft();
+          };
+          card.innerHTML = `
+            <span class="text-slate-400 block font-semibold truncate">${city}</span>
+            <span class="font-bold ${price > 0 ? 'text-amber-400' : 'text-slate-600'}">${price > 0 ? price.toLocaleString() : 'Sin stock'}</span>
+          `;
+          grid.appendChild(card);
+        });
+
+        if (highestPrice > 0) {
+          document.getElementById('bestSellCity').textContent = `${bestCity} (${highestPrice.toLocaleString()} Plata)`;
+          document.getElementById('manualSellPrice').value = highestPrice;
+          document.getElementById('resArbitrageHint').textContent = `Vender en ${bestCity}`;
+        }
+
+        calculateCraft();
+      } catch (err) {
+        console.error(err);
+      } finally {
+        syncIcon.classList.remove('fa-spin');
+      }
+    }
+
+    function calculateCraft() {
+      const { cfg } = getCraftItemIds();
+      const qty = parseInt(document.getElementById('craftQty').value) || 1;
+      const rrr = (parseFloat(document.getElementById('craftRrr').value) || 0) / 100;
+      const p1 = parseFloat(document.getElementById('mat1Price').value) || 0;
+      const p2 = parseFloat(document.getElementById('mat2Price').value) || 0;
+      const sellPrice = parseFloat(document.getElementById('manualSellPrice').value) || 0;
+
+      // Retorno de materiales efectivo
+      const mat1Needed = (qty * cfg.q1) * (1 - rrr);
+      const mat2Needed = (qty * cfg.q2) * (1 - rrr);
+
+      const netMatCost = (mat1Needed * p1) + (mat2Needed * p2);
+      const revenue = qty * sellPrice * 0.96; // 4% impuesto
+      const profit = Math.round(revenue - netMatCost);
+      const roi = netMatCost > 0 ? ((profit / netMatCost) * 100).toFixed(1) : 0;
+
+      document.getElementById('resCraftUnits').textContent = `${qty} unidades`;
+      document.getElementById('resNetMatCost').textContent = Math.round(netMatCost).toLocaleString() + ' Plata';
+      document.getElementById('resCraftRevenue').textContent = Math.round(revenue).toLocaleString() + ' Plata';
+
+      const profitEl = document.getElementById('resCraftProfit');
+      profitEl.textContent = (profit >= 0 ? '+' : '') + profit.toLocaleString() + ' Plata';
+      profitEl.className = profit >= 0 ? 'text-3xl font-black text-emerald-400 tracking-tight' : 'text-3xl font-black text-rose-400 tracking-tight';
+
+      const roiEl = document.getElementById('resCraftRoi');
+      roiEl.textContent = `ROI: ${roi}%`;
+      roiEl.className = roi >= 0 ? 'text-xs font-bold text-emerald-500 block' : 'text-xs font-bold text-rose-500 block';
+    }
+
+    ['craftQty', 'craftRrr', 'mat1Price', 'mat2Price', 'manualSellPrice'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calculateCraft);
+    });
+
+    ['craftCat', 'craftTier', 'craftEnchant'].forEach(id => {
+      document.getElementById(id).addEventListener('change', () => {
+        updateCraftUi();
+        fetchCraftPrices();
+      });
+    });
+
+    document.getElementById('fetchBtn').addEventListener('click', fetchCraftPrices);
+    document.getElementById('serverSelect').addEventListener('change', fetchCraftPrices);
+
+    updateCraftUi();
+    fetchCraftPrices();
+  </script>
+</body>
+</html>
