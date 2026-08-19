@@ -1,36 +1,14 @@
-# 🗡️ Albion Tools Hub - Suite de Calculadoras y Mercado en Vivo
+# 🗡️ Albion Expert Hub
 
-Suite web interactiva y completa para **Albion Online**, conectada directamente a los servidores del **Albion Online Data Project (AODP)** con renderizado oficial de iconos y separada modularmente por páginas.
+Una suite web avanzada, completamente reescrita en Vanilla JS y Tailwind CSS, para el cálculo y monitoreo de precios en tiempo real de **Albion Online**.
 
-Repositorio: [https://github.com/Cfelipe83/Calculadora-Albion](https://github.com/Cfelipe83/Calculadora-Albion)
+## 🚀 Características Nuevas
+1. **Mercado en Vivo con Autocompletado (`mercado.html`):** Busca ítems en español como en el juego. Selecciona Tier, Calidad y Encantamiento para obtener información multi-ciudad. Incluye botón para borrar filtros.
+2. **Crafteo Expandido (`crafteo.html`):** Todos los árboles de crafteo de armas (Hachas, Espadas, Dagas, Arcos, etc.) y armaduras categorizados por su bono de ciudad.
+3. **Buscador de Jugadores (`jugadores.html`):** Utiliza un Proxy CORS para acceder a la API oficial de Albion y revisar K/D Ratios y gremios en tiempo real.
 
----
-
-## 📂 Estructura de Páginas
-
-1. **`index.html` (Refinación):**
-   - Soporte para Tela, Cuero, Lingotes, Tablas y Bloques (Tier 4 a Tier 8 + encantamientos .1, .2, .3, .4).
-   - Tasas RRR reales por ciudad de bioma (15.2%, 36.7%, 53.9% con Foco) e impuestos de taller.
-2. **`islas.html` (Islas, Granjas, Huertos y Pasturas):**
-   - **Granjas:** Zanahorias, Frijoles, Repollos, Patatas, Maíz, Calabazas.
-   - **Huertos de Hierbas:** Arcano Agaric, Consuelda, Bardana, Cardencha, Digitalis, Flor de Fuego.
-   - **Pasturas & Ganado:** Gallinas, Cabras, Gansos, Ovejas, Cerdos, Vacas (Carne y Leche).
-   - **Crianza de Monturas:** Caballos, Bueyes y Lobos Huargos.
-   - Cálculo de retorno con riego de Foco (>100%), semillas sobrantes y ganancia neta diaria.
-3. **`crafteo.html` (Crafteo y Ciudades de Especialización):**
-   - Bonificación de bioma por arma/armadura (Espadas, Arcos, Bastones, Placa, Cuero, Tela, Bolsas, Capas).
-   - Análisis comparativo automático de todas las ciudades para recomendar **dónde craftear** y **en qué ciudad vender más caro**.
-4. **`mercado.html` (Buscador y Comparador Multi-Ciudad en Vivo):**
-   - Buscador universal de cualquier Item ID con órdenes de venta y compra.
-   - Comparador de precios entre **Bridgewatch, Fort Sterling, Lymhurst, Martlock, Thetford, Caerleon, Brecilien y Black Market**.
-   - Detector de márgenes de **Arbitraje** (comprar en la ciudad más barata y transportar a la más cara).
-
----
-
-## 🚀 Despliegue en GitHub Pages
-
-1. Sube todos los archivos (`index.html`, `islas.html`, `crafteo.html`, `mercado.html`, `README.md`) a tu repositorio.
-2. Ve a **Settings** > **Pages** en tu repositorio de GitHub.
-3. En **Branch**, selecciona `main` y la carpeta `/(root)`.
-4. Tu web estará lista en:
-   👉 **`https://cfelipe83.github.io/Calculadora-Albion/`**
+## 🛠️ Instalación en GitHub Pages
+1. Descarga y extrae el ZIP.
+2. Sube todos los archivos extraídos a la rama `main` de tu repositorio de GitHub (`https://github.com/Cfelipe83/Calculadora-Albion`).
+3. Asegúrate de activar **GitHub Pages** en la pestaña de `Settings` apuntando al `main`.
+4. El sitio estará disponible instantáneamente con diseño unificado y navegación superior.
