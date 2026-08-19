@@ -6,136 +6,91 @@
   <title>Albion Hub - Jugadores</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;600;700;900&display=swap');
-    .title-font { font-family: 'Cinzel', serif; }
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #0f172a; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #10b981; }
-  </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950 flex flex-col justify-between">
-  <div class="max-w-7xl mx-auto p-4 md:p-8 space-y-6 w-full">
-
-    <header class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:px-6 backdrop-blur-md shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans p-4 md:p-8">
+  <div class="max-w-7xl mx-auto space-y-6">
+    <header class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl shadow-inner">
-          <i class="fa-solid fa-crown"></i>
-        </div>
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold"><i class="fa-solid fa-crown"></i></div>
         <div>
-          <a href="index.html" class="text-xl font-black text-emerald-400 tracking-wide title-font hover:opacity-90 transition">ALBION HUB</a>
+          <a href="index.html" class="text-xl font-black text-emerald-400">ALBION HUB</a>
           <p class="text-[11px] text-slate-400">Servidor Exclusivo: <span class="text-emerald-300 font-semibold">América (West)</span></p>
         </div>
       </div>
-      <nav class="flex flex-wrap items-center justify-center gap-1.5 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
-        <a href="index.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-fire-burner"></i><span class="hidden md:inline">Refinación</span></a>
-        <a href="islas.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-wheat-awn"></i><span class="hidden md:inline">Islas</span></a>
-        <a href="crafteo.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-hammer"></i><span class="hidden md:inline">Crafteo</span></a>
-        <a href="mercado.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-scale-balanced"></i><span class="hidden md:inline">Mercado</span></a>
-        <a href="jugadores.html" class="px-3.5 py-2 rounded-lg bg-emerald-600 text-slate-950 shadow-md font-black transition flex items-center gap-2"><i class="fa-solid fa-users"></i><span class="hidden md:inline">Jugadores</span></a>
+      <nav class="flex flex-wrap gap-1 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
+        <a href="index.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Refinación</a>
+        <a href="islas.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Islas</a>
+        <a href="crafteo.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Crafteo</a>
+        <a href="mercado.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Mercado</a>
+        <a href="jugadores.html" class="px-3 py-2 bg-emerald-600 text-slate-950 rounded-lg">Jugadores</a>
+        <a href="mapas.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Mapas</a>
       </nav>
-      <div class="flex items-center gap-2">
-        <div class="flex items-center gap-2 bg-slate-950 border border-emerald-500/30 rounded-xl px-3 py-2 text-xs text-emerald-400 font-black shadow-inner">
-          <i class="fa-solid fa-server"></i>
-          <span>América (West)</span>
-        </div>
-        
-      </div>
     </header>
 
-    <section class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
-      <div>
-        <h2 class="text-xl font-bold text-emerald-400 flex items-center gap-2"><i class="fa-solid fa-users-viewfinder"></i> Base de Datos de Jugadores (América)</h2>
-        <p class="text-xs text-slate-400 mt-1">Busca estadísticas, fama de asesinatos (PvP), muertes y gremio de cualquier jugador en el servidor de América (West).</p>
-      </div>
-
+    <section class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-6">
+      <h2 class="text-xl font-bold text-emerald-400 flex items-center gap-2"><i class="fa-solid fa-users"></i> Buscador de Jugadores (América)</h2>
       <div class="flex flex-col md:flex-row gap-3">
-        <div class="relative flex-1">
-          <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-500"></i>
-          <input type="text" id="playerName" placeholder="Nombre exacto del jugador (Ej: Shozen...)" class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-11 pr-4 py-3 text-sm text-slate-100 font-semibold focus:border-emerald-500 focus:outline-none">
-        </div>
-        <button id="searchPlayerBtn" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black px-6 py-3 rounded-xl text-sm transition active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
-          <i id="playerSpinner" class="fa-solid fa-search"></i>
-          <span>Buscar Jugador</span>
+        <input type="text" id="playerName" placeholder="Nombre exacto del jugador (Ej: Shozen...)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-100 font-semibold focus:border-emerald-500 focus:outline-none">
+        <button id="searchPlayerBtn" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black px-6 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2">
+          <i id="playerSpinner" class="fa-solid fa-search"></i> <span>Buscar Jugador</span>
         </button>
       </div>
 
       <div id="playerResults" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 hidden"></div>
       <div id="loadingMsg" class="hidden text-center text-slate-400 text-sm py-8"><i class="fa-solid fa-spinner fa-spin text-emerald-500 text-2xl mb-2"></i><br>Consultando servidores de Albion Online (América)...</div>
-      <div id="errorMsg" class="hidden text-center text-rose-400 text-sm py-8 bg-rose-500/10 border border-rose-500/30 rounded-xl">Jugador no encontrado o error de conexión con la API oficial.</div>
+      <div id="errorMsg" class="hidden text-center text-rose-400 text-sm py-8 bg-rose-500/10 border border-rose-500/30 rounded-xl">Jugador no encontrado o sin datos recientes.</div>
     </section>
-
-    <script>
-      async function searchPlayer() {
-        const name = document.getElementById('playerName').value.trim();
-        if(!name) return;
-        
-        const apiUrl = 'https://gameinfo.albiononline.com/api/gameinfo/search?q=';
-
-        document.getElementById('playerResults').classList.add('hidden');
-        document.getElementById('errorMsg').classList.add('hidden');
-        document.getElementById('loadingMsg').classList.remove('hidden');
-        document.getElementById('playerSpinner').className = 'fa-solid fa-spinner fa-spin';
-
-        try {
-          const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl + name)}`;
-          const res = await fetch(proxyUrl);
-          if(!res.ok) throw new Error('Proxy error');
-          const data = await res.json();
-          const parsed = JSON.parse(data.contents);
-
-          document.getElementById('loadingMsg').classList.add('hidden');
-
-          if(parsed.players && parsed.players.length > 0) {
-            const container = document.getElementById('playerResults');
-            container.innerHTML = '';
-            
-            parsed.players.forEach(p => {
-              const kdRatio = p.DeathFame > 0 ? (p.KillFame / p.DeathFame).toFixed(2) : p.KillFame;
-              const card = document.createElement('div');
-              card.className = 'bg-slate-950 border border-slate-800 p-5 rounded-2xl flex flex-col gap-3 hover:border-emerald-500/50 transition relative overflow-hidden';
-              card.innerHTML = `
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500"></div>
-                <div>
-                  <h3 class="text-lg font-black text-slate-100 flex items-center gap-2"><i class="fa-solid fa-user text-emerald-500"></i> ${p.Name}</h3>
-                  <p class="text-xs text-slate-400 mt-1 font-semibold">${p.GuildName ? `[${p.AllianceName || ''}] ${p.GuildName}` : 'Sin Gremio'}</p>
-                </div>
-                <div class="grid grid-cols-2 gap-2 mt-2">
-                  <div class="bg-slate-900 p-2 rounded-lg border border-slate-800">
-                    <span class="text-[10px] text-slate-500 uppercase block font-bold">Fama PvP</span>
-                    <span class="text-emerald-400 font-black text-sm">${p.KillFame.toLocaleString()}</span>
-                  </div>
-                  <div class="bg-slate-900 p-2 rounded-lg border border-slate-800">
-                    <span class="text-[10px] text-slate-500 uppercase block font-bold">Fama Muertes</span>
-                    <span class="text-rose-400 font-black text-sm">${p.DeathFame.toLocaleString()}</span>
-                  </div>
-                  <div class="bg-slate-900 p-2 rounded-lg border border-slate-800 col-span-2 flex justify-between items-center">
-                    <span class="text-[10px] text-slate-500 uppercase font-bold">K/D Ratio</span>
-                    <span class="text-blue-400 font-black text-sm">${kdRatio}</span>
-                  </div>
-                </div>
-              `;
-              container.appendChild(card);
-            });
-            container.classList.remove('hidden');
-          } else {
-            document.getElementById('errorMsg').classList.remove('hidden');
-          }
-        } catch (e) {
-          document.getElementById('loadingMsg').classList.add('hidden');
-          document.getElementById('errorMsg').classList.remove('hidden');
-        } finally {
-          document.getElementById('playerSpinner').className = 'fa-solid fa-search';
-        }
-      }
-      document.getElementById('searchPlayerBtn').addEventListener('click', searchPlayer);
-      document.getElementById('playerName').addEventListener('keypress', (e) => { if(e.key === 'Enter') searchPlayer(); });
-    </script>
-
   </div>
-  <footer class="mt-12 py-6 border-t border-slate-800 text-center text-xs text-slate-500 bg-slate-900/50">
-    <p>Albion Online es una marca registrada de Sandbox Interactive GmbH. Precios de mercado vía Albion Data Project (Servidor América).</p>
-  </footer>
+
+  <script>
+    async function searchPlayer() {
+      const name = document.getElementById('playerName').value.trim();
+      if(!name) return;
+      
+      const apiUrl = 'https://gameinfo.albiononline.com/api/gameinfo/search?q=' + encodeURIComponent(name);
+      document.getElementById('playerResults').classList.add('hidden');
+      document.getElementById('errorMsg').classList.add('hidden');
+      document.getElementById('loadingMsg').classList.remove('hidden');
+      document.getElementById('playerSpinner').className = 'fa-solid fa-spinner fa-spin';
+
+      try {
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`;
+        const res = await fetch(proxyUrl);
+        const parsed = await res.json();
+        document.getElementById('loadingMsg').classList.add('hidden');
+
+        if(parsed.players && parsed.players.length > 0) {
+          const container = document.getElementById('playerResults');
+          container.innerHTML = '';
+          parsed.players.forEach(p => {
+            const kd = p.DeathFame > 0 ? (p.KillFame / p.DeathFame).toFixed(2) : p.KillFame;
+            const card = document.createElement('div');
+            card.className = 'bg-slate-950 border border-slate-800 p-5 rounded-2xl flex flex-col gap-3 relative overflow-hidden';
+            card.innerHTML = `
+              <div class="w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500 absolute top-0 left-0"></div>
+              <h3 class="text-lg font-black text-slate-100 flex items-center gap-2"><i class="fa-solid fa-user text-emerald-500"></i> ${p.Name}</h3>
+              <p class="text-xs text-slate-400 font-semibold">${p.GuildName ? `[${p.AllianceName || ''}] ${p.GuildName}` : 'Sin Gremio'}</p>
+              <div class="grid grid-cols-2 gap-2 mt-2">
+                <div class="bg-slate-900 p-2 rounded-lg"><span class="text-[10px] text-slate-500 uppercase font-bold">Fama PvP</span><span class="text-emerald-400 font-black text-sm block">${p.KillFame.toLocaleString()}</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg"><span class="text-[10px] text-slate-500 uppercase font-bold">Fama Muertes</span><span class="text-rose-400 font-black text-sm block">${p.DeathFame.toLocaleString()}</span></div>
+                <div class="bg-slate-900 p-2 rounded-lg col-span-2 flex justify-between items-center"><span class="text-[10px] text-slate-500 uppercase font-bold">K/D Ratio</span><span class="text-blue-400 font-black text-sm">${kd}</span></div>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+          container.classList.remove('hidden');
+        } else {
+          document.getElementById('errorMsg').classList.remove('hidden');
+        }
+      } catch (e) {
+        document.getElementById('loadingMsg').classList.add('hidden');
+        document.getElementById('errorMsg').classList.remove('hidden');
+      } finally {
+        document.getElementById('playerSpinner').className = 'fa-solid fa-search';
+      }
+    }
+    document.getElementById('searchPlayerBtn').addEventListener('click', searchPlayer);
+    document.getElementById('playerName').addEventListener('keypress', (e) => { if(e.key === 'Enter') searchPlayer(); });
+  </script>
 </body>
 </html>
