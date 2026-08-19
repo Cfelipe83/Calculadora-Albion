@@ -3,191 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Albion Hub - Refinación</title>
+  <title>Albion Hub - Inicio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0b0f19; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+  </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans p-4 md:p-8">
-  <div class="max-w-7xl mx-auto space-y-6">
-    <header class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+<body class="bg-[#0b0f19] text-slate-200 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-slate-950 text-xs sm:text-sm">
+  <div class="max-w-[1400px] mx-auto p-3 sm:p-6 space-y-5 w-full">
+    
+    <header class="bg-[#111827] border border-slate-800/80 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4 shadow-2xl">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold"><i class="fa-solid fa-crown"></i></div>
-        <div>
-          <a href="index.html" class="text-xl font-black text-emerald-400">ALBION HUB</a>
-          <p class="text-[11px] text-slate-400">Servidor Exclusivo: <span class="text-emerald-300 font-semibold">América (West)</span></p>
-        </div>
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-black"><i class="fa-solid fa-crown"></i></div>
+        <div><a href="index.html" class="text-base sm:text-lg font-black text-emerald-400 tracking-wide flex items-center gap-2">ALBION HUB <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40">WEST PRO</span></a><p class="text-[11px] text-slate-400">Servidor Exclusivo: América (West)</p></div>
       </div>
-      <nav class="flex flex-wrap gap-1 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
-        <a href="index.html" class="px-3 py-2 bg-emerald-600 text-slate-950 rounded-lg">Refinación</a>
-        <a href="islas.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Islas</a>
-        <a href="crafteo.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Crafteo</a>
-        <a href="mercado.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Mercado</a>
-        <a href="jugadores.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Jugadores</a>
-        <a href="mapas.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Mapas</a>
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 bg-[#0b0f19] p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-slate-950 font-black shadow-md flex items-center gap-1.5"><i class="fa-solid fa-fire-burner"></i><span class="hidden md:inline">Refinación</span></a><a href="islas.html" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition flex items-center gap-1.5"><i class="fa-solid fa-wheat-awn"></i><span class="hidden md:inline">Islas</span></a><a href="crafteo.html" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition flex items-center gap-1.5"><i class="fa-solid fa-hammer"></i><span class="hidden md:inline">Crafteo</span></a><a href="mercado.html" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition flex items-center gap-1.5"><i class="fa-solid fa-scale-balanced"></i><span class="hidden md:inline">Mercado</span></a><a href="jugadores.html" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition flex items-center gap-1.5"><i class="fa-solid fa-users"></i><span class="hidden md:inline">Jugadores</span></a><a href="mapas.html" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition flex items-center gap-1.5"><i class="fa-solid fa-map"></i><span class="hidden md:inline">Mapas</span></a>
       </nav>
+      <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1.5 bg-slate-950 border border-emerald-500/40 rounded-xl px-3 py-1.5 text-xs text-emerald-400 font-bold"><i class="fa-solid fa-server"></i><span class="hidden sm:inline">Servidor América</span></div>
+      </div>
     </header>
 
-    <div class="bg-gradient-to-r from-emerald-500/10 via-slate-900 to-slate-900 border border-emerald-500/20 rounded-2xl p-4 flex items-center justify-between shadow-lg">
-      <div class="flex items-center gap-3">
-        <i class="fa-solid fa-circle-info text-emerald-400 text-xl"></i>
-        <p class="text-xs text-slate-300"><strong class="text-emerald-300">Refinación en América:</strong> Refinar en la ciudad correcta otorga un <strong>36.7% RRR</strong> natural (hasta <strong>53.9%</strong> con Foco).</p>
-      </div>
-      <span id="cityBadge" class="hidden sm:inline text-xs font-bold px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 rounded-full">Lymhurst (Tela)</span>
+    
+    <div class="bg-[#111827] p-12 rounded-2xl border border-slate-800 text-center space-y-6 shadow-2xl mt-12">
+      <i class="fa-solid fa-crown text-6xl text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]"></i>
+      <h1 class="text-4xl font-black text-emerald-400">ALBION FREE MARKET PRO</h1>
+      <p class="text-slate-400 max-w-lg mx-auto">Selecciona una herramienta en la barra superior. Sistema de crafteo y mercado actualizado exclusivamente al Servidor West.</p>
     </div>
 
-    <main class="grid lg:grid-cols-3 gap-6">
-      <section class="lg:col-span-2 bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-5">
-        <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center justify-between">
-          <span class="flex items-center gap-2"><i class="fa-solid fa-sliders text-emerald-400"></i> Parámetros de Refinación</span>
-          <span class="text-xs text-slate-400" id="rawPerUnit">3 brutos + 1 refinado previo</span>
-        </h2>
-        <div class="grid sm:grid-cols-3 gap-4">
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1">Tipo de Material</label>
-            <select id="matType" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200">
-              <option value="CLOTH" selected>Tela (Lymhurst)</option><option value="LEATHER">Cuero (Martlock)</option><option value="METALBAR">Lingotes (Thetford)</option><option value="PLANKS">Tablas (Fort Sterling)</option><option value="STONEBLOCK">Bloques (Bridgewatch)</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1">Tier</label>
-            <select id="matTier" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200">
-              <option value="T4">Tier 4</option><option value="T5" selected>Tier 5</option><option value="T6">Tier 6</option><option value="T7">Tier 7</option><option value="T8">Tier 8</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1">Encantamiento</label>
-            <select id="matEnchant" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200">
-              <option value="0" selected>.0 (Normal)</option><option value="1">.1</option><option value="2">.2</option><option value="3">.3</option><option value="4">.4</option>
-            </select>
-          </div>
-        </div>
 
-        <div class="space-y-3">
-          <div class="flex items-center gap-4 bg-slate-950 p-3 rounded-xl border border-slate-800">
-            <img id="rawImg" src="" class="w-14 h-14 bg-slate-900 border border-slate-800 rounded-lg p-1">
-            <div class="flex-1">
-              <div class="flex justify-between items-center text-xs"><span class="font-bold text-slate-300" id="rawTitle">Material Bruto</span><span class="text-slate-500" id="rawRatioText">3 por refinado</span></div>
-              <input type="number" id="rawPrice" placeholder="Precio Compra" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-sm font-bold text-blue-400 mt-1">
-            </div>
-          </div>
-          <div class="flex items-center gap-4 bg-slate-950 p-3 rounded-xl border border-slate-800">
-            <img id="prevImg" src="" class="w-14 h-14 bg-slate-900 border border-slate-800 rounded-lg p-1">
-            <div class="flex-1">
-              <div class="flex justify-between items-center text-xs"><span class="font-bold text-slate-300" id="prevTitle">Tier Inferior</span><span class="text-slate-500">1 por refinado</span></div>
-              <input type="number" id="prevPrice" placeholder="Precio Compra" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-sm font-bold text-blue-400 mt-1">
-            </div>
-          </div>
-          <div class="flex items-center gap-4 bg-slate-950 p-3 rounded-xl border border-slate-800">
-            <img id="outImg" src="" class="w-14 h-14 bg-slate-900 border border-slate-800 rounded-lg p-1">
-            <div class="flex-1">
-              <div class="flex justify-between items-center text-xs"><span class="font-bold text-slate-300" id="outTitle">Producto Final</span><span class="text-emerald-400 font-semibold">Precio Venta</span></div>
-              <input type="number" id="outPrice" placeholder="Precio Venta" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-sm font-bold text-emerald-400 mt-1">
-            </div>
-          </div>
-        </div>
-
-        <div class="grid sm:grid-cols-3 gap-4 pt-2">
-          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Cantidad Bruta</label><input type="number" id="rawQty" value="999" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-slate-100"></div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1">RRR (%)</label>
-            <select id="rrrSelect" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-slate-100">
-              <option value="15.2">15.2% (Sin bono)</option><option value="36.7" selected>36.7% (Bono Ciudad)</option><option value="43.5">43.5% (Ciudad + Evento)</option><option value="53.9">53.9% (Ciudad + Foco)</option>
-            </select>
-          </div>
-          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Tarifa Taller</label><input type="number" id="taxFee" value="500" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-slate-100"></div>
-        </div>
-      </section>
-
-      <section class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-6">
-        <div>
-          <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-chart-pie text-emerald-400"></i> Rentabilidad Neta</h2>
-          <div class="mt-4 space-y-3 text-sm">
-            <div class="flex justify-between items-center"><span class="text-slate-400">Unidades:</span><span id="resUnits" class="font-bold text-slate-100 text-base">0</span></div>
-            <div class="flex justify-between items-center"><span class="text-slate-400">Gasto Bruto:</span><span id="resRawCost" class="font-bold text-rose-400">0</span></div>
-            <div class="flex justify-between items-center"><span class="text-slate-400">Gasto Tier Inf:</span><span id="resPrevCost" class="font-bold text-rose-400">0</span></div>
-            <div class="flex justify-between items-center border-t border-slate-800 pt-2"><span class="text-slate-400">Ingreso:</span><span id="resRevenue" class="font-bold text-slate-100">0</span></div>
-          </div>
-        </div>
-        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 text-center shadow-inner space-y-1">
-          <span class="text-[11px] text-slate-400 uppercase font-black">Ganancia Estimada</span>
-          <p id="resProfit" class="text-3xl font-black text-emerald-400 tracking-tight">0 Plata</p>
-          <span id="resRoi" class="text-xs font-bold text-emerald-500 block">ROI: 0%</span>
-        </div>
-      </section>
-    </main>
   </div>
-
-  <script>
-    const RAW_DICT = { CLOTH: 'FIBER', LEATHER: 'HIDE', METALBAR: 'ORE', PLANKS: 'WOOD', STONEBLOCK: 'ROCK' };
-    const CITY_NAMES = { CLOTH: 'Lymhurst (Tela)', LEATHER: 'Martlock (Cuero)', METALBAR: 'Thetford (Lingotes)', PLANKS: 'Fort Sterling (Tablas)', STONEBLOCK: 'Bridgewatch (Bloques)' };
-    const RATIO_TIER = { T4: 2, T5: 3, T6: 4, T7: 5, T8: 5 };
-
-    function getRefiningIds() {
-      const type = document.getElementById('matType').value, tier = document.getElementById('matTier').value, enchant = document.getElementById('matEnchant').value;
-      const prevTier = 'T' + (parseInt(tier[1]) - 1);
-      const encSuffix = enchant !== '0' ? `@${enchant}` : '';
-      const rawEncSuffix = enchant !== '0' ? `_LEVEL${enchant}@${enchant}` : '';
-      return {
-        rawId: `${tier}_${RAW_DICT[type]}${rawEncSuffix}`,
-        prevId: `${prevTier}_${type}${encSuffix}`,
-        outId: `${tier}_${type}${encSuffix}`,
-        tier, type
-      };
-    }
-
-    function updateUi() {
-      const { rawId, prevId, outId, tier, type } = getRefiningIds();
-      document.getElementById('rawImg').src = `https://render.albiononline.com/v1/item/${rawId}.png?size=64`;
-      document.getElementById('prevImg').src = `https://render.albiononline.com/v1/item/${prevId}.png?size=64`;
-      document.getElementById('outImg').src = `https://render.albiononline.com/v1/item/${outId}.png?size=64`;
-      document.getElementById('cityBadge').textContent = CITY_NAMES[type];
-      document.getElementById('rawPerUnit').textContent = `${RATIO_TIER[tier]} brutos + 1 refinado previo`;
-      document.getElementById('rawRatioText').textContent = `${RATIO_TIER[tier]} por cada refinado`;
-    }
-
-    async function fetchPrices() {
-      const { rawId, prevId, outId } = getRefiningIds();
-      try {
-        const res = await fetch(`https://west.albion-online-data.com/api/v2/stats/prices/${rawId},${prevId},${outId}.json`);
-        const data = await res.json();
-        const getPrice = (id) => { const valid = data.filter(d => d.item_id === id && d.sell_price_min > 0); return valid.length ? Math.min(...valid.map(v => v.sell_price_min)) : 0; };
-        const rawP = getPrice(rawId), prevP = getPrice(prevId), outP = getPrice(outId);
-
-        if (rawP) document.getElementById('rawPrice').value = rawP;
-        if (prevP) document.getElementById('prevPrice').value = prevP;
-        if (outP) document.getElementById('outPrice').value = outP;
-        calculate();
-      } catch (err) {}
-    }
-
-    function calculate() {
-      const { tier } = getRefiningIds();
-      const qty = parseFloat(document.getElementById('rawQty').value) || 0, rawP = parseFloat(document.getElementById('rawPrice').value) || 0;
-      const prevP = parseFloat(document.getElementById('prevPrice').value) || 0, outP = parseFloat(document.getElementById('outPrice').value) || 0;
-      const rrr = (parseFloat(document.getElementById('rrrSelect').value) || 0) / 100, fee = parseFloat(document.getElementById('taxFee').value) || 0;
-
-      const rawPerItem = RATIO_TIER[tier] || 2, multiplier = 1 / (1 - rrr);
-      const totalUnits = Math.floor((qty / rawPerItem) * multiplier);
-      const rawCost = qty * rawP, prevCost = totalUnits * prevP, userTax = totalUnits * (fee * 0.05);
-      const totalCost = rawCost + prevCost + userTax;
-      const grossRevenue = totalUnits * outP * 0.96;
-      const netProfit = Math.round(grossRevenue - totalCost);
-      const roi = totalCost > 0 ? ((netProfit / totalCost) * 100).toFixed(1) : 0;
-
-      document.getElementById('resUnits').textContent = totalUnits.toLocaleString();
-      document.getElementById('resRawCost').textContent = Math.round(rawCost).toLocaleString() + ' Plata';
-      document.getElementById('resPrevCost').textContent = Math.round(prevCost).toLocaleString() + ' Plata';
-      document.getElementById('resRevenue').textContent = Math.round(grossRevenue).toLocaleString() + ' Plata';
-      const profitEl = document.getElementById('resProfit');
-      profitEl.textContent = (netProfit >= 0 ? '+' : '') + netProfit.toLocaleString() + ' Plata';
-      profitEl.className = netProfit >= 0 ? 'text-3xl font-black text-emerald-400 tracking-tight' : 'text-3xl font-black text-rose-400 tracking-tight';
-      document.getElementById('resRoi').textContent = `ROI: ${roi}%`;
-      document.getElementById('resRoi').className = roi >= 0 ? 'text-xs font-bold text-emerald-500 block' : 'text-xs font-bold text-rose-500 block';
-    }
-
-    ['rawQty', 'rawPrice', 'prevPrice', 'outPrice', 'rrrSelect', 'taxFee'].forEach(id => document.getElementById(id).addEventListener('input', calculate));
-    ['matType', 'matTier', 'matEnchant'].forEach(id => document.getElementById(id).addEventListener('change', () => { updateUi(); fetchPrices(); }));
-    updateUi(); fetchPrices();
-  </script>
+  <footer class="mt-8 py-6 border-t border-slate-800 text-center text-xs text-slate-500 bg-[#111827]/50">
+    <p>Albion Free Market Replica - Servidor América (West). Precios en tiempo real vía Albion Data Project.</p>
+  </footer>
+  <script src="items.js"></script>
 </body>
 </html>

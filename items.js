@@ -1,36 +1,28 @@
+
 const ITEMS_DB = [
-  // --- ESPADAS (Lymhurst) ---
   { id: "MAIN_SWORD", name: "Espada Ancha", type: "dynamic", m1: "PLANKS", q1: 8, m2: "METALBAR", q2: 16, city: "Lymhurst (+24.8%)" },
   { id: "2H_CLAYMORE", name: "Claymore", type: "dynamic", m1: "PLANKS", q1: 12, m2: "METALBAR", q2: 20, city: "Lymhurst (+24.8%)" },
   { id: "2H_DUALSWORD", name: "Espadas Dobles", type: "dynamic", m1: "PLANKS", q1: 12, m2: "METALBAR", q2: 20, city: "Lymhurst (+24.8%)" },
-  // --- HACHAS (Martlock) ---
   { id: "MAIN_AXE", name: "Hacha de Batalla", type: "dynamic", m1: "PLANKS", q1: 8, m2: "METALBAR", q2: 16, city: "Martlock (+24.8%)" },
   { id: "2H_HALBERD", name: "Alabarda", type: "dynamic", m1: "PLANKS", q1: 12, m2: "METALBAR", q2: 20, city: "Martlock (+24.8%)" },
   { id: "2H_AXE", name: "Gran Hacha", type: "dynamic", m1: "PLANKS", q1: 12, m2: "METALBAR", q2: 20, city: "Martlock (+24.8%)" },
-  // --- MAZAS (Thetford) ---
   { id: "MAIN_MACE", name: "Maza", type: "dynamic", m1: "PLANKS", q1: 8, m2: "METALBAR", q2: 16, city: "Thetford (+24.8%)" },
   { id: "2H_MACE", name: "Maza Pesada", type: "dynamic", m1: "PLANKS", q1: 12, m2: "METALBAR", q2: 20, city: "Thetford (+24.8%)" },
   { id: "2H_FLAIL", name: "Mangual", type: "dynamic", m1: "PLANKS", q1: 12, m2: "METALBAR", q2: 20, city: "Thetford (+24.8%)" },
-  // --- MARTILLOS (Fort Sterling) ---
   { id: "MAIN_HAMMER", name: "Martillo", type: "dynamic", m1: "PLANKS", q1: 8, m2: "METALBAR", q2: 16, city: "Fort Sterling (+24.8%)" },
   { id: "2H_POLEHAMMER", name: "Martillo de Guerra", type: "dynamic", m1: "PLANKS", q1: 12, m2: "METALBAR", q2: 20, city: "Fort Sterling (+24.8%)" },
   { id: "2H_HAMMER", name: "Gran Martillo", type: "dynamic", m1: "PLANKS", q1: 12, m2: "METALBAR", q2: 20, city: "Fort Sterling (+24.8%)" },
-  // --- LANZAS (Fort Sterling) ---
   { id: "MAIN_1HSPEAR", name: "Lanza", type: "dynamic", m1: "PLANKS", q1: 16, m2: "METALBAR", q2: 8, city: "Fort Sterling (+24.8%)" },
   { id: "2H_SPEAR", name: "Pica", type: "dynamic", m1: "PLANKS", q1: 20, m2: "METALBAR", q2: 12, city: "Fort Sterling (+24.8%)" },
   { id: "2H_GLAIVE", name: "Guja", type: "dynamic", m1: "PLANKS", q1: 20, m2: "METALBAR", q2: 12, city: "Fort Sterling (+24.8%)" },
-  // --- DAGAS (Bridgewatch) ---
   { id: "MAIN_DAGGER", name: "Daga", type: "dynamic", m1: "LEATHER", q1: 16, m2: "METALBAR", q2: 8, city: "Bridgewatch (+24.8%)" },
   { id: "2H_DAGGERPAIR", name: "Dagas Dobles", type: "dynamic", m1: "LEATHER", q1: 20, m2: "METALBAR", q2: 12, city: "Bridgewatch (+24.8%)" },
   { id: "2H_CLAWPAIR", name: "Garras", type: "dynamic", m1: "LEATHER", q1: 20, m2: "METALBAR", q2: 12, city: "Bridgewatch (+24.8%)" },
-  // --- ARCOS (Lymhurst) ---
   { id: "2H_BOW", name: "Arco", type: "dynamic", m1: "PLANKS", q1: 32, m2: null, q2: 0, city: "Lymhurst (+24.8%)" },
   { id: "2H_WARBOW", name: "Arco de Guerra", type: "dynamic", m1: "PLANKS", q1: 32, m2: null, q2: 0, city: "Lymhurst (+24.8%)" },
   { id: "2H_LONGBOW", name: "Arco Largo", type: "dynamic", m1: "PLANKS", q1: 32, m2: null, q2: 0, city: "Lymhurst (+24.8%)" },
-  // --- BALLESTAS (Bridgewatch) ---
   { id: "2H_CROSSBOW", name: "Ballesta", type: "dynamic", m1: "PLANKS", q1: 20, m2: "METALBAR", q2: 12, city: "Bridgewatch (+24.8%)" },
   { id: "MAIN_1HCROSSBOW", name: "Ballesta Ligera", type: "dynamic", m1: "PLANKS", q1: 16, m2: "METALBAR", q2: 8, city: "Bridgewatch (+24.8%)" },
-  // --- BASTONES MAGICOS ---
   { id: "MAIN_FIRESTAFF", name: "Bastón de Fuego", type: "dynamic", m1: "PLANKS", q1: 16, m2: "METALBAR", q2: 8, city: "Thetford (+24.8%)" },
   { id: "2H_FIRESTAFF", name: "Gran Bastón de Fuego", type: "dynamic", m1: "PLANKS", q1: 20, m2: "METALBAR", q2: 12, city: "Thetford (+24.8%)" },
   { id: "MAIN_NATURESTAFF", name: "Bastón de Naturaleza", type: "dynamic", m1: "PLANKS", q1: 16, m2: "CLOTH", q2: 8, city: "Thetford (+24.8%)" },
@@ -39,7 +31,6 @@ const ITEMS_DB = [
   { id: "MAIN_FROSTSTAFF", name: "Bastón de Hielo", type: "dynamic", m1: "PLANKS", q1: 16, m2: "METALBAR", q2: 8, city: "Martlock (+24.8%)" },
   { id: "MAIN_ARCANESTAFF", name: "Bastón Arcano", type: "dynamic", m1: "PLANKS", q1: 16, m2: "METALBAR", q2: 8, city: "Lymhurst (+24.8%)" },
 
-  // --- ARMADURAS DE PLACA (Thetford) ---
   { id: "ARMOR_PLATE_SET1", name: "Armadura de Soldado", type: "dynamic", m1: "METALBAR", q1: 16, m2: null, q2: 0, city: "Thetford (+24.8%)" },
   { id: "ARMOR_PLATE_SET2", name: "Armadura de Caballero", type: "dynamic", m1: "METALBAR", q1: 16, m2: null, q2: 0, city: "Thetford (+24.8%)" },
   { id: "ARMOR_PLATE_SET3", name: "Armadura de Guardián", type: "dynamic", m1: "METALBAR", q1: 16, m2: null, q2: 0, city: "Thetford (+24.8%)" },
@@ -50,7 +41,6 @@ const ITEMS_DB = [
   { id: "SHOES_PLATE_SET2", name: "Botas de Caballero", type: "dynamic", m1: "METALBAR", q1: 8, m2: null, q2: 0, city: "Lymhurst (+24.8%)" },
   { id: "SHOES_PLATE_SET3", name: "Botas de Guardián", type: "dynamic", m1: "METALBAR", q1: 8, m2: null, q2: 0, city: "Lymhurst (+24.8%)" },
 
-  // --- ARMADURAS DE CUERO (Thetford) ---
   { id: "ARMOR_LEATHER_SET1", name: "Chaqueta de Mercenario", type: "dynamic", m1: "LEATHER", q1: 16, m2: null, q2: 0, city: "Thetford (+24.8%)" },
   { id: "ARMOR_LEATHER_SET2", name: "Chaqueta de Cazador", type: "dynamic", m1: "LEATHER", q1: 16, m2: null, q2: 0, city: "Thetford (+24.8%)" },
   { id: "ARMOR_LEATHER_SET3", name: "Chaqueta de Asesino", type: "dynamic", m1: "LEATHER", q1: 16, m2: null, q2: 0, city: "Thetford (+24.8%)" },
@@ -61,7 +51,6 @@ const ITEMS_DB = [
   { id: "SHOES_LEATHER_SET2", name: "Zapatos de Cazador", type: "dynamic", m1: "LEATHER", q1: 8, m2: null, q2: 0, city: "Martlock (+24.8%)" },
   { id: "SHOES_LEATHER_SET3", name: "Zapatos de Asesino", type: "dynamic", m1: "LEATHER", q1: 8, m2: null, q2: 0, city: "Martlock (+24.8%)" },
 
-  // --- ARMADURAS DE TELA (Bridgewatch) ---
   { id: "ARMOR_CLOTH_SET1", name: "Toga de Erudito", type: "dynamic", m1: "CLOTH", q1: 16, m2: null, q2: 0, city: "Bridgewatch (+24.8%)" },
   { id: "ARMOR_CLOTH_SET2", name: "Toga de Clérigo", type: "dynamic", m1: "CLOTH", q1: 16, m2: null, q2: 0, city: "Bridgewatch (+24.8%)" },
   { id: "ARMOR_CLOTH_SET3", name: "Toga de Mago", type: "dynamic", m1: "CLOTH", q1: 16, m2: null, q2: 0, city: "Bridgewatch (+24.8%)" },
@@ -72,7 +61,6 @@ const ITEMS_DB = [
   { id: "SHOES_CLOTH_SET2", name: "Sandalias de Clérigo", type: "dynamic", m1: "CLOTH", q1: 8, m2: null, q2: 0, city: "Thetford (+24.8%)" },
   { id: "SHOES_CLOTH_SET3", name: "Sandalias de Mago", type: "dynamic", m1: "CLOTH", q1: 8, m2: null, q2: 0, city: "Thetford (+24.8%)" },
 
-  // --- ACCESORIOS ---
   { id: "BAG", name: "Bolsa (Normal)", type: "dynamic", m1: "LEATHER", q1: 8, m2: "CLOTH", q2: 8, city: "Cualquier Ciudad" },
   { id: "CAPE", name: "Capa Normal", type: "dynamic", m1: "CLOTH", q1: 4, m2: "LEATHER", q2: 4, city: "Brecilien / Caerleon" },
 
@@ -99,8 +87,8 @@ const ITEMS_DB = [
   { id: "T8_POTION_COOLDOWN", name: "Poción de Veneno Magistral (T8)", type: "fixed", tier: 8, m1: "T8_FIREBLOOM", q1: 24, m2: "T7_ELUSIVEFOXGLOVE", q2: 12, city: "Caerleon / Brecilien" },
 
   { id: "T4_POTION_INVIS", name: "Poción de Invisibilidad (T4)", type: "fixed", tier: 4, m1: "T4_COMFREY", q1: 24, m2: "T3_AGARIC", q2: 12, city: "Caerleon / Brecilien" },
-  { id: "T6_POTION_INVIS", name: "Poción Invisibilidad Mayor (T6)", type: "fixed", tier: 6, m1: "T6_DRAGONTEASEL", q1: 24, m2: "T5_BURDOCK", q2: 12, city: "Caerleon / Brecilien" },
-  { id: "T8_POTION_INVIS", name: "Poción Invisibilidad Magistral (T8)", type: "fixed", tier: 8, m1: "T8_FIREBLOOM", q1: 24, m2: "T7_ELUSIVEFOXGLOVE", q2: 12, city: "Caerleon / Brecilien" },
+  { id: "T6_POTION_INVIS", name: "Poción de Invisibilidad Mayor (T6)", type: "fixed", tier: 6, m1: "T6_DRAGONTEASEL", q1: 24, m2: "T5_BURDOCK", q2: 12, city: "Caerleon / Brecilien" },
+  { id: "T8_POTION_INVIS", name: "Poción de Invisibilidad Magistral (T8)", type: "fixed", tier: 8, m1: "T8_FIREBLOOM", q1: 24, m2: "T7_ELUSIVEFOXGLOVE", q2: 12, city: "Caerleon / Brecilien" },
 
   // --- MONTURAS BASE ---
   { id: "T3_MOUNT_HORSE", name: "Caballo de Montar T3", type: "fixed", tier: 3, m1: "T3_FARM_HORSE_GROWN", q1: 1, m2: "T3_LEATHER", q2: 20, city: "Isla" },
@@ -117,7 +105,15 @@ const ITEMS_DB = [
   { id: "T7_MOUNT_OX", name: "Buey de Transporte T7", type: "fixed", tier: 7, m1: "T7_FARM_OX_GROWN", q1: 1, m2: "T7_PLANKS", q2: 30, city: "Isla" },
   { id: "T8_MOUNT_OX", name: "Buey de Transporte T8", type: "fixed", tier: 8, m1: "T8_FARM_OX_GROWN", q1: 1, m2: "T8_PLANKS", q2: 30, city: "Isla" },
 
-  { id: "T6_MOUNT_DIREWOLF", name: "Lobo Huargo T6", type: "fixed", tier: 6, m1: "T6_FARM_DIREWOLF_GROWN", q1: 1, m2: "T6_LEATHER", q2: 30, city: "Isla" }
+  { id: "T6_MOUNT_DIREWOLF", name: "Lobo Huargo T6", type: "fixed", tier: 6, m1: "T6_FARM_DIREWOLF_GROWN", q1: 1, m2: "T6_LEATHER", q2: 30, city: "Isla" },
+  { id: "CLOTH", name: "Tela Refinada", type: "dynamic", city: "Cualquier Ciudad" },
+  { id: "LEATHER", name: "Cuero Refinado", type: "dynamic", city: "Cualquier Ciudad" },
+  { id: "METALBAR", name: "Lingotes", type: "dynamic", city: "Cualquier Ciudad" },
+  { id: "PLANKS", name: "Tablas", type: "dynamic", city: "Cualquier Ciudad" },
+  { id: "STONEBLOCK", name: "Bloques", type: "dynamic", city: "Cualquier Ciudad" },
+  { id: "MEAT", name: "Carne (T3-T8)", type: "dynamic", city: "Mercado" },
+  { id: "MILK", name: "Leche (T4-T8)", type: "dynamic", city: "Mercado" },
+  { id: "EGG", name: "Huevos (T3-T7)", type: "dynamic", city: "Mercado" }
 ];
 
 const MAPS_DB = [
@@ -132,5 +128,5 @@ const MAPS_DB = [
   { name: "Roast Oasis", type: "Continente Real", tier: "T6", pvp: "PVP Total (Roja)", res: "Madera, Piedra, Piel" },
   { name: "Arthur's Rest", type: "Zona Negra (Santuario)", tier: "T7", pvp: "Segura", res: "Ninguno" },
   { name: "Sunfang Approach", type: "Zona Negra", tier: "T8", pvp: "PVP Total (Negra)", res: "Piel, Mineral, Fibra" },
-  { name: "Caminos Avalonianos", type: "Caminos Avalonianos", tier: "T4-T8", pvp: "PVP Total (Negra)", res: "Todos los recursos aleatorios" }
+  { name: "Caminos Avalonianos", type: "Caminos Avalonianos", tier: "T4-T8", pvp: "PVP Total (Negra)", res: "Todos los recursos" }
 ];
