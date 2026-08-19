@@ -28,6 +28,7 @@
         <a href="crafteo.html" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-slate-950 font-black shadow-md">Crafteo</a>
         <a href="mercado.html" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition">Mercado</a>
         <a href="jugadores.html" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition">Jugadores</a>
+        <a href="mapas.html" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition">Mapas</a>
       </nav>
       <div class="flex items-center gap-2">
         <button id="fetchBtn" class="bg-emerald-600 text-slate-950 font-black px-3.5 py-1.5 rounded-xl text-xs transition active:scale-95 shadow-md shadow-emerald-500/20"><i id="syncIcon" class="fa-solid fa-arrows-rotate"></i> API West</button>
@@ -37,8 +38,8 @@
     <section class="bg-[#111827] border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
         <div class="md:col-span-5 relative">
-          <label class="block text-[11px] font-bold text-slate-400 uppercase mb-1">Buscar Ítem</label>
-          <input type="text" id="itemSearchInput" placeholder="Ej: Casco, Chaqueta, Espada..." autocomplete="off" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl px-3 py-2 text-sm text-emerald-300 font-bold focus:border-emerald-500 focus:outline-none">
+          <label class="block text-[11px] font-bold text-slate-400 uppercase mb-1">Buscar Ítem a Fabricar</label>
+          <input type="text" id="itemSearchInput" placeholder="Escribe y presiona Enter (Ej: Casco, Espada...)" autocomplete="off" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl px-3 py-2 text-sm text-emerald-300 font-bold focus:border-emerald-500 focus:outline-none">
           <div id="autocompleteList" class="absolute z-50 w-full bg-[#1e293b] border border-slate-700 rounded-xl mt-1 max-h-56 overflow-y-auto hidden shadow-2xl"></div>
         </div>
         <div class="md:col-span-2">
@@ -67,12 +68,14 @@
       <section class="lg:col-span-7 bg-[#111827] border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
           <div class="flex items-center gap-3">
-            <img id="headerOutputImg" src="https://render.albiononline.com/v1/item/TREASURE_KNOWLEDGE.png?size=64" class="w-12 h-12 bg-[#0b0f19] border border-slate-700 rounded-xl p-1 shadow-inner">
+            <img id="headerOutputImg" src="https://render.albiononline.com/v1/item/TREASURE_KNOWLEDGE.png?size=64" onerror="this.src='https://render.albiononline.com/v1/item/TREASURE_KNOWLEDGE.png?size=64'" class="w-12 h-12 bg-[#0b0f19] border border-slate-700 rounded-xl p-1 shadow-inner">
             <div><h2 id="headerOutputName" class="text-base font-black text-slate-100">Selecciona un Ítem</h2><p id="headerOutputCode" class="text-[11px] font-mono text-slate-500">ID Técnico</p></div>
           </div>
           <div class="text-right"><span class="text-[10px] text-slate-400 uppercase font-bold block">Producción</span><span id="headerTotalOutputs" class="text-base font-black text-emerald-400">0 Unidades</span></div>
         </div>
-        <div id="inputsContainer" class="space-y-2.5"></div>
+        <div id="inputsContainer" class="space-y-2.5">
+           <div class="text-center text-slate-500 text-xs py-4">Utiliza el buscador de arriba para cargar la receta.</div>
+        </div>
       </section>
 
       <section class="lg:col-span-5 space-y-4">
@@ -107,61 +110,73 @@
 
   <script src="items.js"></script>
   <script>
-    let currentRecipeKey = null;
-    const CITIES = ['Bridgewatch', 'Fort Sterling', 'Lymhurst', 'Martlock', 'Thetford', 'Caerleon', 'Brecilien', 'Black Market'];
+    let currentRecipe = null;
+    const CITIES = ['Bridgewatch', 'Fort Sterling', 'Lymhurst', 'Martlock', 'Thetford', 'Caerleon', 'Brecilien'];
 
     const searchInput = document.getElementById('itemSearchInput');
     const autocompleteList = document.getElementById('autocompleteList');
+
+    function selectItem(item) {
+        searchInput.value = item.name;
+        currentRecipe = item;
+        autocompleteList.classList.add('hidden');
+        if(item.type === 'fixed') { 
+            document.getElementById('tierSelect').value = item.tier; 
+            document.getElementById('tierSelect').disabled = true; 
+        } else { 
+            document.getElementById('tierSelect').disabled = false; 
+        }
+        renderInputs(); fetchPrices();
+    }
 
     searchInput.addEventListener('input', () => {
       const val = searchInput.value.toLowerCase().trim();
       autocompleteList.innerHTML = '';
       if(val.length < 2) { autocompleteList.classList.add('hidden'); return; }
 
-      const keys = Object.keys(AFM_RECIPES);
-      const matches = keys.filter(k => AFM_RECIPES[k].name.toLowerCase().includes(val) || k.toLowerCase().includes(val)).slice(0, 15);
-
+      const matches = RECIPES_DB.filter(i => i.name.toLowerCase().includes(val) || i.id.toLowerCase().includes(val)).slice(0, 15);
       if(matches.length > 0) autocompleteList.classList.remove('hidden');
       else autocompleteList.classList.add('hidden');
 
-      matches.forEach(k => {
-        const item = AFM_RECIPES[k];
+      matches.forEach(item => {
         const div = document.createElement('div');
-        div.className = 'px-4 py-2 hover:bg-slate-800 cursor-pointer text-xs sm:text-sm font-bold text-emerald-300 border-b border-slate-800 flex justify-between';
-        div.innerHTML = `<span>${item.name}</span><span class="text-[9px] text-slate-500 font-mono">${k}</span>`;
-        div.onclick = () => {
-          searchInput.value = item.name;
-          currentRecipeKey = k;
-          autocompleteList.classList.add('hidden');
-          if(item.type === 'fixed') { document.getElementById('tierSelect').value = item.tier; document.getElementById('tierSelect').disabled = true; } 
-          else { document.getElementById('tierSelect').disabled = false; }
-          renderInputs(); fetchPrices();
-        };
+        div.className = 'px-4 py-2 hover:bg-slate-800 cursor-pointer text-xs font-bold text-emerald-300 border-b border-slate-800 flex justify-between';
+        div.innerHTML = `<span>${item.name}</span><span class="text-[9px] text-slate-500 font-mono">${item.id}</span>`;
+        div.onclick = () => selectItem(item);
         autocompleteList.appendChild(div);
       });
+    });
+
+    // Permitir "Enter" para seleccionar el primero
+    searchInput.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter') {
+            e.preventDefault();
+            const val = searchInput.value.toLowerCase().trim();
+            const match = RECIPES_DB.find(i => i.name.toLowerCase().includes(val) || i.id.toLowerCase().includes(val));
+            if(match) selectItem(match);
+        }
     });
 
     document.addEventListener('click', (e) => { if(e.target !== searchInput) autocompleteList.classList.add('hidden'); });
 
     function getRenderIds() {
-      if(!currentRecipeKey) return null;
-      const rec = AFM_RECIPES[currentRecipeKey];
+      if(!currentRecipe) return null;
       const t = document.getElementById('tierSelect').value;
       const e = document.getElementById('enchantSelect').value;
       const suf = e !== '0' ? `@${e}` : '';
 
-      let outId = rec.type === 'fixed' ? rec.outputId : `T${t}_${rec.outputId}${suf}`;
+      let outId = currentRecipe.type === 'fixed' ? currentRecipe.id : `T${t}_${currentRecipe.id}`;
+      if(e !== '0' && !outId.includes('MOUNT') && !outId.includes('MEAL') && !outId.includes('POTION')) outId += suf;
+
+      let m1 = currentRecipe.type === 'fixed' ? currentRecipe.m1 : `T${t}_${currentRecipe.m1}${suf}`;
+      let m2 = currentRecipe.m2 ? (currentRecipe.type === 'fixed' ? currentRecipe.m2 : `T${t}_${currentRecipe.m2}${suf}`) : null;
       
-      let m1 = rec.type === 'fixed' ? rec.m1 : `T${t}_${rec.m1}${suf}`;
-      let m2 = rec.m2 ? (rec.type === 'fixed' ? rec.m2 : `T${t}_${rec.m2}${suf}`) : null;
-      
-      // Artefacto (Material 3) nunca se le aplica el tier/sufijo al vuelo porque su ID ya viene exacto, solo el tier inicial
       let m3 = null;
-      if(rec.m3) {
-          m3 = rec.m3.includes('T3_') || rec.m3.includes('T4_') ? rec.m3 : `T${t}_${rec.m3}`;
+      if(currentRecipe.m3) {
+          m3 = currentRecipe.m3.includes('T3_') || currentRecipe.m3.includes('T4_') || currentRecipe.m3.includes('T7_') ? currentRecipe.m3 : `T${t}_${currentRecipe.m3}`;
       }
 
-      return { outId, m1, q1: rec.q1, m2, q2: rec.q2, m3, q3: rec.q3, rec, t };
+      return { outId, m1, q1: currentRecipe.q1, m2, q2: currentRecipe.q2, m3, q3: currentRecipe.q3, rec: currentRecipe, t };
     }
 
     function renderInputs() {
@@ -171,7 +186,7 @@
       document.getElementById('headerOutputImg').src = `https://render.albiononline.com/v1/item/${ids.outId}.png?size=64`;
       document.getElementById('headerOutputName').textContent = ids.rec.type === 'fixed' ? ids.rec.name : `${ids.rec.name} T${ids.t}`;
       document.getElementById('headerOutputCode').textContent = ids.outId;
-      document.getElementById('bestCraftCityLabel').textContent = ids.rec.city;
+      document.getElementById('bestCraftCityLabel').textContent = ids.rec.city || 'Cualquiera';
 
       const container = document.getElementById('inputsContainer');
       container.innerHTML = '';
@@ -255,14 +270,13 @@
 
       let grossMat = 0, retValue = 0;
 
-      // Iterar por los 3 posibles items
       [ { q: ids.q1, idx: 0, art: false }, { q: ids.q2, idx: 1, art: false }, { q: ids.q3, idx: 2, art: true } ].forEach(m => {
         if(m.q) {
           const el = document.getElementById(`inputPrice_${m.idx}`);
           const p = el ? parseFloat(el.value)||0 : 0;
           const costLinea = (m.q * runs) * p;
           grossMat += costLinea;
-          // Si es artefacto, el retorno es 0. Solo los recursos primarios se devuelven.
+          // Artefactos no devuelven RRR
           if(!m.art) retValue += costLinea * rrr; 
         }
       });
@@ -270,6 +284,7 @@
       const netMat = grossMat - retValue;
       const statFee = runs * (fee * 0.12);
       
+      // Comidas y pociones craftean x10 en Albion
       const unitsPerRun = ids.rec.outputId.includes('MEAL') || ids.rec.outputId.includes('POTION') ? 10 : 1;
       const totOut = runs * unitsPerRun;
       document.getElementById('headerTotalOutputs').textContent = `${totOut} Unidades`;
