@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Albion Expert Hub - Crafteo Expandido</title>
+  <title>Albion Hub - Crafteo</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -12,39 +12,39 @@
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+    ::-webkit-scrollbar-thumb:hover { background: #10b981; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-amber-500 selection:text-slate-950 flex flex-col justify-between">
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950 flex flex-col justify-between">
   <div class="max-w-7xl mx-auto p-4 md:p-8 space-y-6 w-full">
 
     <header class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:px-6 backdrop-blur-md shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <div class="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl shadow-inner">
+        <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl shadow-inner">
           <i class="fa-solid fa-crown"></i>
         </div>
         <div>
-          <a href="index.html" class="text-xl font-black text-amber-400 tracking-wide title-font hover:opacity-90 transition">ALBION EXPERT HUB</a>
-          <p class="text-[11px] text-slate-400">Herramientas Avanzadas & <span class="text-amber-300 font-semibold">Mercado en Vivo</span></p>
+          <a href="index.html" class="text-xl font-black text-emerald-400 tracking-wide title-font hover:opacity-90 transition">ALBION HUB</a>
+          <p class="text-[11px] text-slate-400">Servidor Exclusivo: <span class="text-emerald-300 font-semibold">América (West)</span></p>
         </div>
       </div>
-
       <nav class="flex flex-wrap items-center justify-center gap-1.5 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
-        <a href="index.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-fire-burner"></i><span class="hidden md:inline">Inicio</span></a>
-        <a href="crafteo.html" class="px-3.5 py-2 rounded-lg bg-amber-500 text-slate-950 shadow-md transition flex items-center gap-2"><i class="fa-solid fa-hammer"></i><span class="hidden md:inline">Crafteo</span></a>
+        <a href="index.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-fire-burner"></i><span class="hidden md:inline">Refinación</span></a>
+        <a href="islas.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-wheat-awn"></i><span class="hidden md:inline">Islas</span></a>
+        <a href="crafteo.html" class="px-3.5 py-2 rounded-lg bg-emerald-600 text-slate-950 shadow-md font-black transition flex items-center gap-2"><i class="fa-solid fa-hammer"></i><span class="hidden md:inline">Crafteo</span></a>
         <a href="mercado.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-scale-balanced"></i><span class="hidden md:inline">Mercado</span></a>
         <a href="jugadores.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-users"></i><span class="hidden md:inline">Jugadores</span></a>
       </nav>
-
       <div class="flex items-center gap-2">
-        <div class="flex items-center gap-1.5 bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-amber-300 font-bold">
-          <i class="fa-solid fa-globe text-slate-400"></i>
-          <select id="serverSelect" class="bg-transparent focus:outline-none cursor-pointer">
-            <option value="europe" selected class="bg-slate-900 text-slate-100">Europa</option>
-            <option value="west" class="bg-slate-900 text-slate-100">América</option>
-            <option value="east" class="bg-slate-900 text-slate-100">Asia</option>
-          </select>
+        <div class="flex items-center gap-2 bg-slate-950 border border-emerald-500/30 rounded-xl px-3 py-2 text-xs text-emerald-400 font-black shadow-inner">
+          <i class="fa-solid fa-server"></i>
+          <span>América (West)</span>
         </div>
+        
+        <button id="fetchBtn" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black px-3.5 py-2 rounded-xl text-xs transition active:scale-95 shadow-md shadow-emerald-500/20">
+          <i id="syncIcon" class="fa-solid fa-arrows-rotate"></i>
+          <span class="hidden sm:inline">Precios API</span>
+        </button>
       </div>
     </header>
 
@@ -67,12 +67,12 @@
 
     <main class="grid lg:grid-cols-3 gap-6 mt-6">
       <section class="lg:col-span-2 bg-slate-900/80 p-6 rounded-2xl border border-slate-800 space-y-5 shadow-lg">
-        <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-hammer text-amber-400"></i> Editor de Fabricación (Armas y Armaduras Completas)</h2>
+        <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-hammer text-emerald-400"></i> Editor de Fabricación (Armas y Armaduras Completas)</h2>
 
         <div class="grid sm:grid-cols-3 gap-4">
           <div class="sm:col-span-3">
             <label class="block text-xs font-semibold text-slate-400 mb-1">Categoría Completa del Ítem</label>
-            <select id="craftCat" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200 focus:border-amber-500 focus:outline-none">
+            <select id="craftCat" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200 focus:border-emerald-500 focus:outline-none">
               <optgroup label="BONO MARTLOCK">
                 <option value="AXE">Hachas</option><option value="ICE_STAFF">Bastones de Hielo</option><option value="LEATHER_SHOES">Zapatos de Cuero</option><option value="OFFHAND">Secundarias</option>
               </optgroup>
@@ -112,21 +112,21 @@
             <img id="mat1Img" src="" class="w-12 h-12 bg-slate-900 border border-slate-800 rounded-lg p-1">
             <div class="flex-1">
               <span class="font-bold text-slate-300 text-xs" id="mat1Name">Mat 1</span>
-              <input type="number" id="mat1Price" placeholder="Precio Unidad" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1 text-sm font-bold text-amber-400 mt-1 focus:border-amber-500 focus:outline-none">
+              <input type="number" id="mat1Price" placeholder="Precio Unidad" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1 text-sm font-bold text-blue-400 mt-1 focus:border-emerald-500 focus:outline-none">
             </div>
           </div>
           <div id="mat2Container" class="flex items-center gap-4 bg-slate-950/80 p-3 rounded-xl border border-slate-800">
             <img id="mat2Img" src="" class="w-12 h-12 bg-slate-900 border border-slate-800 rounded-lg p-1">
             <div class="flex-1">
               <span class="font-bold text-slate-300 text-xs" id="mat2Name">Mat 2</span>
-              <input type="number" id="mat2Price" placeholder="Precio Unidad" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1 text-sm font-bold text-amber-400 mt-1 focus:border-amber-500 focus:outline-none">
+              <input type="number" id="mat2Price" placeholder="Precio Unidad" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1 text-sm font-bold text-blue-400 mt-1 focus:border-emerald-500 focus:outline-none">
             </div>
           </div>
         </div>
         
         <div class="grid sm:grid-cols-3 gap-4">
-          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Cantidad a fabricar</label><input type="number" id="craftQty" value="10" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-slate-100 focus:border-amber-500"></div>
-          <div class="sm:col-span-2"><label class="block text-xs font-semibold text-slate-400 mb-1">Precio Venta Seleccionado (Por Unidad)</label><input type="number" id="manualSellPrice" placeholder="Escribe o haz click en la ciudad abajo..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-emerald-400 focus:border-amber-500"></div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Cantidad a fabricar</label><input type="number" id="craftQty" value="10" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-slate-100 focus:border-emerald-500"></div>
+          <div class="sm:col-span-2"><label class="block text-xs font-semibold text-slate-400 mb-1">Precio Venta Seleccionado (Por Unidad)</label><input type="number" id="manualSellPrice" placeholder="Escribe o haz click en la ciudad abajo..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-emerald-400 focus:border-emerald-500"></div>
         </div>
 
         <div class="border-t border-slate-800 pt-4">
@@ -221,17 +221,15 @@
       }
 
       async function fetchPrices() {
-        // sync animation
         const btnIcon = document.getElementById('syncIcon');
         if(btnIcon) btnIcon.classList.add('fa-spin');
 
-        const server = document.getElementById('serverSelect').value;
         const { finalId, mat1, mat2 } = getIds();
         const ids = [finalId, mat1];
         if(mat2) ids.push(mat2);
 
         try {
-          const res = await fetch(`https://${server}.albion-online-data.com/api/v2/stats/prices/${ids.join(',')}.json?locations=${CITIES.join(',')}`);
+          const res = await fetch(`https://west.albion-online-data.com/api/v2/stats/prices/${ids.join(',')}.json?locations=${CITIES.join(',')}`);
           const data = await res.json();
           
           const getP = (id) => { const v = data.filter(d=>d.item_id===id && d.sell_price_min>0); return v.length ? Math.min(...v.map(x=>x.sell_price_min)) : 0; };
@@ -248,9 +246,9 @@
             if(p > maxP) { maxP = p; bestC = c; }
 
             const div = document.createElement('div');
-            div.className = 'bg-slate-950 p-3 rounded-xl border border-slate-800 cursor-pointer hover:border-amber-500 transition shadow-inner';
+            div.className = 'bg-slate-950 p-3 rounded-xl border border-slate-800 cursor-pointer hover:border-emerald-500 transition shadow-inner';
             div.onclick = () => { document.getElementById('manualSellPrice').value = p; calculate(); };
-            div.innerHTML = `<span class="block text-slate-500 font-bold mb-1">${c}</span><span class="text-sm font-black ${p>0?'text-amber-400':'text-slate-600'}">${p?p.toLocaleString():'Sin stock'}</span>`;
+            div.innerHTML = `<span class="block text-slate-500 font-bold mb-1">${c}</span><span class="text-sm font-black ${p>0?'text-emerald-400':'text-slate-600'}">${p?p.toLocaleString():'Sin stock'}</span>`;
             grid.appendChild(div);
           });
           
@@ -291,12 +289,13 @@
 
       ['craftQty','craftRrr','mat1Price','mat2Price','manualSellPrice'].forEach(id=>document.getElementById(id).addEventListener('input', calculate));
       ['craftCat','craftTier','craftEnchant'].forEach(id=>document.getElementById(id).addEventListener('change', ()=>{updateUi();fetchPrices();}));
+      document.getElementById('fetchBtn').addEventListener('click', fetchPrices);
       updateUi(); fetchPrices();
     </script>
 
   </div>
   <footer class="mt-12 py-6 border-t border-slate-800 text-center text-xs text-slate-500 bg-slate-900/50">
-    <p>Albion Online es una marca registrada de Sandbox Interactive GmbH. Datos de mercado vía Albion Online Data Project.</p>
+    <p>Albion Online es una marca registrada de Sandbox Interactive GmbH. Precios de mercado vía Albion Data Project (Servidor América).</p>
   </footer>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Albion Expert Hub - Buscador de Jugadores</title>
+  <title>Albion Hub - Jugadores</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -12,61 +12,57 @@
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+    ::-webkit-scrollbar-thumb:hover { background: #10b981; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-amber-500 selection:text-slate-950 flex flex-col justify-between">
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950 flex flex-col justify-between">
   <div class="max-w-7xl mx-auto p-4 md:p-8 space-y-6 w-full">
 
     <header class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:px-6 backdrop-blur-md shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <div class="w-11 h-11 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl shadow-inner">
+        <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl shadow-inner">
           <i class="fa-solid fa-crown"></i>
         </div>
         <div>
-          <a href="index.html" class="text-xl font-black text-amber-400 tracking-wide title-font hover:opacity-90 transition">ALBION EXPERT HUB</a>
-          <p class="text-[11px] text-slate-400">Herramientas Avanzadas & <span class="text-amber-300 font-semibold">Mercado en Vivo</span></p>
+          <a href="index.html" class="text-xl font-black text-emerald-400 tracking-wide title-font hover:opacity-90 transition">ALBION HUB</a>
+          <p class="text-[11px] text-slate-400">Servidor Exclusivo: <span class="text-emerald-300 font-semibold">América (West)</span></p>
         </div>
       </div>
-
       <nav class="flex flex-wrap items-center justify-center gap-1.5 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
-        <a href="index.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-fire-burner"></i><span class="hidden md:inline">Inicio</span></a>
+        <a href="index.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-fire-burner"></i><span class="hidden md:inline">Refinación</span></a>
+        <a href="islas.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-wheat-awn"></i><span class="hidden md:inline">Islas</span></a>
         <a href="crafteo.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-hammer"></i><span class="hidden md:inline">Crafteo</span></a>
         <a href="mercado.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-scale-balanced"></i><span class="hidden md:inline">Mercado</span></a>
-        <a href="jugadores.html" class="px-3.5 py-2 rounded-lg bg-amber-500 text-slate-950 shadow-md transition flex items-center gap-2"><i class="fa-solid fa-users"></i><span class="hidden md:inline">Jugadores</span></a>
+        <a href="jugadores.html" class="px-3.5 py-2 rounded-lg bg-emerald-600 text-slate-950 shadow-md font-black transition flex items-center gap-2"><i class="fa-solid fa-users"></i><span class="hidden md:inline">Jugadores</span></a>
       </nav>
-
       <div class="flex items-center gap-2">
-        <div class="flex items-center gap-1.5 bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-amber-300 font-bold">
-          <i class="fa-solid fa-globe text-slate-400"></i>
-          <select id="serverSelect" class="bg-transparent focus:outline-none cursor-pointer">
-            <option value="europe" selected class="bg-slate-900 text-slate-100">Europa</option>
-            <option value="west" class="bg-slate-900 text-slate-100">América</option>
-            <option value="east" class="bg-slate-900 text-slate-100">Asia</option>
-          </select>
+        <div class="flex items-center gap-2 bg-slate-950 border border-emerald-500/30 rounded-xl px-3 py-2 text-xs text-emerald-400 font-black shadow-inner">
+          <i class="fa-solid fa-server"></i>
+          <span>América (West)</span>
         </div>
+        
       </div>
     </header>
 
     <section class="bg-slate-900/90 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
       <div>
-        <h2 class="text-xl font-bold text-amber-400 flex items-center gap-2"><i class="fa-solid fa-users-viewfinder"></i> Base de Datos de Jugadores</h2>
-        <p class="text-xs text-slate-400 mt-1">Busca estadísticas, fama de asesinatos (PvP), muertes y gremio de cualquier jugador en los servidores oficiales.</p>
+        <h2 class="text-xl font-bold text-emerald-400 flex items-center gap-2"><i class="fa-solid fa-users-viewfinder"></i> Base de Datos de Jugadores (América)</h2>
+        <p class="text-xs text-slate-400 mt-1">Busca estadísticas, fama de asesinatos (PvP), muertes y gremio de cualquier jugador en el servidor de América (West).</p>
       </div>
 
       <div class="flex flex-col md:flex-row gap-3">
         <div class="relative flex-1">
           <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-500"></i>
-          <input type="text" id="playerName" placeholder="Nombre exacto del jugador (Ej: Shozen, Equart...)" class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-11 pr-4 py-3 text-sm text-slate-100 font-semibold focus:border-amber-500 focus:outline-none">
+          <input type="text" id="playerName" placeholder="Nombre exacto del jugador (Ej: Shozen...)" class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-11 pr-4 py-3 text-sm text-slate-100 font-semibold focus:border-emerald-500 focus:outline-none">
         </div>
-        <button id="searchPlayerBtn" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-6 py-3 rounded-xl text-sm transition active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20">
+        <button id="searchPlayerBtn" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black px-6 py-3 rounded-xl text-sm transition active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
           <i id="playerSpinner" class="fa-solid fa-search"></i>
           <span>Buscar Jugador</span>
         </button>
       </div>
 
       <div id="playerResults" class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 hidden"></div>
-      <div id="loadingMsg" class="hidden text-center text-slate-400 text-sm py-8"><i class="fa-solid fa-spinner fa-spin text-amber-500 text-2xl mb-2"></i><br>Consultando servidores de Albion Online...</div>
+      <div id="loadingMsg" class="hidden text-center text-slate-400 text-sm py-8"><i class="fa-solid fa-spinner fa-spin text-emerald-500 text-2xl mb-2"></i><br>Consultando servidores de Albion Online (América)...</div>
       <div id="errorMsg" class="hidden text-center text-rose-400 text-sm py-8 bg-rose-500/10 border border-rose-500/30 rounded-xl">Jugador no encontrado o error de conexión con la API oficial.</div>
     </section>
 
@@ -75,13 +71,7 @@
         const name = document.getElementById('playerName').value.trim();
         if(!name) return;
         
-        const serverMap = {
-            'europe': 'https://gameinfo-ams.albiononline.com/api/gameinfo/search?q=',
-            'west': 'https://gameinfo.albiononline.com/api/gameinfo/search?q=',
-            'east': 'https://gameinfo-sgp.albiononline.com/api/gameinfo/search?q='
-        };
-        const server = document.getElementById('serverSelect').value;
-        const apiUrl = serverMap[server] || serverMap['west'];
+        const apiUrl = 'https://gameinfo.albiononline.com/api/gameinfo/search?q=';
 
         document.getElementById('playerResults').classList.add('hidden');
         document.getElementById('errorMsg').classList.add('hidden');
@@ -104,11 +94,11 @@
             parsed.players.forEach(p => {
               const kdRatio = p.DeathFame > 0 ? (p.KillFame / p.DeathFame).toFixed(2) : p.KillFame;
               const card = document.createElement('div');
-              card.className = 'bg-slate-950 border border-slate-800 p-5 rounded-2xl flex flex-col gap-3 hover:border-amber-500/50 transition relative overflow-hidden';
+              card.className = 'bg-slate-950 border border-slate-800 p-5 rounded-2xl flex flex-col gap-3 hover:border-emerald-500/50 transition relative overflow-hidden';
               card.innerHTML = `
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 to-rose-500"></div>
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-blue-500"></div>
                 <div>
-                  <h3 class="text-lg font-black text-slate-100 flex items-center gap-2"><i class="fa-solid fa-user text-amber-500"></i> ${p.Name}</h3>
+                  <h3 class="text-lg font-black text-slate-100 flex items-center gap-2"><i class="fa-solid fa-user text-emerald-500"></i> ${p.Name}</h3>
                   <p class="text-xs text-slate-400 mt-1 font-semibold">${p.GuildName ? `[${p.AllianceName || ''}] ${p.GuildName}` : 'Sin Gremio'}</p>
                 </div>
                 <div class="grid grid-cols-2 gap-2 mt-2">
@@ -122,7 +112,7 @@
                   </div>
                   <div class="bg-slate-900 p-2 rounded-lg border border-slate-800 col-span-2 flex justify-between items-center">
                     <span class="text-[10px] text-slate-500 uppercase font-bold">K/D Ratio</span>
-                    <span class="text-amber-300 font-black text-sm">${kdRatio}</span>
+                    <span class="text-blue-400 font-black text-sm">${kdRatio}</span>
                   </div>
                 </div>
               `;
@@ -145,7 +135,7 @@
 
   </div>
   <footer class="mt-12 py-6 border-t border-slate-800 text-center text-xs text-slate-500 bg-slate-900/50">
-    <p>Albion Online es una marca registrada de Sandbox Interactive GmbH. Datos de mercado vía Albion Online Data Project.</p>
+    <p>Albion Online es una marca registrada de Sandbox Interactive GmbH. Precios de mercado vía Albion Data Project (Servidor América).</p>
   </footer>
 </body>
 </html>
