@@ -6,90 +6,196 @@
   <title>Albion Hub - Crafteo</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;600;700;900&display=swap');
+    .title-font { font-family: 'Cinzel', serif; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+  </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans p-4 md:p-8">
-  <div class="max-w-7xl mx-auto space-y-6">
-    <header class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-emerald-500 selection:text-slate-950 flex flex-col justify-between p-4 md:p-8">
+  <div class="max-w-7xl mx-auto space-y-6 w-full">
+    
+    <!-- Header / Navbar -->
+    <header class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:px-6 backdrop-blur-md shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold"><i class="fa-solid fa-crown"></i></div>
+        <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl shadow-inner">
+          <i class="fa-solid fa-crown"></i>
+        </div>
         <div>
-          <a href="index.html" class="text-xl font-black text-emerald-400">ALBION HUB</a>
+          <a href="index.html" class="text-xl font-black text-emerald-400 tracking-wide title-font hover:opacity-90 transition">ALBION HUB</a>
           <p class="text-[11px] text-slate-400">Servidor Exclusivo: <span class="text-emerald-300 font-semibold">América (West)</span></p>
         </div>
       </div>
-      <nav class="flex flex-wrap gap-1 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
-        <a href="index.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Refinación</a>
-        <a href="islas.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Islas</a>
-        <a href="crafteo.html" class="px-3 py-2 bg-emerald-600 text-slate-950 rounded-lg">Crafteo</a>
-        <a href="mercado.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Mercado</a>
-        <a href="jugadores.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Jugadores</a>
-        <a href="mapas.html" class="px-3 py-2 text-slate-400 hover:text-slate-100">Mapas</a>
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 bg-slate-950/80 p-1.5 rounded-xl border border-slate-800 text-xs font-bold">
+        <a href="index.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-fire-burner"></i><span class="hidden md:inline">Refinación</span></a>
+        <a href="islas.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-wheat-awn"></i><span class="hidden md:inline">Islas</span></a>
+        <a href="crafteo.html" class="px-3.5 py-2 rounded-lg bg-emerald-600 text-slate-950 shadow-md font-black transition flex items-center gap-2"><i class="fa-solid fa-hammer"></i><span class="hidden md:inline">Crafteo</span></a>
+        <a href="mercado.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-scale-balanced"></i><span class="hidden md:inline">Mercado</span></a>
+        <a href="jugadores.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-users"></i><span class="hidden md:inline">Jugadores</span></a>
+        <a href="mapas.html" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition flex items-center gap-2"><i class="fa-solid fa-map-location-dot"></i><span class="hidden md:inline">Mapas</span></a>
       </nav>
+      <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 bg-slate-950 border border-emerald-500/30 rounded-xl px-3 py-2 text-xs text-emerald-400 font-black shadow-inner">
+          <i class="fa-solid fa-server"></i>
+          <span class="hidden sm:inline">América (West)</span>
+        </div>
+        <button id="fetchBtn" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-black px-3.5 py-2 rounded-xl text-xs transition active:scale-95 shadow-md shadow-emerald-500/20">
+          <i id="syncIcon" class="fa-solid fa-arrows-rotate"></i>
+          <span class="hidden sm:inline">Precios API</span>
+        </button>
+      </div>
     </header>
 
+    <!-- Indicadores de Ciudad -->
     <div class="grid sm:grid-cols-2 gap-4">
-      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex items-center gap-4">
-        <div><span class="text-[11px] text-slate-400 uppercase font-bold">Ciudad Bono Crafteo</span><p id="bestCraftCity" class="text-base font-bold text-amber-300">Selecciona un Ítem</p></div>
+      <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl"><i class="fa-solid fa-city"></i></div>
+        <div>
+          <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Ciudad con Bono de Crafteo</span>
+          <p id="bestCraftCity" class="text-base font-bold text-amber-300">Selecciona un Ítem</p>
+        </div>
       </div>
-      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex items-center gap-4">
-        <div><span class="text-[11px] text-slate-400 uppercase font-bold">Vender en (Mayor Precio)</span><p id="bestSellCity" class="text-base font-bold text-emerald-400">Calculando...</p></div>
+      <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl"><i class="fa-solid fa-sack-dollar"></i></div>
+        <div>
+          <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Vender en (Mayor Precio)</span>
+          <p id="bestSellCity" class="text-base font-bold text-emerald-400">Calculando...</p>
+        </div>
       </div>
     </div>
 
+    <!-- Panel Principal -->
     <main class="grid lg:grid-cols-3 gap-6">
-      <section class="lg:col-span-2 bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-5">
-        <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-hammer text-emerald-400"></i> Editor de Fabricación</h2>
+      <section class="lg:col-span-2 bg-slate-900/80 p-6 rounded-2xl border border-slate-800 space-y-5 shadow-lg">
+        <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center gap-2">
+          <i class="fa-solid fa-hammer text-emerald-400"></i> Editor de Fabricación
+        </h2>
+
         <div class="grid sm:grid-cols-3 gap-4">
           <div class="sm:col-span-3">
             <label class="block text-xs font-semibold text-slate-400 mb-1">Categoría del Ítem</label>
-            <select id="craftCat" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200">
-              <optgroup label="BONO MARTLOCK"><option value="AXE">Hachas</option><option value="ICE_STAFF">Bastones de Hielo</option><option value="LEATHER_SHOES">Zapatos de Cuero</option><option value="OFFHAND">Secundarias</option></optgroup>
-              <optgroup label="BONO FORT STERLING"><option value="HAMMER">Martillos</option><option value="SPEAR">Lanzas</option><option value="HOLY_STAFF">Bastones Sagrados</option><option value="PLATE_ARMOR">Armaduras de Placa</option><option value="CLOTH_HELMET">Cascos de Tela</option></optgroup>
-              <optgroup label="BONO THETFORD"><option value="MACE">Mazas</option><option value="NATURE_STAFF">Bastones de Naturaleza</option><option value="FIRE_STAFF">Bastones de Fuego</option><option value="LEATHER_ARMOR">Armaduras de Cuero</option><option value="CLOTH_SHOES">Zapatos de Tela</option></optgroup>
-              <optgroup label="BONO LYMHURST"><option value="SWORD" selected>Espadas</option><option value="BOW">Arcos</option><option value="ARCANE_STAFF">Bastones Arcanos</option><option value="LEATHER_HELMET">Cascos de Cuero</option><option value="PLATE_SHOES">Zapatos de Placa</option></optgroup>
-              <optgroup label="BONO BRIDGEWATCH"><option value="CROSSBOW">Ballestas</option><option value="DAGGER">Dagas</option><option value="CURSED_STAFF">Bastones Malditos</option><option value="PLATE_HELMET">Cascos de Placa</option><option value="CLOTH_ARMOR">Túnicas de Tela</option></optgroup>
-              <optgroup label="BONO CAERLEON / BRECILIEN"><option value="FOOD">Comidas (Estofados)</option><option value="POTION">Pociones (Curación)</option><option value="CAPE">Capas</option></optgroup>
-              <optgroup label="MONTURAS"><option value="MOUNT_HORSE">Caballos</option><option value="MOUNT_OX">Bueyes</option><option value="MOUNT_DIREWOLF">Lobos Huargos</option></optgroup>
-              <optgroup label="GLOBAL"><option value="BAG">Bolsas</option></optgroup>
+            <select id="craftCat" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200 focus:border-emerald-500 focus:outline-none">
+              <optgroup label="COMIDAS (Bono: Caerleon / Brecilien)">
+                <option value="STEW" selected>Estofado (Daño & Foco)</option>
+                <option value="OMELETTE">Tortilla (Cooldown & Cast)</option>
+                <option value="PIE">Pastel (Carga & Rendimiento)</option>
+                <option value="SOUP">Sopa (Regeneración de Salud)</option>
+                <option value="ROAST">Asado (Robo de Vida)</option>
+              </optgroup>
+              <optgroup label="POCIONES (Bono: Caerleon / Brecilien)">
+                <option value="POT_HEAL">Poción de Curación</option>
+                <option value="POT_ENERGY">Poción de Energía</option>
+                <option value="POT_POISON">Poción de Veneno</option>
+                <option value="POT_GIGANT">Poción de Gigante</option>
+                <option value="POT_RESIST">Poción de Resistencia</option>
+                <option value="POT_INVIS">Poción de Invisibilidad</option>
+              </optgroup>
+              <optgroup label="MONTURAS (Guarnicionero)">
+                <option value="MOUNT_HORSE">Caballo de Montar</option>
+                <option value="MOUNT_OX">Buey de Transporte</option>
+                <option value="MOUNT_DIREWOLF">Lobo Huargo</option>
+              </optgroup>
+              <optgroup label="EQUIPO - BONO MARTLOCK">
+                <option value="AXE">Hachas</option><option value="ICE_STAFF">Bastones de Hielo</option><option value="LEATHER_SHOES">Zapatos de Cuero</option><option value="OFFHAND">Secundarias</option>
+              </optgroup>
+              <optgroup label="EQUIPO - BONO FORT STERLING">
+                <option value="HAMMER">Martillos</option><option value="SPEAR">Lanzas</option><option value="HOLY_STAFF">Bastones Sagrados</option><option value="PLATE_ARMOR">Armaduras de Placa</option><option value="CLOTH_HELMET">Cascos de Tela</option>
+              </optgroup>
+              <optgroup label="EQUIPO - BONO THETFORD">
+                <option value="MACE">Mazas</option><option value="NATURE_STAFF">Bastones de Naturaleza</option><option value="FIRE_STAFF">Bastones de Fuego</option><option value="LEATHER_ARMOR">Armaduras de Cuero</option><option value="CLOTH_SHOES">Zapatos de Tela</option>
+              </optgroup>
+              <optgroup label="EQUIPO - BONO LYMHURST">
+                <option value="SWORD">Espadas</option><option value="BOW">Arcos</option><option value="ARCANE_STAFF">Bastones Arcanos</option><option value="LEATHER_HELMET">Cascos de Cuero</option><option value="PLATE_SHOES">Zapatos de Placa</option>
+              </optgroup>
+              <optgroup label="EQUIPO - BONO BRIDGEWATCH">
+                <option value="CROSSBOW">Ballestas</option><option value="DAGGER">Dagas</option><option value="CURSED_STAFF">Bastones Malditos</option><option value="PLATE_HELMET">Cascos de Placa</option><option value="CLOTH_ARMOR">Túnicas de Tela</option>
+              </optgroup>
+              <optgroup label="GLOBAL / OTROS">
+                <option value="BAG">Bolsas (Global)</option><option value="CAPE">Capas (Brecilien / Caerleon)</option>
+              </optgroup>
             </select>
           </div>
-          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Tier</label><select id="craftTier" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200"><option value="4">Tier 4</option><option value="5">Tier 5</option><option value="6" selected>Tier 6</option><option value="7">Tier 7</option><option value="8">Tier 8</option></select></div>
-          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Encantamiento</label><select id="craftEnchant" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200"><option value="0">.0</option><option value="1">.1</option><option value="2">.2</option><option value="3">.3</option><option value="4">.4</option></select></div>
-          <div><label class="block text-xs font-semibold text-slate-400 mb-1">RRR (%)</label><select id="craftRrr" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-slate-100"><option value="15.2">15.2%</option><option value="24.8" selected>24.8% (Bono Ciudad)</option><option value="47.9">47.9% (Con Foco)</option></select></div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Nivel (Tier)</label>
+            <select id="craftTier" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200">
+              <option value="4">Tier 4 (Adepto)</option>
+              <option value="5">Tier 5 (Experto)</option>
+              <option value="6">Tier 6 (Maestro)</option>
+              <option value="7">Tier 7 (Gran Maestro)</option>
+              <option value="8" selected>Tier 8 (Anciano)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Encantamiento</label>
+            <select id="craftEnchant" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-semibold text-slate-200">
+              <option value="0" selected>.0 (Normal)</option>
+              <option value="1">.1</option>
+              <option value="2">.2</option>
+              <option value="3">.3</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Tasa RRR (%)</label>
+            <select id="craftRrr" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-slate-100">
+              <option value="15.2">15.2% (Básico)</option>
+              <option value="24.8" selected>24.8% (Bono Ciudad)</option>
+              <option value="47.9">47.9% (Ciudad + Foco)</option>
+            </select>
+          </div>
         </div>
 
+        <!-- Materiales Requeridos -->
         <div class="space-y-3">
-          <div class="flex items-center gap-4 bg-slate-950 p-3 rounded-xl border border-slate-800">
-            <img id="mat1Img" src="" onerror="this.src='https://render.albiononline.com/v1/item/TREASURE_KNOWLEDGE.png?size=64'" class="w-12 h-12 bg-slate-900 border border-slate-800 rounded-lg p-1">
-            <div class="flex-1"><span class="font-bold text-slate-300 text-xs" id="mat1Name">Mat 1</span><input type="number" id="mat1Price" placeholder="Precio Unidad" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1 text-sm font-bold text-blue-400 mt-1 focus:outline-none"></div>
+          <div class="flex items-center gap-4 bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
+            <img id="mat1Img" src="" onerror="this.src='https://render.albiononline.com/v1/item/TREASURE_KNOWLEDGE.png?size=64'" class="w-14 h-14 bg-slate-900 border border-slate-800 rounded-xl p-1 shadow-inner">
+            <div class="flex-1">
+              <span class="font-bold text-slate-200 text-xs" id="mat1Name">Material 1</span>
+              <input type="number" id="mat1Price" placeholder="Precio Unidad" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1.5 text-sm font-bold text-blue-400 mt-1 focus:border-emerald-500 focus:outline-none">
+            </div>
           </div>
-          <div id="mat2Container" class="flex items-center gap-4 bg-slate-950 p-3 rounded-xl border border-slate-800">
-            <img id="mat2Img" src="" onerror="this.src='https://render.albiononline.com/v1/item/TREASURE_KNOWLEDGE.png?size=64'" class="w-12 h-12 bg-slate-900 border border-slate-800 rounded-lg p-1">
-            <div class="flex-1"><span class="font-bold text-slate-300 text-xs" id="mat2Name">Mat 2</span><input type="number" id="mat2Price" placeholder="Precio Unidad" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1 text-sm font-bold text-blue-400 mt-1 focus:outline-none"></div>
+          <div id="mat2Container" class="flex items-center gap-4 bg-slate-950/80 p-3.5 rounded-xl border border-slate-800">
+            <img id="mat2Img" src="" onerror="this.src='https://render.albiononline.com/v1/item/TREASURE_KNOWLEDGE.png?size=64'" class="w-14 h-14 bg-slate-900 border border-slate-800 rounded-xl p-1 shadow-inner">
+            <div class="flex-1">
+              <span class="font-bold text-slate-200 text-xs" id="mat2Name">Material 2</span>
+              <input type="number" id="mat2Price" placeholder="Precio Unidad" class="w-full bg-slate-900 border border-slate-700/60 rounded-lg px-3 py-1.5 text-sm font-bold text-blue-400 mt-1 focus:border-emerald-500 focus:outline-none">
+            </div>
           </div>
         </div>
 
         <div class="grid sm:grid-cols-3 gap-4">
-          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Cantidad</label><input type="number" id="craftQty" value="10" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-slate-100"></div>
-          <div class="sm:col-span-2"><label class="block text-xs font-semibold text-slate-400 mb-1">Precio Venta (Unidad)</label><input type="number" id="manualSellPrice" placeholder="Click en ciudad abajo..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-emerald-400"></div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Cantidad a fabricar</label>
+            <input type="number" id="craftQty" value="10" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-slate-100 focus:border-emerald-500">
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Precio Venta Seleccionado (Por Unidad)</label>
+            <input type="number" id="manualSellPrice" placeholder="Escribe o haz click en la ciudad abajo..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-sm font-bold text-emerald-400 focus:border-emerald-500">
+          </div>
         </div>
 
         <div class="border-t border-slate-800 pt-4">
+          <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">Precios de Venta en Servidor América (Click para elegir)</h3>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs" id="cityPriceGrid"></div>
         </div>
       </section>
 
-      <section class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-6">
+      <!-- Panel Resultados -->
+      <section class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-6 shadow-lg">
         <div>
-          <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center gap-2"><i class="fa-solid fa-chart-line text-emerald-400"></i> Desglose</h2>
-          <div class="mt-4 space-y-3 text-sm">
+          <h2 class="text-base font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center gap-2">
+            <i class="fa-solid fa-chart-line text-emerald-400"></i> Desglose de Ganancia
+          </h2>
+          <div class="mt-4 space-y-3.5 text-sm">
             <div class="flex justify-between items-center"><span class="text-slate-400">Ítems Creados:</span><span id="resCraftUnits" class="font-bold text-slate-100">0</span></div>
-            <div class="flex justify-between items-center"><span class="text-slate-400">Costo Materiales:</span><span id="resNetMatCost" class="font-bold text-rose-400">0 Plata</span></div>
-            <div class="flex justify-between items-center"><span class="text-slate-400">Ingreso por Ventas:</span><span id="resCraftRevenue" class="font-bold text-emerald-400">0 Plata</span></div>
+            <div class="flex justify-between items-center"><span class="text-slate-400">Costo Materiales Neto:</span><span id="resNetMatCost" class="font-bold text-rose-400">0 Plata</span></div>
+            <div class="flex justify-between items-center"><span class="text-slate-400">Ingreso por Ventas (post 4% fee):</span><span id="resCraftRevenue" class="font-bold text-emerald-400">0 Plata</span></div>
           </div>
         </div>
         <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 text-center shadow-inner space-y-1">
-          <span class="text-[11px] text-slate-400 uppercase font-black">Ganancia Neta</span>
+          <span class="text-[11px] text-slate-400 uppercase font-black tracking-widest">Beneficio Neto Crafteo</span>
           <p id="resCraftProfit" class="text-3xl font-black text-emerald-400 tracking-tight">0 Plata</p>
           <span id="resCraftRoi" class="text-xs font-bold text-emerald-500 block">ROI: 0%</span>
         </div>
@@ -98,119 +204,289 @@
   </div>
 
   <script>
-    const CRAFT_CONFIG = {
-      AXE: { base: 'MAIN_AXE', mat1: 'PLANKS', q1: 8, mat2: 'METALBAR', q2: 16, city: 'Martlock' },
-      ICE_STAFF: { base: 'MAIN_FROSTSTAFF', mat1: 'PLANKS', q1: 16, mat2: 'METALBAR', q2: 8, city: 'Martlock' },
-      LEATHER_SHOES: { base: 'SHOES_LEATHER_SET1', mat1: 'LEATHER', q1: 8, mat2: null, q2: 0, city: 'Martlock' },
-      OFFHAND: { base: 'OFF_SHIELD', mat1: 'METALBAR', q1: 8, mat2: null, q2: 0, city: 'Martlock' },
-      HAMMER: { base: 'MAIN_HAMMER', mat1: 'PLANKS', q1: 8, mat2: 'METALBAR', q2: 16, city: 'Fort Sterling' },
-      SPEAR: { base: 'MAIN_1HSPEAR', mat1: 'PLANKS', q1: 16, mat2: 'METALBAR', q2: 8, city: 'Fort Sterling' },
-      HOLY_STAFF: { base: 'MAIN_HOLYSTAFF', mat1: 'PLANKS', q1: 16, mat2: 'CLOTH', q2: 8, city: 'Fort Sterling' },
-      PLATE_ARMOR: { base: 'ARMOR_PLATE_SET1', mat1: 'METALBAR', q1: 16, mat2: null, q2: 0, city: 'Fort Sterling' },
-      CLOTH_HELMET: { base: 'HEAD_CLOTH_SET1', mat1: 'CLOTH', q1: 8, mat2: null, q2: 0, city: 'Fort Sterling' },
-      MACE: { base: 'MAIN_MACE', mat1: 'PLANKS', q1: 8, mat2: 'METALBAR', q2: 16, city: 'Thetford' },
-      NATURE_STAFF: { base: 'MAIN_NATURESTAFF', mat1: 'PLANKS', q1: 16, mat2: 'CLOTH', q2: 8, city: 'Thetford' },
-      FIRE_STAFF: { base: 'MAIN_FIRESTAFF', mat1: 'PLANKS', q1: 16, mat2: 'METALBAR', q2: 8, city: 'Thetford' },
-      LEATHER_ARMOR: { base: 'ARMOR_LEATHER_SET1', mat1: 'LEATHER', q1: 16, mat2: null, q2: 0, city: 'Thetford' },
-      CLOTH_SHOES: { base: 'SHOES_CLOTH_SET1', mat1: 'CLOTH', q1: 8, mat2: null, q2: 0, city: 'Thetford' },
-      SWORD: { base: 'MAIN_SWORD', mat1: 'PLANKS', q1: 8, mat2: 'METALBAR', q2: 16, city: 'Lymhurst' },
-      BOW: { base: '2H_BOW', mat1: 'PLANKS', q1: 32, mat2: null, q2: 0, city: 'Lymhurst' },
-      ARCANE_STAFF: { base: 'MAIN_ARCANESTAFF', mat1: 'PLANKS', q1: 16, mat2: 'METALBAR', q2: 8, city: 'Lymhurst' },
-      LEATHER_HELMET: { base: 'HEAD_LEATHER_SET1', mat1: 'LEATHER', q1: 8, mat2: null, q2: 0, city: 'Lymhurst' },
-      PLATE_SHOES: { base: 'SHOES_PLATE_SET1', mat1: 'METALBAR', q1: 8, mat2: null, q2: 0, city: 'Lymhurst' },
-      CROSSBOW: { base: '2H_CROSSBOW', mat1: 'PLANKS', q1: 20, mat2: 'METALBAR', q2: 12, city: 'Bridgewatch' },
-      DAGGER: { base: 'MAIN_DAGGER', mat1: 'LEATHER', q1: 16, mat2: 'METALBAR', q2: 8, city: 'Bridgewatch' },
-      CURSED_STAFF: { base: 'MAIN_CURSEDSTAFF', mat1: 'PLANKS', q1: 16, mat2: 'METALBAR', q2: 8, city: 'Bridgewatch' },
-      PLATE_HELMET: { base: 'HEAD_PLATE_SET1', mat1: 'METALBAR', q1: 8, mat2: null, q2: 0, city: 'Bridgewatch' },
-      CLOTH_ARMOR: { base: 'ARMOR_CLOTH_SET1', mat1: 'CLOTH', q1: 16, mat2: null, q2: 0, city: 'Bridgewatch' },
-      FOOD: { base: 'MEAL_STEW', mat1: 'MEAT', q1: 18, mat2: 'CABBAGE', q2: 18, city: 'Caerleon / Brecilien' },
-      POTION: { base: 'POTION_HEAL', mat1: 'BURDOCK', q1: 24, mat2: 'ALCOHOL', q2: 6, city: 'Caerleon / Brecilien' },
-      MOUNT_HORSE: { base: 'MOUNT_HORSE', mat1: 'FARM_HORSE_GROWN', q1: 1, mat2: 'LEATHER', q2: 20, city: 'Sin Bono' },
-      MOUNT_OX: { base: 'MOUNT_OX', mat1: 'FARM_OX_GROWN', q1: 1, mat2: 'PLANKS', q2: 30, city: 'Sin Bono' },
-      MOUNT_DIREWOLF: { base: 'MOUNT_DIREWOLF', mat1: 'FARM_DIREWOLF_GROWN', q1: 1, mat2: 'LEATHER', q2: 30, city: 'Sin Bono' },
-      BAG: { base: 'BAG', mat1: 'CLOTH', q1: 8, mat2: 'LEATHER', q2: 8, city: 'Cualquier Ciudad' },
-      CAPE: { base: 'CAPE', mat1: 'CLOTH', q1: 4, mat2: 'LEATHER', q2: 4, city: 'Brecilien / Caerleon' }
-    };
     const CITIES = ['Bridgewatch', 'Fort Sterling', 'Lymhurst', 'Martlock', 'Thetford', 'Caerleon', 'Brecilien'];
 
-    function getIds() {
-      const cat = document.getElementById('craftCat').value, tier = document.getElementById('craftTier').value, enc = document.getElementById('craftEnchant').value;
-      const cfg = CRAFT_CONFIG[cat], suf = enc !== '0' ? `@${enc}` : '';
-      let finalId = `T${tier}_${cfg.base}${suf}`, mat1 = `T${tier}_${cfg.mat1}${suf}`, mat2 = cfg.mat2 ? `T${tier}_${cfg.mat2}${suf}` : null;
-      if(cat === 'FOOD') { finalId = `T${tier}_MEAL_STEW${suf}`; mat1 = `T${tier}_MEAT`; mat2 = `T${tier}_CABBAGE`; }
-      else if (cat === 'POTION') { finalId = `T${tier}_POTION_HEAL${suf}`; mat1 = `T${tier}_BURDOCK`; mat2 = null; }
-      else if (cat.includes('MOUNT')) { mat1 = `T${tier}_${cfg.mat1}`; }
-      return { finalId, mat1, mat2, cfg };
+    // Mapeo técnico de recetas completas para comidas, pociones, monturas y equipo
+    const RECIPES = {
+      // COMIDAS
+      STEW: {
+        city: 'Caerleon / Brecilien',
+        getIds: (t, enc) => ({
+          final: `T${t}_MEAL_STEW${enc}`,
+          m1: `T${t}_MEAT`, q1: 18, name1: `Carne T${t}`,
+          m2: t >= 6 ? `T${t-2}_POTATO` : `T4_TURNIP`, q2: 12, name2: `Vegetal Agrícola`
+        })
+      },
+      OMELETTE: {
+        city: 'Caerleon / Brecilien',
+        getIds: (t, enc) => ({
+          final: `T${t}_MEAL_OMELETTE${enc}`,
+          m1: `T${t}_EGG`, q1: 24, name1: `Huevos de Granja`,
+          m2: `T${t}_MILK`, q2: 18, name2: `Leche Fresca`
+        })
+      },
+      PIE: {
+        city: 'Caerleon / Brecilien',
+        getIds: (t, enc) => ({
+          final: `T${t}_MEAL_PIE${enc}`,
+          m1: `T${t}_MEAT`, q1: 18, name1: `Carne T${t}`,
+          m2: `T${t}_WHEAT`, q2: 18, name2: `Harina / Trigo`
+        })
+      },
+      SOUP: {
+        city: 'Caerleon / Brecilien',
+        getIds: (t, enc) => ({
+          final: `T${t}_MEAL_SOUP${enc}`,
+          m1: `T${t}_CARROT`, q1: 48, name1: `Zanahorias / Vegetales`,
+          m2: null, q2: 0, name2: null
+        })
+      },
+      ROAST: {
+        city: 'Caerleon / Brecilien',
+        getIds: (t, enc) => ({
+          final: `T${t}_MEAL_ROAST${enc}`,
+          m1: `T${t}_MEAT`, q1: 24, name1: `Carne T${t}`,
+          m2: `T${t}_MILK`, q2: 12, name2: `Leche`
+        })
+      },
+
+      // POCIONES
+      POT_HEAL: {
+        city: 'Caerleon / Brecilien',
+        getIds: (t, enc) => ({
+          final: `T${t}_POTION_HEAL${enc}`,
+          m1: `T${t}_BURDOCK`, q1: 24, name1: `Hierba de Curación (Burdock/Consuelda)`,
+          m2: `T${t}_AGARIC`, q2: 12, name2: `Hongo Arcano`
+        })
+      },
+      POT_ENERGY: {
+        city: 'Caerleon / Brecilien',
+        getIds: (t, enc) => ({
+          final: `T${t}_POTION_ENERGY${enc}`,
+          m1: `T${t}_COMFREY`, q1: 24, name1: `Hierba Consuelda`,
+          m2: `T${t}_AGARIC`, q2: 12, name2: `Hongo Arcano`
+        })
+      },
+      POT_POISON: {
+        city: 'Caerleon / Brecilien',
+        getIds: (t, enc) => ({
+          final: `T${t}_POTION_COOLDOWN${enc}`,
+          m1: `T${t}_DRAGONTEASEL`, q1: 24, name1: `Cardencha Venenosa`,
+          m2: `T${t}_BURDOCK`, q2: 12, name2: `Hierba Secundaria`
+        })
+      },
+      POT_GIGANT: {
+        city: 'Caerleon / Brecilien',
+        getIds: (t, enc) => ({
+          final: `T${t}_POTION_SLOWDOWN${enc}`,
+          m1: `T${t}_FIREBLOOM`, q1: 24, name1: `Flor de Fuego`,
+          m2: `T${t}_ELUSIVEFOXGLOVE`, q2: 12, name2: `Digitalis`
+        })
+      },
+      POT_RESIST: {
+        city: 'Caerleon / Brecilien',
+        getIds: (t, enc) => ({
+          final: `T${t}_POTION_STONESKIN${enc}`,
+          m1: `T${t}_ELUSIVEFOXGLOVE`, q1: 24, name1: `Digitalis`,
+          m2: `T${t}_BURDOCK`, q2: 12, name2: `Bardana`
+        })
+      },
+      POT_INVIS: {
+        city: 'Caerleon / Brecilien',
+        getIds: (t, enc) => ({
+          final: `T${t}_POTION_INVIS${enc}`,
+          m1: `T${t}_FIREBLOOM`, q1: 36, name1: `Flor de Fuego T${t}`,
+          m2: `T${t}_AGARIC`, q2: 18, name2: `Hongo Arcano`
+        })
+      },
+
+      // MONTURAS
+      MOUNT_HORSE: {
+        city: 'Sin Bono de Ciudad',
+        getIds: (t) => ({
+          final: `T${t}_MOUNT_HORSE`,
+          m1: `T${t}_FARM_HORSE_GROWN`, q1: 1, name1: `Caballo Criado T${t}`,
+          m2: `T${t}_LEATHER`, q2: 20, name2: `Cuero T${t} Refinado`
+        })
+      },
+      MOUNT_OX: {
+        city: 'Sin Bono de Ciudad',
+        getIds: (t) => ({
+          final: `T${t}_MOUNT_OX`,
+          m1: `T${t}_FARM_OX_GROWN`, q1: 1, name1: `Buey Criado T${t}`,
+          m2: `T${t}_PLANKS`, q2: 30, name2: `Tablas T${t} Refinadas`
+        })
+      },
+      MOUNT_DIREWOLF: {
+        city: 'Sin Bono de Ciudad',
+        getIds: (t) => ({
+          final: `T6_MOUNT_DIREWOLF`,
+          m1: `T6_FARM_DIREWOLF_GROWN`, q1: 1, name1: `Lobo Huargo Criado`,
+          m2: `T6_LEATHER`, q2: 30, name2: `Cuero T6 Refinado`
+        })
+      },
+
+      // EQUIPAMIENTO & ARMAS
+      SWORD: { city: 'Lymhurst (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_SWORD${e}`, m1: `T${t}_PLANKS${e}`, q1: 8, name1: `Tablas T${t}`, m2: `T${t}_METALBAR${e}`, q2: 16, name2: `Lingotes T${t}` }) },
+      BOW: { city: 'Lymhurst (+24.8%)', getIds: (t, e) => ({ final: `T${t}_2H_BOW${e}`, m1: `T${t}_PLANKS${e}`, q1: 32, name1: `Tablas T${t}`, m2: null, q2: 0, name2: null }) },
+      ARCANE_STAFF: { city: 'Lymhurst (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_ARCANESTAFF${e}`, m1: `T${t}_PLANKS${e}`, q1: 16, name1: `Tablas T${t}`, m2: `T${t}_METALBAR${e}`, q2: 8, name2: `Lingotes T${t}` }) },
+      LEATHER_HELMET: { city: 'Lymhurst (+24.8%)', getIds: (t, e) => ({ final: `T${t}_HEAD_LEATHER_SET1${e}`, m1: `T${t}_LEATHER${e}`, q1: 8, name1: `Cuero T${t}`, m2: null, q2: 0, name2: null }) },
+      PLATE_SHOES: { city: 'Lymhurst (+24.8%)', getIds: (t, e) => ({ final: `T${t}_SHOES_PLATE_SET1${e}`, m1: `T${t}_METALBAR${e}`, q1: 8, name1: `Lingotes T${t}`, m2: null, q2: 0, name2: null }) },
+
+      AXE: { city: 'Martlock (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_AXE${e}`, m1: `T${t}_PLANKS${e}`, q1: 8, name1: `Tablas T${t}`, m2: `T${t}_METALBAR${e}`, q2: 16, name2: `Lingotes T${t}` }) },
+      ICE_STAFF: { city: 'Martlock (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_FROSTSTAFF${e}`, m1: `T${t}_PLANKS${e}`, q1: 16, name1: `Tablas T${t}`, m2: `T${t}_METALBAR${e}`, q2: 8, name2: `Lingotes T${t}` }) },
+      LEATHER_SHOES: { city: 'Martlock (+24.8%)', getIds: (t, e) => ({ final: `T${t}_SHOES_LEATHER_SET1${e}`, m1: `T${t}_LEATHER${e}`, q1: 8, name1: `Cuero T${t}`, m2: null, q2: 0, name2: null }) },
+      OFFHAND: { city: 'Martlock (+24.8%)', getIds: (t, e) => ({ final: `T${t}_OFF_SHIELD${e}`, m1: `T${t}_METALBAR${e}`, q1: 8, name1: `Lingotes T${t}`, m2: null, q2: 0, name2: null }) },
+
+      HAMMER: { city: 'Fort Sterling (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_HAMMER${e}`, m1: `T${t}_PLANKS${e}`, q1: 8, name1: `Tablas T${t}`, m2: `T${t}_METALBAR${e}`, q2: 16, name2: `Lingotes T${t}` }) },
+      SPEAR: { city: 'Fort Sterling (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_1HSPEAR${e}`, m1: `T${t}_PLANKS${e}`, q1: 16, name1: `Tablas T${t}`, m2: `T${t}_METALBAR${e}`, q2: 8, name2: `Lingotes T${t}` }) },
+      HOLY_STAFF: { city: 'Fort Sterling (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_HOLYSTAFF${e}`, m1: `T${t}_PLANKS${e}`, q1: 16, name1: `Tablas T${t}`, m2: `T${t}_CLOTH${e}`, q2: 8, name2: `Tela T${t}` }) },
+      PLATE_ARMOR: { city: 'Fort Sterling (+24.8%)', getIds: (t, e) => ({ final: `T${t}_ARMOR_PLATE_SET1${e}`, m1: `T${t}_METALBAR${e}`, q1: 16, name1: `Lingotes T${t}`, m2: null, q2: 0, name2: null }) },
+      CLOTH_HELMET: { city: 'Fort Sterling (+24.8%)', getIds: (t, e) => ({ final: `T${t}_HEAD_CLOTH_SET1${e}`, m1: `T${t}_CLOTH${e}`, q1: 8, name1: `Tela T${t}`, m2: null, q2: 0, name2: null }) },
+
+      MACE: { city: 'Thetford (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_MACE${e}`, m1: `T${t}_PLANKS${e}`, q1: 8, name1: `Tablas T${t}`, m2: `T${t}_METALBAR${e}`, q2: 16, name2: `Lingotes T${t}` }) },
+      NATURE_STAFF: { city: 'Thetford (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_NATURESTAFF${e}`, m1: `T${t}_PLANKS${e}`, q1: 16, name1: `Tablas T${t}`, m2: `T${t}_CLOTH${e}`, q2: 8, name2: `Tela T${t}` }) },
+      FIRE_STAFF: { city: 'Thetford (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_FIRESTAFF${e}`, m1: `T${t}_PLANKS${e}`, q1: 16, name1: `Tablas T${t}`, m2: `T${t}_METALBAR${e}`, q2: 8, name2: `Lingotes T${t}` }) },
+      LEATHER_ARMOR: { city: 'Thetford (+24.8%)', getIds: (t, e) => ({ final: `T${t}_ARMOR_LEATHER_SET1${e}`, m1: `T${t}_LEATHER${e}`, q1: 16, name1: `Cuero T${t}`, m2: null, q2: 0, name2: null }) },
+      CLOTH_SHOES: { city: 'Thetford (+24.8%)', getIds: (t, e) => ({ final: `T${t}_SHOES_CLOTH_SET1${e}`, m1: `T${t}_CLOTH${e}`, q1: 8, name1: `Tela T${t}`, m2: null, q2: 0, name2: null }) },
+
+      CROSSBOW: { city: 'Bridgewatch (+24.8%)', getIds: (t, e) => ({ final: `T${t}_2H_CROSSBOW${e}`, m1: `T${t}_PLANKS${e}`, q1: 20, name1: `Tablas T${t}`, m2: `T${t}_METALBAR${e}`, q2: 12, name2: `Lingotes T${t}` }) },
+      DAGGER: { city: 'Bridgewatch (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_DAGGER${e}`, m1: `T${t}_LEATHER${e}`, q1: 16, name1: `Cuero T${t}`, m2: `T${t}_METALBAR${e}`, q2: 8, name2: `Lingotes T${t}` }) },
+      CURSED_STAFF: { city: 'Bridgewatch (+24.8%)', getIds: (t, e) => ({ final: `T${t}_MAIN_CURSEDSTAFF${e}`, m1: `T${t}_PLANKS${e}`, q1: 16, name1: `Tablas T${t}`, m2: `T${t}_METALBAR${e}`, q2: 8, name2: `Lingotes T${t}` }) },
+      PLATE_HELMET: { city: 'Bridgewatch (+24.8%)', getIds: (t, e) => ({ final: `T${t}_HEAD_PLATE_SET1${e}`, m1: `T${t}_METALBAR${e}`, q1: 8, name1: `Lingotes T${t}`, m2: null, q2: 0, name2: null }) },
+      CLOTH_ARMOR: { city: 'Bridgewatch (+24.8%)', getIds: (t, e) => ({ final: `T${t}_ARMOR_CLOTH_SET1${e}`, m1: `T${t}_CLOTH${e}`, q1: 16, name1: `Tela T${t}`, m2: null, q2: 0, name2: null }) },
+
+      BAG: { city: 'Cualquier Ciudad (15.2%)', getIds: (t, e) => ({ final: `T${t}_BAG${e}`, m1: `T${t}_CLOTH${e}`, q1: 8, name1: `Tela T${t}`, m2: `T${t}_LEATHER${e}`, q2: 8, name2: `Cuero T${t}` }) },
+      CAPE: { city: 'Brecilien / Caerleon', getIds: (t, e) => ({ final: `T${t}_CAPE${e}`, m1: `T${t}_CLOTH${e}`, q1: 4, name1: `Tela T${t}`, m2: `T${t}_LEATHER${e}`, q2: 4, name2: `Cuero T${t}` }) }
+    };
+
+    function getCurrentRecipe() {
+      const cat = document.getElementById('craftCat').value;
+      const tier = document.getElementById('craftTier').value;
+      const enc = document.getElementById('craftEnchant').value;
+      const encSuffix = enc !== '0' ? `@${enc}` : '';
+
+      const recipeObj = RECIPES[cat] || RECIPES['STEW'];
+      const details = recipeObj.getIds(tier, encSuffix);
+      return { ...details, city: recipeObj.city };
     }
 
     function updateUi() {
-      const { mat1, mat2, cfg } = getIds();
-      document.getElementById('bestCraftCity').textContent = `${cfg.city}`;
-      document.getElementById('mat1Img').src = `https://render.albiononline.com/v1/item/${mat1}.png?size=64`;
-      document.getElementById('mat1Name').textContent = `${cfg.mat1} (x${cfg.q1})`;
+      const r = getCurrentRecipe();
+      document.getElementById('bestCraftCity').textContent = r.city;
+      
+      document.getElementById('mat1Img').src = `https://render.albiononline.com/v1/item/${r.m1}.png?size=64`;
+      document.getElementById('mat1Name').textContent = `${r.name1} (x${r.q1})`;
+
       const mat2Box = document.getElementById('mat2Container');
-      if(mat2) {
+      if(r.m2) {
         mat2Box.style.display = 'flex';
-        document.getElementById('mat2Img').src = `https://render.albiononline.com/v1/item/${mat2}.png?size=64`;
-        document.getElementById('mat2Name').textContent = `${cfg.mat2} (x${cfg.q2})`;
-      } else { mat2Box.style.display = 'none'; }
+        document.getElementById('mat2Img').src = `https://render.albiononline.com/v1/item/${r.m2}.png?size=64`;
+        document.getElementById('mat2Name').textContent = `${r.name2} (x${r.q2})`;
+      } else {
+        mat2Box.style.display = 'none';
+      }
     }
 
     async function fetchPrices() {
-      const { finalId, mat1, mat2 } = getIds();
-      const ids = [finalId, mat1];
-      if(mat2) ids.push(mat2);
+      const syncIcon = document.getElementById('syncIcon');
+      if(syncIcon) syncIcon.classList.add('fa-spin');
+      
+      const r = getCurrentRecipe();
+      const ids = [r.final, r.m1];
+      if(r.m2) ids.push(r.m2);
+
       try {
         const res = await fetch(`https://west.albion-online-data.com/api/v2/stats/prices/${ids.join(',')}.json?locations=${CITIES.join(',')}`);
         const data = await res.json();
-        const getP = (id) => { const v = data.filter(d=>d.item_id===id && d.sell_price_min>0); return v.length ? Math.min(...v.map(x=>x.sell_price_min)) : 0; };
-        document.getElementById('mat1Price').value = getP(mat1);
-        if(mat2) document.getElementById('mat2Price').value = getP(mat2);
+        
+        const getP = (id) => { 
+          const v = data.filter(d => d.item_id === id && d.sell_price_min > 0); 
+          return v.length ? Math.min(...v.map(x => x.sell_price_min)) : 0; 
+        };
+
+        const p1 = getP(r.m1);
+        if(p1 > 0) document.getElementById('mat1Price').value = p1;
+
+        if(r.m2) {
+          const p2 = getP(r.m2);
+          if(p2 > 0) document.getElementById('mat2Price').value = p2;
+        }
 
         const grid = document.getElementById('cityPriceGrid');
         grid.innerHTML = '';
         let maxP = 0, bestC = '-';
+
         CITIES.forEach(c => {
-          const m = data.filter(d=>d.item_id===finalId && d.city===c && d.sell_price_min>0);
-          const p = m.length ? Math.min(...m.map(x=>x.sell_price_min)) : 0;
+          const m = data.filter(d => d.item_id === r.final && d.city === c && d.sell_price_min > 0);
+          const p = m.length ? Math.min(...m.map(x => x.sell_price_min)) : 0;
           if(p > maxP) { maxP = p; bestC = c; }
+
           const div = document.createElement('div');
-          div.className = 'bg-slate-950 p-2.5 rounded-xl border border-slate-800 cursor-pointer hover:border-emerald-500';
+          div.className = 'bg-slate-950 p-3 rounded-xl border border-slate-800 cursor-pointer hover:border-emerald-500 transition shadow-inner';
           div.onclick = () => { document.getElementById('manualSellPrice').value = p; calculate(); };
-          div.innerHTML = `<span class="block text-slate-500 font-bold">${c}</span><span class="text-sm font-black ${p>0?'text-emerald-400':'text-slate-600'}">${p?p.toLocaleString():'Sin stock'}</span>`;
+          div.innerHTML = `<span class="block text-slate-500 font-bold mb-1">${c}</span><span class="text-sm font-black ${p > 0 ? 'text-emerald-400' : 'text-slate-600'}">${p > 0 ? p.toLocaleString() + ' 🥈' : 'Sin stock'}</span>`;
           grid.appendChild(div);
         });
-        if(maxP>0) {
-          document.getElementById('bestSellCity').textContent = `${bestC} (${maxP.toLocaleString()})`;
+
+        if(maxP > 0) {
+          document.getElementById('bestSellCity').textContent = `${bestC} (${maxP.toLocaleString()} Plata)`;
           document.getElementById('manualSellPrice').value = maxP;
+        } else {
+          document.getElementById('bestSellCity').textContent = 'Sin datos en mercado';
         }
         calculate();
-      } catch(e) {}
+      } catch(e) {
+        console.error(e);
+      } finally {
+        if(syncIcon) syncIcon.classList.remove('fa-spin');
+      }
     }
 
     function calculate() {
-      const { cfg } = getIds();
-      const qty = parseInt(document.getElementById('craftQty').value)||1, rrr = parseFloat(document.getElementById('craftRrr').value)/100 || 0;
-      const p1 = parseFloat(document.getElementById('mat1Price').value)||0, p2 = parseFloat(document.getElementById('mat2Price').value)||0;
-      const sP = parseFloat(document.getElementById('manualSellPrice').value)||0;
-      const cost = ((qty*cfg.q1)*(1-rrr)*p1) + ((qty*(cfg.q2||0))*(1-rrr)*p2);
-      const rev = qty * sP * 0.96;
+      const r = getCurrentRecipe();
+      const qty = parseInt(document.getElementById('craftQty').value) || 1;
+      const rrr = (parseFloat(document.getElementById('craftRrr').value) || 0) / 100;
+      const p1 = parseFloat(document.getElementById('mat1Price').value) || 0;
+      const p2 = parseFloat(document.getElementById('mat2Price').value) || 0;
+      const sP = parseFloat(document.getElementById('manualSellPrice').value) || 0;
+
+      const m1Net = (qty * r.q1) * (1 - rrr);
+      const m2Net = (qty * (r.q2 || 0)) * (1 - rrr);
+
+      const cost = (m1Net * p1) + (m2Net * p2);
+      const rev = qty * sP * 0.96; // 4% impuesto
       const prof = Math.round(rev - cost);
-      const roi = cost>0 ? ((prof/cost)*100).toFixed(1) : 0;
+      const roi = cost > 0 ? ((prof / cost) * 100).toFixed(1) : 0;
 
       document.getElementById('resCraftUnits').textContent = `${qty} unidades`;
       document.getElementById('resNetMatCost').textContent = Math.round(cost).toLocaleString() + ' Plata';
       document.getElementById('resCraftRevenue').textContent = Math.round(rev).toLocaleString() + ' Plata';
+
       const pe = document.getElementById('resCraftProfit');
-      pe.textContent = (prof>=0?'+':'') + prof.toLocaleString() + ' Plata';
-      pe.className = prof>=0 ? 'text-3xl font-black text-emerald-400 tracking-tight' : 'text-3xl font-black text-rose-400 tracking-tight';
-      document.getElementById('resCraftRoi').textContent = `ROI: ${roi}%`;
-      document.getElementById('resCraftRoi').className = prof>=0 ? 'text-xs font-bold text-emerald-500 block' : 'text-xs font-bold text-rose-500 block';
+      pe.textContent = (prof >= 0 ? '+' : '') + prof.toLocaleString() + ' Plata';
+      pe.className = prof >= 0 ? 'text-3xl font-black text-emerald-400 tracking-tight' : 'text-3xl font-black text-rose-400 tracking-tight';
+
+      const roiEl = document.getElementById('resCraftRoi');
+      roiEl.textContent = `ROI: ${roi}%`;
+      roiEl.className = prof >= 0 ? 'text-xs font-bold text-emerald-500 block' : 'text-xs font-bold text-rose-500 block';
     }
 
-    ['craftQty','craftRrr','mat1Price','mat2Price','manualSellPrice'].forEach(id=>document.getElementById(id).addEventListener('input', calculate));
-    ['craftCat','craftTier','craftEnchant'].forEach(id=>document.getElementById(id).addEventListener('change', ()=>{updateUi();fetchPrices();}));
-    updateUi(); fetchPrices();
+    ['craftQty', 'craftRrr', 'mat1Price', 'mat2Price', 'manualSellPrice'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calculate);
+    });
+
+    ['craftCat', 'craftTier', 'craftEnchant'].forEach(id => {
+      document.getElementById(id).addEventListener('change', () => {
+        updateUi();
+        fetchPrices();
+      });
+    });
+
+    document.getElementById('fetchBtn').addEventListener('click', fetchPrices);
+
+    updateUi();
+    fetchPrices();
   </script>
 </body>
 </html>
