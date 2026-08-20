@@ -39,7 +39,7 @@
       <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
         <div class="md:col-span-5 relative">
           <label class="block text-[11px] font-bold text-slate-400 uppercase mb-1">Buscar Ítem a Fabricar</label>
-          <input type="text" id="itemSearchInput" placeholder="Escribe y presiona Enter (Ej: Casco, Espada...)" autocomplete="off" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl px-3 py-2 text-sm text-emerald-300 font-bold focus:border-emerald-500 focus:outline-none">
+          <input type="text" id="itemSearchInput" placeholder="Escribe 'Casco', 'Espada', 'Pastel' (Usa ENTER)" autocomplete="off" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl px-3 py-2 text-sm text-emerald-300 font-bold focus:border-emerald-500 focus:outline-none">
           <div id="autocompleteList" class="absolute z-50 w-full bg-[#1e293b] border border-slate-700 rounded-xl mt-1 max-h-56 overflow-y-auto hidden shadow-2xl"></div>
         </div>
         <div class="md:col-span-2">
@@ -56,7 +56,7 @@
         </div>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 pt-2 border-t border-slate-800 text-xs">
-        <div><label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Tasa RRR</label><select id="rrrSelect" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg p-1.5 font-bold text-emerald-400"><option value="0.0">0%</option><option value="0.152">15.2% (Isla)</option><option value="0.248" selected>24.8% (Bono Ciudad)</option><option value="0.479">47.9% (Con Foco)</option></select></div>
+        <div><label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Tasa RRR</label><select id="rrrSelect" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg p-1.5 font-bold text-emerald-400"><option value="0.0">0%</option><option value="0.152">15.2% (Isla)</option><option value="0.180">18.0% (Brecilien)</option><option value="0.248" selected>24.8% (Ciudad Bono)</option><option value="0.479">47.9% (Con Foco)</option></select></div>
         <div><label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Premium</label><select id="premiumSelect" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg p-1.5 text-slate-200"><option value="0.04" selected>4% Tax</option><option value="0.08">8% Tax</option></select></div>
         <div><label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Setup Mercado</label><select id="setupTaxSelect" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg p-1.5 text-slate-200"><option value="0.025" selected>2.5% Orden</option><option value="0.0">0.0% Directa</option></select></div>
         <div><label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Tarifa Taller</label><input type="number" id="stationFeeInput" value="500" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg p-1.5 text-slate-200"></div>
@@ -82,8 +82,8 @@
         <div class="bg-[#111827] border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
           <h3 class="text-xs font-bold text-slate-400 uppercase flex items-center justify-between"><span>Venta en Mercado</span><span id="bestSellCityBadge" class="text-[11px] text-emerald-400 font-bold">-</span></h3>
           <div class="grid grid-cols-2 gap-2.5">
-            <div><label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Ciudad Destino</label><select id="sellCitySelect" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl p-2 text-xs font-bold text-slate-200"><option value="Caerleon" selected>Caerleon</option><option value="Black Market">Black Market</option><option value="Brecilien">Brecilien</option><option value="Bridgewatch">Bridgewatch</option><option value="Fort Sterling">Fort Sterling</option><option value="Lymhurst">Lymhurst</option><option value="Martlock">Martlock</option><option value="Thetford">Thetford</option></select></div>
-            <div><label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Precio Unitario</label><input type="number" id="outputUnitPriceInput" value="0" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl p-2 text-xs font-bold text-emerald-400 text-right"></div>
+            <div><label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Ciudad Destino</label><select id="sellCitySelect" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl p-2 text-xs font-bold text-slate-200 focus:outline-none"><option value="Caerleon" selected>Caerleon</option><option value="Black Market">Black Market</option><option value="Brecilien">Brecilien</option><option value="Bridgewatch">Bridgewatch</option><option value="Fort Sterling">Fort Sterling</option><option value="Lymhurst">Lymhurst</option><option value="Martlock">Martlock</option><option value="Thetford">Thetford</option></select></div>
+            <div><label class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Precio Venta (Unitario)</label><input type="number" id="outputUnitPriceInput" value="0" class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl p-2 text-xs font-bold text-emerald-400 text-right"></div>
           </div>
           <div class="pt-2 border-t border-slate-800"><div class="grid grid-cols-4 gap-1 text-center text-[10px]" id="marketCityPricesGrid"></div></div>
         </div>
@@ -110,23 +110,23 @@
 
   <script src="items.js"></script>
   <script>
-    let currentRecipe = null;
-    const CITIES = ['Bridgewatch', 'Fort Sterling', 'Lymhurst', 'Martlock', 'Thetford', 'Caerleon', 'Brecilien'];
+    let currentRecipeKey = null;
+    const CITIES = ['Bridgewatch', 'Fort Sterling', 'Lymhurst', 'Martlock', 'Thetford', 'Caerleon', 'Brecilien', 'Black Market'];
 
     const searchInput = document.getElementById('itemSearchInput');
     const autocompleteList = document.getElementById('autocompleteList');
 
-    function selectItem(item) {
-        searchInput.value = item.name;
-        currentRecipe = item;
-        autocompleteList.classList.add('hidden');
-        if(item.type === 'fixed') { 
-            document.getElementById('tierSelect').value = item.tier; 
-            document.getElementById('tierSelect').disabled = true; 
-        } else { 
-            document.getElementById('tierSelect').disabled = false; 
-        }
-        renderInputs(); fetchPrices();
+    function selectItem(key, item) {
+      searchInput.value = item.name;
+      currentRecipeKey = key;
+      autocompleteList.classList.add('hidden');
+      if(item.type === 'fixed') { 
+        document.getElementById('tierSelect').value = item.tier; 
+        document.getElementById('tierSelect').disabled = true; 
+      } else { 
+        document.getElementById('tierSelect').disabled = false; 
+      }
+      renderInputs(); fetchPrices();
     }
 
     searchInput.addEventListener('input', () => {
@@ -134,49 +134,52 @@
       autocompleteList.innerHTML = '';
       if(val.length < 2) { autocompleteList.classList.add('hidden'); return; }
 
-      const matches = RECIPES_DB.filter(i => i.name.toLowerCase().includes(val) || i.id.toLowerCase().includes(val)).slice(0, 15);
+      const keys = Object.keys(AFM_RECIPES);
+      const matches = keys.filter(k => AFM_RECIPES[k].name.toLowerCase().includes(val) || k.toLowerCase().includes(val)).slice(0, 15);
+
       if(matches.length > 0) autocompleteList.classList.remove('hidden');
       else autocompleteList.classList.add('hidden');
 
-      matches.forEach(item => {
+      matches.forEach(k => {
+        const item = AFM_RECIPES[k];
         const div = document.createElement('div');
-        div.className = 'px-4 py-2 hover:bg-slate-800 cursor-pointer text-xs font-bold text-emerald-300 border-b border-slate-800 flex justify-between';
-        div.innerHTML = `<span>${item.name}</span><span class="text-[9px] text-slate-500 font-mono">${item.id}</span>`;
-        div.onclick = () => selectItem(item);
+        div.className = 'px-4 py-2 hover:bg-slate-800 cursor-pointer text-xs sm:text-sm font-bold text-emerald-300 border-b border-slate-800 flex justify-between';
+        div.innerHTML = `<span>${item.name}</span><span class="text-[9px] text-slate-500 font-mono">${k}</span>`;
+        div.onclick = () => selectItem(k, item);
         autocompleteList.appendChild(div);
       });
     });
 
-    // Permitir "Enter" para seleccionar el primero
     searchInput.addEventListener('keypress', (e) => {
-        if(e.key === 'Enter') {
-            e.preventDefault();
-            const val = searchInput.value.toLowerCase().trim();
-            const match = RECIPES_DB.find(i => i.name.toLowerCase().includes(val) || i.id.toLowerCase().includes(val));
-            if(match) selectItem(match);
-        }
+      if(e.key === 'Enter') {
+        const val = searchInput.value.toLowerCase().trim();
+        const keys = Object.keys(AFM_RECIPES);
+        const matchKey = keys.find(k => AFM_RECIPES[k].name.toLowerCase().includes(val) || k.toLowerCase().includes(val));
+        if(matchKey) selectItem(matchKey, AFM_RECIPES[matchKey]);
+      }
     });
 
     document.addEventListener('click', (e) => { if(e.target !== searchInput) autocompleteList.classList.add('hidden'); });
 
     function getRenderIds() {
-      if(!currentRecipe) return null;
+      if(!currentRecipeKey) return null;
+      const rec = AFM_RECIPES[currentRecipeKey];
       const t = document.getElementById('tierSelect').value;
       const e = document.getElementById('enchantSelect').value;
       const suf = e !== '0' ? `@${e}` : '';
 
-      let outId = currentRecipe.type === 'fixed' ? currentRecipe.id : `T${t}_${currentRecipe.id}`;
+      let outId = rec.type === 'fixed' ? rec.outputId : `T${t}_${rec.outputId}${suf}`;
       if(e !== '0' && !outId.includes('MOUNT') && !outId.includes('MEAL') && !outId.includes('POTION')) outId += suf;
 
-      let m1 = currentRecipe.type === 'fixed' ? currentRecipe.m1 : `T${t}_${currentRecipe.m1}${suf}`;
-      let m2 = currentRecipe.m2 ? (currentRecipe.type === 'fixed' ? currentRecipe.m2 : `T${t}_${currentRecipe.m2}${suf}`) : null;
+      let m1 = rec.type === 'fixed' ? rec.m1 : `T${t}_${rec.m1}${suf}`;
+      let m2 = rec.m2 ? (rec.type === 'fixed' ? rec.m2 : `T${t}_${rec.m2}${suf}`) : null;
       
       let m3 = null;
-      if(currentRecipe.m3) {
-          m3 = currentRecipe.m3.includes('T3_') || currentRecipe.m3.includes('T4_') || currentRecipe.m3.includes('T7_') ? currentRecipe.m3 : `T${t}_${currentRecipe.m3}`;
+      if(rec.m3) {
+          m3 = rec.m3.includes('T3_') || rec.m3.includes('T4_') || rec.m3.includes('T7_') ? rec.m3 : `T${t}_${rec.m3}`;
       }
 
-      return { outId, m1, q1: currentRecipe.q1, m2, q2: currentRecipe.q2, m3, q3: currentRecipe.q3, rec: currentRecipe, t };
+      return { outId, m1, q1: rec.q1, m2, q2: rec.q2, m3, q3: rec.q3, rec, t };
     }
 
     function renderInputs() {
@@ -270,6 +273,7 @@
 
       let grossMat = 0, retValue = 0;
 
+      // Iterar por los 3 posibles items
       [ { q: ids.q1, idx: 0, art: false }, { q: ids.q2, idx: 1, art: false }, { q: ids.q3, idx: 2, art: true } ].forEach(m => {
         if(m.q) {
           const el = document.getElementById(`inputPrice_${m.idx}`);
@@ -284,7 +288,6 @@
       const netMat = grossMat - retValue;
       const statFee = runs * (fee * 0.12);
       
-      // Comidas y pociones craftean x10 en Albion
       const unitsPerRun = ids.rec.outputId.includes('MEAL') || ids.rec.outputId.includes('POTION') ? 10 : 1;
       const totOut = runs * unitsPerRun;
       document.getElementById('headerTotalOutputs').textContent = `${totOut} Unidades`;
@@ -304,7 +307,7 @@
       const pe = document.getElementById('resProfit');
       pe.textContent = (profit>=0?'+':'') + profit.toLocaleString() + ' 🥈';
       pe.className = profit>=0 ? 'text-3xl font-black text-emerald-400 tracking-tight' : 'text-3xl font-black text-rose-400 tracking-tight';
-      document.getElementById('resRoi').textContent = `ROI: ${roi}%`;
+      document.getElementById('resRoiBadge').textContent = `ROI: ${roi}%`;
       document.getElementById('resProfitPerRun').textContent = `${runs>0 ? Math.round(profit/runs).toLocaleString() : 0} 🥈 / run`;
     }
 
